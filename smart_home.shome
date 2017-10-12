@@ -1,0 +1,11 @@
+
+Create rise pin
+
+set TemperatureSensor as Mandatory Sensor call as bu
+set Led as Optional Actuator
+set AirConditioner as Optional Actuator
+set Alarm as Optional Actuator
+set AutomaticDoor as Optional Actuator
+set AutomaticWindow as Optional Actuator
+set LightSensor as Optional Sensor
+set PresenceSensor as Optional Sensor

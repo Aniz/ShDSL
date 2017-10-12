@@ -1,0 +1,54 @@
+/*
+  Entity DSL grammar.
+*/
+
+SmartHomeModel: 
+  'Create' name=ID pin=ID
+  components*=Component
+;
+
+Component:  
+     Device | Feature | Statment
+;
+
+Condition:
+  "Luminosity" | "Presence" 
+;
+
+Command:
+  "bbb" | "ccc" 
+;
+
+TypeDevice:
+"Sensor" | "Actuador" | "Hardware"
+;
+
+Device:
+  'set' entity=ID 'as' type=[Type] typeDevice=[TypeDevice]
+  ('call as' alias=ID)* 
+  ('using' condition=Condition '()')*
+;
+
+Feature:
+  'new' entity=ID 
+  'dependes on' feature*=[Feature] 
+  type=Type
+;
+
+Statment:
+  'if' entity=ID
+  'then' command=Command feature=[Feature]
+;
+
+Type: 
+  'Mandatory' | 'Optional' | 'Alternate' 
+;
+
+Entity:
+  'AlarmAgainsRobbery'|'AutomatedAirConditioner'|'AutomatedIlumination'|'AutomatedWindowControl'|'LockDoors'| 'PanicMode' | 'PresenceIlusion'|'UserAirConditionerControl'|'UserIlumination'|'UserWindowControl'
+;
+
+// Special rule for comments. Comments start with //
+Comment:
+    /\/\/.*$/
+;

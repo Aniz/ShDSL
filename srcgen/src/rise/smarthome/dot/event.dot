@@ -1,0 +1,32 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+4602047624 -> 4602047848 [label="components:0" arrowtail=diamond dir=both]
+4602047848[label="{:Device|+entity:str='TemperatureSensor'\l+type:str='Mandatory'\l+typeDevice:str='Sensor'\l+alias:str='bu'\l}"]
+4602047624 -> 4602154400 [label="components:1" arrowtail=diamond dir=both]
+4602154400[label="{:Device|+entity:str='Led'\l+type:str='Optional'\l+typeDevice:str='Actuator'\l+alias:str=''\l}"]
+4602047624 -> 4602154176 [label="components:2" arrowtail=diamond dir=both]
+4602154176[label="{:Device|+entity:str='AirConditioner'\l+type:str='Optional'\l+typeDevice:str='Actuator'\l+alias:str=''\l}"]
+4602047624 -> 4602153448 [label="components:3" arrowtail=diamond dir=both]
+4602153448[label="{:Device|+entity:str='Alarm'\l+type:str='Optional'\l+typeDevice:str='Actuator'\l+alias:str=''\l}"]
+4602047624 -> 4602153224 [label="components:4" arrowtail=diamond dir=both]
+4602153224[label="{:Device|+entity:str='AutomaticDoor'\l+type:str='Optional'\l+typeDevice:str='Actuator'\l+alias:str=''\l}"]
+4602047624 -> 4602152944 [label="components:5" arrowtail=diamond dir=both]
+4602152944[label="{:Device|+entity:str='AutomaticWindow'\l+type:str='Optional'\l+typeDevice:str='Actuator'\l+alias:str=''\l}"]
+4602047624 -> 4602152664 [label="components:6" arrowtail=diamond dir=both]
+4602152664[label="{:Device|+entity:str='LightSensor'\l+type:str='Optional'\l+typeDevice:str='Sensor'\l+alias:str=''\l}"]
+4602047624 -> 4602152272 [label="components:7" arrowtail=diamond dir=both]
+4602152272[label="{:Device|+entity:str='PresenceSensor'\l+type:str='Optional'\l+typeDevice:str='Sensor'\l+alias:str=''\l}"]
+4602047624[label="{rise:SmartHomeModel|+pin:str='pin'\l}"]
+
+}

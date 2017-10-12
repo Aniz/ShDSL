@@ -1,0 +1,63 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+140376046378248 -> 140376046380104[arrowtail=diamond, dir=both, headlabel="components 0..*"]
+140376046378248[ label="{SmartHomeModel|+name:ID\l+pin:ID\l}"]
+
+140376046380104[ label="{*Component|}"]
+140376046380104 -> 140376046387528 [dir=back]
+140376046380104 -> 140376046389384 [dir=back]
+140376046380104 -> 140376046391240 [dir=back]
+
+140376046381960[ label="{Condition|Luminosity\|Presence}"]
+
+140376046383816[ label="{Command|bbb\|ccc}"]
+
+140376046385672[ label="{TypeDevice|Sensor\|Actuador\|Hardware}"]
+
+140376046387528[ label="{Device|+entity:ID\l+type:Type\l+typeDevice:TypeDevice\l+alias:ID\l+condition:Condition\l}"]
+
+140376046389384 -> 140376046389384[headlabel="feature 0..*"]
+140376046389384[ label="{Feature|+entity:ID\l+type:Type\l}"]
+
+140376046391240 -> 140376046389384[headlabel="feature "]
+140376046391240[ label="{Statment|+entity:ID\l+command:Command\l}"]
+
+140376046393096[ label="{Type|Mandatory\|Optional\|Alternate}"]
+
+140376046394952[ label="{Entity|AlarmAgainsRobbery\|AutomatedAirConditioner\|AutomatedIlumination\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
+
+140376046396808[ label="{Comment|\\/\\/.*$}"]
+
+140376045809256[ label="{ID|}"]
+
+140376045790120[ label="{STRING|}"]
+
+140376045791976[ label="{BOOL|}"]
+
+140376045787224[ label="{INT|}"]
+
+140376045800232[ label="{FLOAT|}"]
+
+140376045802088[ label="{NUMBER|}"]
+140376045802088 -> 140376045800232 [dir=back]
+140376045802088 -> 140376045787224 [dir=back]
+
+140376045803944[ label="{BASETYPE|}"]
+140376045803944 -> 140376045802088 [dir=back]
+140376045803944 -> 140376045791976 [dir=back]
+140376045803944 -> 140376045809256 [dir=back]
+140376045803944 -> 140376045790120 [dir=back]
+
+
+}

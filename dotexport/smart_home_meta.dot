@@ -1,0 +1,52 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+140485062764536[ label="{SmartHomeModel|+name:ID\l+pin:ID\l}"]
+
+140485062766392[ label="{*Component|}"]
+140485062766392 -> 140485062772536 [dir=back]
+
+140485062768248[ label="{Condition|Luminosity\|Presence}"]
+
+140485062770104[ label="{TypeDevice|Sensor\|Actuador\|Hardware}"]
+
+140485062772536[ label="{Device|+typeDevice:TypeDevice\l+entity:Entity\l+condition:Condition\l+isRequired:Bool\l}"]
+
+140485062774392[ label="{Bool|true\|false}"]
+
+140485062776248[ label="{Entity|AlarmAgainsRobbery\|AutomatedAirConditioner\|AutomatedIlumination\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
+
+140485062778104[ label="{Comment|\\/\\/.*$}"]
+
+140485063897336[ label="{ID|}"]
+
+140485063899768[ label="{STRING|}"]
+
+140485063902200[ label="{BOOL|}"]
+
+140485063904632[ label="{INT|}"]
+
+140485063907064[ label="{FLOAT|}"]
+
+140485063909496[ label="{NUMBER|}"]
+140485063909496 -> 140485063907064 [dir=back]
+140485063909496 -> 140485063904632 [dir=back]
+
+140485063911352[ label="{BASETYPE|}"]
+140485063911352 -> 140485063909496 [dir=back]
+140485063911352 -> 140485063902200 [dir=back]
+140485063911352 -> 140485063897336 [dir=back]
+140485063911352 -> 140485063899768 [dir=back]
+
+
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project default="run">
+        
+    <target name="clean"> 
+        <echo/>       
+        <echo message="Step 1 - folder 'srcgen' is being cleaned!"/>
+        <delete dir="srcgen"/>                
+    </target>
+    <target depends="clean" name="preprocess">   
+        <echo/>
+        <echo message="Step 2 - Source code is being created in the 'srcgen' folder!"/>        
+                
+        <!-- É obrigatório para executar --> 
+        <mkdir dir="srcgen/src/spl"/>           
+        <copy todir="srcgen/src/spl">
+            <fileset dir="srcgen/src" includes="**/*.java"/>
+        </copy>
+
+        <mkdir dir="srcgen/src/images"/>           
+        <copy todir="srcgen/src/images">
+            <fileset dir="images" includes="**/*.png, **/*.gif, **/*.jpg"/>
+        </copy>
+        
+        <copy todir="srcgen/build/jar/src/images">
+              <fileset dir="images" includes="**/*.png, **/*.gif, **/*.jpg"/>
+        </copy>
+        
+        <!-- É obrigatório para executar --> 
+        <mkdir dir="srcgen/build/jar/lib"/>           
+        <copy todir="srcgen/build/jar/lib">
+            <fileset dir="lib" includes="**/*.jar"/>
+        </copy>
+        
+        <!-- É obrigatório para executar PAULO --> 
+                <mkdir dir="srcgen/build/jar/properties"/>           
+                <copy todir="srcgen/build/jar/properties">
+                    <fileset dir="properties" includes="**/*.properties"/>
+                </copy>
+    
+    </target>    
+     
+    <!-- , **/*.properties PAULO--> 
+    <target depends="preprocess" name="compile">        
+        <echo/>
+        <echo message="Step 3 - Product is being compiled!"/>              
+        <mkdir dir="srcgen/build/classes"/>
+        <javac destdir="srcgen/build/classes" encoding="UTF-8" fork="yes" includeantruntime="true" srcdir="srcgen/src"> <!-- ATENÇÃO: compila arquivos da pasta srcgen. Para não ter problema com acento, definir UTF-8 aqui -->
+            <classpath>  
+                <fileset dir="lib" includes="**/*.jar"/> 
+                <fileset dir="properties" includes="**/*.properties"/>
+            </classpath>  
+        </javac>  
+    </target>
+
+    <!-- , **/*.properties PAULO--> 
+    <target depends="compile" name="jar">   
+        <echo/>         
+        <echo message="Step 4 - Jar is being created!"/>        
+        <jar basedir="srcgen/build/classes" destfile="srcgen/build/jar/riseevents.jar">
+            <fileset dir="srcgen/src" includes="**/*.class, **/*.png, **/*.gif, **/*.jpg, **/*.properties"/>            
+            <manifest>
+                <attribute name="Main-Class" value="riseevents.ev.ui2.RiseEventsMainScreenP"/>
+                <attribute name="Class-Path" value="lib/swingx-all-1.6.4.jar lib/itext-2.1.7.jar lib/itextpdf-5.5.3.jar lib/itext-pdfa-5.5.3.jar lib/mysql-connector-java-5.1.8-bin.jar"/>                
+            </manifest>
+        </jar>           
+    </target>
+    
+    <target depends="jar" name="run">     
+        <echo/>                      
+        <echo message="Step 5 - Advanced Product Line is running!"/>        
+        <java fork="true" jar="srcgen/build/jar/riseevents.jar"/>        
+    </target>  
+    
+</project>

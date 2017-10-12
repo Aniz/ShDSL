@@ -1,0 +1,66 @@
+Resource	CBO	CC	CE	CF	DOIH	LCOM2	LOC	NOA	NOAM	NOC	NOCC	NOM	NOO	NOOM	PF	RFC	WOC
+SmartHomeRiSE_Release06_OO	27	57		15	6	84	3091	8	6	55	11	30	26	3	7	492	
+SmartHomeRiSE_Release06_OO.rise.smarthome.arduino	12	4	13		1	84	127	7		1	0	16	9	1		54	
+SmartHomeRiSE_Release06_OO.rise.smarthome.arduino.ArduinoControl	12	4	13		1	84	127	7		1	0	16	9	1		54	113
+SmartHomeRiSE_Release06_OO.rise.smarthome.enums	0	1	0		2	83	32	1	1	2	0	3	2	1		24	
+SmartHomeRiSE_Release06_OO.rise.smarthome.enums.ActuatorEnum	0	1	0		2	83	17	1	1	1	0	3	2	1		24	14
+SmartHomeRiSE_Release06_OO.rise.smarthome.enums.SensorEnum	0	1	0		2	75	15	1	1	1	0	3	2	1		24	20
+SmartHomeRiSE_Release06_OO.rise.smarthome.featureModeling	2	2	6		1	71	63	3		6	11	11	8	1		21	
+SmartHomeRiSE_Release06_OO.rise.smarthome.featureModeling.AdaptableFeature	0	1	0		0		3	0		1	4	1	1	0		1	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.featureModeling.AlternativeFeature	0	1	4		0		5	0		1	0	1	1	0		1	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.featureModeling.FeatureBase	1	2	1		1	71	30	3		1	11	11	8	1		21	57
+SmartHomeRiSE_Release06_OO.rise.smarthome.featureModeling.FeatureHelper	2	1	2		1		17	0		1	0	1	1	0		14	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.featureModeling.MandatoryFeature	0		4		0		4	0		1	0	0	0	0		0	0
+SmartHomeRiSE_Release06_OO.rise.smarthome.featureModeling.OptionalFeature	0		4		0		4	0		1	0	0	0	0		0	0
+SmartHomeRiSE_Release06_OO.rise.smarthome.features	5	8	17		3	67	495	3	6	14	2	10	7	1		39	
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.AlarmAgainstRobbery	4	5	4		2	67	55	3	4	2	0	8	5	1		30	80
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.AlarmAgainstRobbery.AlarmAgainstRoberryThread	3	3	3		2	33	18	2	1	1	0	4	2	1		58	200
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.AutomatedAirConditionerControl	5	4	7		3	67	40	3	6	1	0	10	7	1		34	71
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.AutomatedIluminationByLuminosity	5	4	7		3	67	40	3	6	1	0	10	7	1		34	71
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.AutomatedIluminationByPresence	5	4	7		3	67	40	3	6	1	0	10	7	1		34	71
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.AutomatedWindowControl	5	4	7		3	67	40	3	6	1	0	10	7	1		34	71
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.LockDoors	4	4	5		2	58	32	2	4	1	0	7	5	1		27	80
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.PanicMode	4	5	3		2	63	59	2	2	2	0	5	3	1		34	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.PanicMode.PanicModeThread	3	4	2		2	33	29	2	1	1	0	4	2	1		62	200
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.PresenceIlusion	4	7	3		2	63	80	2	2	2	0	5	3	1		39	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.PresenceIlusion.PresenceIlusionThread	6	4	5		2	50	41	4	1	1	0	6	2	1		66	200
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.UserAirConditionerControl	5	5	6		2	58	35	2	4	1	2	7	5	1		28	80
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.UserIlumination	5	8	6		2	58	39	2	4	1	2	7	5	1		29	80
+SmartHomeRiSE_Release06_OO.rise.smarthome.features.UserWindowControl	5	5	6		2	58	35	2	4	1	0	7	5	1		28	80
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI	27	5	43		6	67	1187	5	3	12	11	8	3	0		487	
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.AlarmAgainstRobberyUI	24	3	24		6	56	106	5	2	1	0	7	2	0		485	2
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.AutomatedAirConditionerControlUI	27	3	26		6	58	123	5	3	1	0	8	3	0		486	3
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.AutomatedIluminationByLuminosityUI	27	3	26		6	58	123	5	3	1	0	8	3	0		487	3
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.AutomatedIluminationByPresenceUI	27	3	26		6	58	123	5	3	1	0	8	3	0		487	3
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.AutomatedWindowControlUI	26	3	25		6	58	123	5	3	1	0	8	3	0		486	3
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.FeatureUIBase	2	2	4		5	67	15	1	2	1	11	3	2	0		455	200
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.LockDoorsUI	25	4	24		6	47	124	4	2	1	0	6	2	0		486	2
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.PanicModeUI	11	2	14		6	33	31	2	0	1	0	2	0	0		465	0
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.PresenceIlusionUI	11	2	14		6	33	30	2	0	1	0	2	0	0		465	0
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.UserAirConditionerControlUI	25	4	24		6	47	124	4	2	1	0	6	2	0		486	2
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.UserIluminationUI	26	5	24		6	47	141	4	2	1	0	6	2	0		487	2
+SmartHomeRiSE_Release06_OO.rise.smarthome.featuresUI.UserWindowControlUI	25	4	24		6	47	124	4	2	1	0	6	2	0		486	2
+SmartHomeRiSE_Release06_OO.rise.smarthome.gui	26	57	51		6	65	635	8	4	5	0	8	4	0		492	
+SmartHomeRiSE_Release06_OO.rise.smarthome.gui.AlternativeFeatureSelectionDialog	9	1	12		6	50	49	3	1	1	0	4	1	0		461	0
+SmartHomeRiSE_Release06_OO.rise.smarthome.gui.ConsoleMain	6	2	6		1		15	0		1	0	1	1	0		23	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.gui.FeatureControlTab	22	6	21		5	58	122	3	2	1	0	5	2	0		486	2
+SmartHomeRiSE_Release06_OO.rise.smarthome.gui.HardwareControlTab	17	3	18		5	11	147	8	0	1	0	8	0	0		484	0
+SmartHomeRiSE_Release06_OO.rise.smarthome.gui.Main	26	57	28		6	65	302	3	4	1	0	7	4	0		492	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices	3	6	2		3	53	178	3	4	11	10	12	9	3		29	
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.Actuator	1	1	1		2	0	21	1	4	1	5	5	4	0		27	75
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.AirConditioner	0	1	0		3		9	0	0	1	0	1	1	1		25	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.Alarm	0	1	0		3		9	0	0	1	0	1	1	1		25	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.AutomaticDoor	0	1	0		3		9	0	0	1	0	1	1	1		25	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.AutomaticWindow	0	1	0		3		9	0	0	1	0	1	1	1		25	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.Hardware	0	6	0		1	53	60	3		1	10	12	9	3		20	56
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.Led	0	1	0		3		9	0	0	1	0	1	1	1		25	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.LightSensor	1	1	1		3		9	0	0	1	0	1	1	1		26	1
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.PresenceSensor	0	1	0		3		10	0	0	1	0	1	1	1		25	1
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.Sensor	3	3	2		2		24	0	3	1	3	4	4	1		29	133
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.devices.TemperatureSensor	1	1	1		3		9	0	0	1	0	1	1	1		26	1
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.home	26	24	27		1	77	349	4		2	0	30	26	1		95	
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.home.AutomatedFeaturesRunnable	4	4	4		1	0	27	1		1	0	4	3	1		16	67
+SmartHomeRiSE_Release06_OO.rise.smarthome.model.home.HouseFacade	26	24	25		1	77	322	4		1	0	30	26	0		95	200
+SmartHomeRiSE_Release06_OO.rise.smarthome.util	2	3	2		1	50	25	1		2	0	2	2	0		15	
+SmartHomeRiSE_Release06_OO.rise.smarthome.util.ListUtils	0	3	0		1		18	0		1	0	2	2	0		13	100
+SmartHomeRiSE_Release06_OO.rise.smarthome.util.Utils	2	1	2		1	50	7	1		1	0	2	1	0		15	100

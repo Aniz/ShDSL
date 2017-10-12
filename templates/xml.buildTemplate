@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project default="run">
+        
+    <target name="clean"> 
+        <echo/>       
+        <echo message="Step 1 - folder '_e-{{systemName|lower}}' is being cleaned!"/>
+        <delete dir="_e-{{systemName|lower}}"/>                
+    </target>
+    <target depends="clean" name="preprocess">   
+        <echo/>
+        <echo message="Step 2 - Source code is being created in the '_e-{{systemName|lower}}' folder!"/>        
+                
+        <!-- É obrigatório para executar --> 
+        <mkdir dir="_e-{{systemName|lower}}/src/spl"/>           
+        <copy todir="_e-{{systemName|lower}}/src/spl">
+            <fileset dir="src" includes="**/*.java"/>
+        </copy>
+
+        <mkdir dir="_e-{{systemName|lower}}/src/images"/>           
+        <copy todir="_e-{{systemName|lower}}/src/images">
+            <fileset dir="images" includes="**/*.png, **/*.gif, **/*.jpg"/>
+        </copy>
+        
+        <copy todir="_e-{{systemName|lower}}/build/jar/src/images">
+              <fileset dir="images" includes="**/*.png, **/*.gif, **/*.jpg"/>
+        </copy>
+        
+        <!-- É obrigatório para executar --> 
+        <mkdir dir="_e-{{systemName|lower}}/build/jar/lib"/>           
+        <copy todir="_e-{{systemName|lower}}/build/jar/lib">
+            <fileset dir="lib" includes="**/*.jar"/>
+        </copy>
+        
+        <!-- É obrigatório para executar PAULO --> 
+                <mkdir dir="_e-{{systemName|lower}}/build/jar/properties"/>           
+                <copy todir="_e-{{systemName|lower}}/build/jar/properties">
+                    <fileset dir="properties" includes="**/*.properties"/>
+                </copy>
+    
+    </target>    
+     
+    <!-- , **/*.properties PAULO--> 
+    <target depends="preprocess" name="compile">        
+        <echo/>
+        <echo message="Step 3 - Product is being compiled!"/>              
+        <mkdir dir="_e-{{systemName|lower}}/build/classes"/>
+        <javac destdir="_e-{{systemName|lower}}/build/classes" encoding="UTF-8" fork="yes" includeantruntime="true" srcdir="_e-{{systemName|lower}}/src"> <!-- ATENÇÃO: compila arquivos da pasta _e-{{systemName|lower}}. Para não ter problema com acento, definir UTF-8 aqui -->
+            <classpath>  
+                <fileset dir="lib" includes="**/*.jar"/> 
+                <fileset dir="properties" includes="**/*.properties"/>
+            </classpath>  
+        </javac>  
+    </target>
+
+    <!-- , **/*.properties PAULO--> 
+    <target depends="compile" name="jar">   
+        <echo/>         
+        <echo message="Step 4 - Jar is being created!"/>        
+        <jar basedir="_e-{{systemName|lower}}/build/classes" destfile="_e-{{systemName|lower}}/build/jar/{{systemName|lower}}.jar">
+            <fileset dir="_e-{{systemName|lower}}/src" includes="**/*.class, **/*.png, **/*.gif, **/*.jpg, **/*.properties"/>            
+            <manifest>
+                <attribute name="Main-Class" value="{{systemName|lower}}.ev.ui2.{{systemName}}MainScreenP"/>
+                <attribute name="Class-Path" value="lib/swingx-all-1.6.4.jar lib/itext-2.1.7.jar lib/itextpdf-5.5.3.jar lib/itext-pdfa-5.5.3.jar lib/mysql-connector-java-5.1.8-bin.jar"/>                
+            </manifest>
+        </jar>           
+    </target>
+    
+    <target depends="jar" name="run">     
+        <echo/>                      
+        <echo message="Step 5 - Advanced Product Line is running!"/>        
+        <java fork="true" jar="_e-{{systemName|lower}}/build/jar/{{systemName|lower}}.jar"/>        
+    </target>  
+    
+</project>
