@@ -3,6 +3,10 @@ package {{systemName|lower}}.smarthome.featureModeling;
 import java.util.ArrayList;
 import java.util.List;
 
+{% for item in data.items() %}
+import {{systemName|lower}}.smarthome.features.{{item.feature.name}};
+{% endif %}
+
 //#if defined(alarm_against_robery)
 import rise.smarthome.features.AlarmAgainstRobbery;
 //#endif
@@ -45,6 +49,10 @@ public class FeatureHelper {
 	public static List<Class<? extends FeatureBase>> getAllAvaliableFeatures(){
 
 		ArrayList<Class<? extends FeatureBase>> featureList = new ArrayList<Class<? extends FeatureBase>>();
+
+		{% for item in data.items() %}
+			featureList.add({{item.feature.name}}.class);
+		{% endif %}
 
 		//#if defined(alarm_against_robery)
 		featureList.add(AlarmAgainstRobbery.class);

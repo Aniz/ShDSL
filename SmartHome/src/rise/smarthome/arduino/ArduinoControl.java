@@ -1,4 +1,4 @@
-package rise.smarthome.arduino;
+package {{systemName|lower}}.smarthome.arduino;
 
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;
@@ -10,14 +10,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
-import rise.smarthome.model.devices.Actuator;
-import rise.smarthome.model.devices.Sensor;
+import {{systemName|lower}}.smarthome.model.devices.Actuator;
+import {{systemName|lower}}.smarthome.model.devices.Sensor;
 
 public final class ArduinoControl implements SerialPortEventListener {
 
 	private OutputStream serialOut;
 	private int rate=9600;
-	private String portName="/dev/cu.usbmodem411";
+	// private String portName="/dev/cu.usbmodem411";
+	private String portName="{{extraData}}";
 	private SerialPort serialPort;
 	private BufferedReader input;
 	private String arduinoOut;

@@ -1,11 +1,11 @@
-package rise.smarthome.gui;
+package {{systemName|lower}}.smarthome.gui;
 
 import java.awt.Label;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import rise.smarthome.featureModeling.FeatureBase;
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 

@@ -40,7 +40,7 @@ def main(debug=False):
     systemPin = smart_home_model.pin
     general_folder = createFolder(this_folder, 'srcgen')
     src_folder = createFolder(general_folder, 'src')
-    general_sh_folder = createFolder(src_folder, 'rise')
+    general_sh_folder = createFolder(src_folder, systemName.lower())
     srcgen_folder = createFolder(general_sh_folder, 'smarthome')
     
     dotFolder = createFolder(srcgen_folder, 'dot')
@@ -59,7 +59,7 @@ def main(debug=False):
     
     codeFolder = join(this_folder, 'SmartHome')
     srcCodeFolder = createFolder(codeFolder, 'src')
-    riseCodeFolder = createFolder(srcCodeFolder, systemName.lower())
+    riseCodeFolder = createFolder(srcCodeFolder, 'rise')
     smarthomeCodeFolder = createFolder(riseCodeFolder, 'smarthome')
     arduinoCodeFolder = createFolder(smarthomeCodeFolder, 'arduino')
     enumsCodeFolder = createFolder(smarthomeCodeFolder, 'enums')
@@ -85,6 +85,8 @@ def main(debug=False):
     jinja_env.filters['javatype'] = javatype
     jinja_env.filters['upperfirst'] = upperfirst
     jinja_env.filters['splitName'] = splitName
+    jinja_env.filters['remove'] = remove
+    jinja_env.filters['append'] = append
 
     componentData = ""
     componentExtraData = ""
@@ -99,6 +101,7 @@ def main(debug=False):
     statmentDict = {}
     commandsDict = {}
     componentDictByBaseDevice = {}
+    componentFeatureDict = {}
     commandsOptionDict = {}
     dependenceDict = {}
     allDevicesDict = {}
@@ -112,53 +115,78 @@ def main(debug=False):
     #Get options from model
     for component in smart_home_model.components:
         if component.__class__.__name__ == 'Action':
-            actionsArray.append(component.function)
-            
-        elif component.__class__.__name__ == 'Option' or component.__class__.__name__ == 'NewOption':
-            if component.__class__.__name__ == 'NewOption':
-                component.new = True
-            selectedOptionsArray.append(component.entity)
-            componentDict[component.entity] = {"option":component}
-            componentDict[component.entity]["statments"] = {}
-            
-            #Get commands from model
-            commandsArray = []
-            if component.command.__class__.__name__ == 'SubCommandInOption':
-                componentDict[component.command.entity]["extraCommand"] = component.entity
-            if component.command.__class__.__name__ == 'CommandOption':
-                for command in component.command.commandsOption:
-                    commandsArray.append(command)
-            componentDict[component.entity]["commands"] = commandsArray
-            
+            actionsArray.append(component.function)    
         elif component.__class__.__name__ == 'Device':
             devicesArray.append(component)
-            componentDict[component.entity] = {"device":component}
+            componentDict[component.name] = {"device":component}
             if not component.typeDevice in componentDictByBaseDevice:
                 componentDictByBaseDevice[component.typeDevice] = {}
-            componentDictByBaseDevice[component.typeDevice][component.entity] = {"device":component}
-            # componentDict[component.entity] = component
-    
-    
+            componentDictByBaseDevice[component.typeDevice][component.name] = {"device":component}
+        elif component.__class__.__name__ == 'Feature':
+            componentFeatureDict[component.name] = {"feature":component}
+       
     for key,value in componentDict.items():
         componentData = ""
         componentExtraData = ""
-        #Remove Option if the dependence is not avaliable and print a error
         if True:
             generateFile(templateFolder,devicesFolder,'deviceTemplate.java',key,jinja_env,value,"",systemName,".java")
- 
+       
+    #validation
+    for keyF, feature in componentFeatureDict.items():
+        if not feature["feature"].actuador:
+            print("[error] Feature '%s' missing actuator" % (feature["feature"].name)) 
+        if feature["feature"].type == "Alternative" and not feature["feature"].alternatives:
+            print("[error] Missing alternatives features of '%s' " % (feature["feature"].name)) 
     
-    for keyBaseDevice, nameFile in componentDictByBaseDevice.items():
-        copyCodeFile(devicesCodeFolder,devicesFolder,keyBaseDevice,jinja_env,value,componentExtraData,systemName)
+    if "PanicMode" not in componentFeatureDict: 
+        print("[error] Missing mandatory features: PanicMode") 
+    if "PresenceIlusion" not in componentFeatureDict: 
+        print("[error] Missing mandatory features: PresenceIlusion") 
+    if "UserIlumination" not in componentFeatureDict: 
+        print("[error] Missing mandatory features: UserIlumination") 
+    
+    #code generation       
+    generateFile(arduinoCodeFolder,arduinoFolder,'ArduinoControl.java',"ArduinoControl",jinja_env,"",systemPin,systemName,".java") 
+    
+    for keyN, nameFile in enumerate(avaliableBaseDevices):
+        copyCodeFile(devicesCodeFolder,devicesFolder,nameFile,jinja_env,value,componentExtraData,systemName)
         if nameFile != "Hardware": 
-            generateFile(templateFolder,enumsFolder,'baseDeviceEnumTemplate.java',keyBaseDevice,jinja_env,componentDictByBaseDevice[keyBaseDevice],keyBaseDevice,systemName,".java")
-     
-     
-    copyCodeFile(homeCodeFolder,homeFolder,'AutomatedFeaturesRunnable',jinja_env,value,componentExtraData,systemName)
-    copyCodeFile(homeCodeFolder,homeFolder,'HouseFacade',jinja_env,value,componentExtraData,systemName)
+            generateFile(templateFolder,enumsFolder,'baseDeviceEnumTemplate.java',nameFile+"Enum",jinja_env,componentDictByBaseDevice[nameFile],nameFile,systemName,".java")
+    
+    generateCodeRecursively(featureModelingCodeFolder,featureModelingFolder,jinja_env,componentFeatureDict,{},{},systemName, "", "")
+    generateFile(templateFolder,featureModelingFolder,'featureHelperTemplate.java',"FeatureHelper",jinja_env,componentFeatureDict,"",systemName,".java")
+    
+    for keyF, feature in componentFeatureDict.items():
+        if feature["feature"].sensor:
+            generateFile(templateFolder,featuresFolder,"automatedFeatureTemplate.java",keyF,jinja_env,feature,"",systemName,".java") 
+            generateFile(templateFolder,uiFolder,"automatedFeatureUITemplate.java",keyF+"UI",jinja_env,feature,componentExtraData,systemName)
+        else:
+            if keyF not in ["PresenceIlusion","PanicMode"]:
+                generateFile(templateFolder,uiFolder,"listFeatureUITemplate.java",keyF,jinja_env,feature,"",systemName,".java")             
+            else:
+                copyCodeFile(uiCodeFolder,uiFolder,keyF+"UI",jinja_env,feature,componentExtraData,systemName)
+ 
+            copyCodeFile(featuresCodeFolder,featuresFolder,keyF,jinja_env,feature,componentExtraData,systemName)        
+    
+    copyCodeFile(uiCodeFolder,uiFolder,"FeatureUIBase",jinja_env,"","",systemName)
+    copyCodeFile(homeCodeFolder,homeFolder,'AutomatedFeaturesRunnable',jinja_env,componentFeatureDict,componentExtraData,systemName)
+    copyCodeFile(homeCodeFolder,homeFolder,'HouseFacade',jinja_env,componentFeatureDict,componentDict,systemName)
+    
+    generateCodeRecursively(guiCodeFolder,guiFolder,jinja_env,componentFeatureDict,componentDict,{},systemName, "", "")
     
     generateCodeRecursively(utilCodeFolder,utilFolder,jinja_env,componentDict,{},{},systemName, "", "")
-    generateCodeRecursively(featureModelingCodeFolder,featureModelingFolder,jinja_env,componentDict,{},{},systemName, "", "")
    
+def append(data):
+    newA = []
+    for k,v in data.items():
+        if v["feature"].extend and v["feature"].extend.name not in newA:
+            newA = newA + [v["feature"].extend.name]   
+    return newA
+
+def remove(data,item):
+    return data.remove(item)
+
+
 def upperfirst(x):
     return x[0].upper()+x[1:]
 

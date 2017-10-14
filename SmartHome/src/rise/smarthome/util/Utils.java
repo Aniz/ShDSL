@@ -1,4 +1,4 @@
-package rise.smarthome.util;
+package {{systemName|lower}}.smarthome.util;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

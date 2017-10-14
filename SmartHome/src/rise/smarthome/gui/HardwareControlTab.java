@@ -1,4 +1,4 @@
-package rise.smarthome.gui;
+package {{systemName|lower}}.smarthome.gui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -13,16 +13,23 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import rise.smarthome.enums.ActuatorEnum;
-import rise.smarthome.enums.SensorEnum;
-import rise.smarthome.model.devices.AirConditioner;
-import rise.smarthome.model.devices.Alarm;
-import rise.smarthome.model.devices.AutomaticDoor;
-import rise.smarthome.model.devices.AutomaticWindow;
-import rise.smarthome.model.devices.Led;
-import rise.smarthome.model.devices.LightSensor;
-import rise.smarthome.model.devices.PresenceSensor;
-import rise.smarthome.model.devices.TemperatureSensor;
+import {{systemName|lower}}.smarthome.enums.ActuatorEnum;
+import {{systemName|lower}}.smarthome.enums.SensorEnum;
+
+{% for device in extraData.devices %}
+{% if device.typeDevice != "Hardware" %}
+import {{systemName|lower}}.smarthome.model.devices.{{device.name}};
+{% endif %}
+{% endfor %}
+
+import {{systemName|lower}}.smarthome.model.devices.AirConditioner;
+import {{systemName|lower}}.smarthome.model.devices.Alarm;
+import {{systemName|lower}}.smarthome.model.devices.AutomaticDoor;
+import {{systemName|lower}}.smarthome.model.devices.AutomaticWindow;
+import {{systemName|lower}}.smarthome.model.devices.Led;
+import {{systemName|lower}}.smarthome.model.devices.LightSensor;
+import {{systemName|lower}}.smarthome.model.devices.PresenceSensor;
+import {{systemName|lower}}.smarthome.model.devices.TemperatureSensor;
 
 public class HardwareControlTab extends JPanel {
 
@@ -54,6 +61,16 @@ public class HardwareControlTab extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				SensorEnum sensorEnum = (SensorEnum) cmbSensors.getSelectedItem(); 
 				switch (sensorEnum) {
+
+				{% for k,device in extraData.items() %}
+				{% if device["device"].typeDevice == "Sensor" %}
+				case {{device["device"].name|upper}}:
+					{{device["device"].name}} {{device["device"].name|lower}} = new {{device["device"].name}}(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
+					Main.getHouseInstance().addHardware({{device["device"].name|lower}});
+					break;
+				{% endif %}
+				{% endfor %}
+
 				case LIGHT_SENSOR:
 					LightSensor lightSensor = new LightSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(lightSensor);
@@ -115,6 +132,16 @@ public class HardwareControlTab extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				ActuatorEnum actuatorEnum = (ActuatorEnum) cmbActuators.getSelectedItem();
 				switch (actuatorEnum) {
+
+				{% for k,device in extraData.items() %}
+				{% if device["device"].typeDevice == "Actuator" %}
+				case {{device["device"].name|upper}}:
+					{{device["device"].name}} {{device["device"].name|lower}} = new {{device["device"].name}}(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
+					Main.getHouseInstance().addHardware({{device["device"].name|lower}});
+					break;
+				{% endif %}
+				{% endfor %}
+
 				case LED:
 					Led led = new Led(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
 					Main.getHouseInstance().addHardware(led);

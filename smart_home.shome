@@ -1,11 +1,68 @@
+//ps:Features having a sensor are automatic
 
-Create rise pin
-
+Create rise "/dev/cu.usbmodem411"
+    
 set TemperatureSensor as Mandatory Sensor call as bu
-set Led as Optional Actuator
-set AirConditioner as Optional Actuator
-set Alarm as Optional Actuator
-set AutomaticDoor as Optional Actuator
-set AutomaticWindow as Optional Actuator
+set Led as Optional Actuator	
+set AirConditioner as Optional Actuator	
+set Alarm as Optional Actuator	
+set AutomaticDoor as Optional Actuator	
+set AutomaticWindow as Optional Actuator	
 set LightSensor as Optional Sensor
 set PresenceSensor as Optional Sensor
+
+use Optional UserAirConditionerControl 
+actuador: AirConditioner
+serial: "5575292698449566428L"
+
+use Alternative AutomatedAirConditionerControl 
+extends: UserWindowControl
+alternatives: UserAirConditionerControl
+actuador: AirConditioner
+sensor: TemperatureSensor
+serial: "4435596811596503762L"
+
+use Mandatory PresenceIlusion 
+actuador: Led
+serial: "4435596811596503762L"
+
+use Alternative AutomatedIluminationByPresence 
+extends: UserIlumination 
+alternatives: AutomatedIluminationByLuminosity
+actuador: Led
+sensor: PresenceSensor
+serial: "4435596811596503762L"
+
+use Mandatory UserIlumination 
+actuador: Led
+serial: "4435596811596503762L"
+
+use Alternative AutomatedIluminationByLuminosity 
+extends: UserIlumination 
+alternatives: AutomatedIluminationByPresence
+actuador: Led
+sensor: LightSensor
+serial: "4435596811596503762L"
+
+use Optional UserWindowControl 
+actuador: AutomaticWindow
+serial: "5575292698449566428L"
+
+use Alternative AutomatedWindowControl 
+extends: UserAirConditionerControl 
+alternatives: UserAirConditionerControl
+actuador: AutomaticWindow
+sensor: TemperatureSensor
+serial: "4435596811596503762L"
+
+use Mandatory PanicMode 
+actuador: Led
+serial: "4435596811596503762L"
+
+use Optional AlarmAgainstRobbery 
+actuador: Alarm
+serial: "5575292698449566428L"
+
+use Optional LockDoors 
+actuador: AutomaticDoor
+serial: "4435596811596503762L"

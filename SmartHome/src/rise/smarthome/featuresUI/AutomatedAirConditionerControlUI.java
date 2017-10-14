@@ -17,32 +17,32 @@ import javax.swing.JToggleButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import rise.smarthome.features.AutomatedAirConditionerControl;
+import rise.smarthome.features.{{data.feature.name}};
 import rise.smarthome.gui.Main;
-import rise.smarthome.model.devices.AirConditioner;
+import rise.smarthome.model.devices.{{data.feature.actuador.name}};
 import rise.smarthome.model.devices.Hardware;
-import rise.smarthome.model.devices.TemperatureSensor;
+import rise.smarthome.model.devices.{{data.feature.sensor.name}};
 
-public class AutomatedAirConditionerControlUI extends FeatureUIBase {
+public class {{data.feature.name}}UI extends FeatureUIBase {
 
 	private static final long serialVersionUID = 4435596811596503762L;
-	private JComboBox<AirConditioner> cmbAvaliableAirConditioner;
-	private AutomatedAirConditionerControl automatedAirConditionerControl;
-        private JComboBox<AirConditioner> cmbCurrentAirConditioners;
-	private JComboBox<TemperatureSensor> cmbSensor;
+	private JComboBox<{{data.feature.actuador.name}}> cmbAvaliable{{data.feature.actuador.name}};
+	private {{data.feature.name}} {{data.feature.name|lower}};
+    private JComboBox<{{data.feature.actuador.name}}> cmbCurrent{{data.feature.actuador.name}}s;
+	private JComboBox<{{data.feature.sensor.name}}> cmbSensor;
 	private JToggleButton tglActivateFeature;
 
-	public AutomatedAirConditionerControlUI() {
+	public {{data.feature.name}}UI() {
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentShown(ComponentEvent e) {
 				updateAvaliableCombo();
-				updateAirConditionerToAutomateCombo();
-				updateTemperatureSensorCombo();
+				update{{data.feature.name}}ToAutomateCombo();
+				update{{data.feature.sensor.name}}Combo();
 			}
 		});
-		automatedAirConditionerControl = (AutomatedAirConditionerControl) Main.getHouseInstance().getFeatureByType(AutomatedAirConditionerControl.class);
-		setForClass(AutomatedAirConditionerControl.class);
+		{{data.feature.name|lower}} = ({{data.feature.name}}) Main.getHouseInstance().getFeatureByType({{data.feature.name}}.class);
+		setForClass({{data.feature.name}}.class);
 		setLayout(null);
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, null, null), "Feature Action", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 204)));
@@ -58,10 +58,10 @@ public class AutomatedAirConditionerControlUI extends FeatureUIBase {
 			public void actionPerformed(ActionEvent e) {
 				if(tglActivateFeature.isSelected()){
 					tglActivateFeature.setText("Stop Feature");
-					automatedAirConditionerControl.setActive(true);
+					{{data.feature.name|lower}}.setActive(true);
 				}else{
 					tglActivateFeature.setText("Start Feature");
-					automatedAirConditionerControl.setActive(false);
+					{{data.feature.name|lower}}.setActive(false);
 				}
 			}
 		});
@@ -76,39 +76,39 @@ public class AutomatedAirConditionerControlUI extends FeatureUIBase {
 		JLabel lblAutomaticWindowPin = new JLabel("Avaliable Automatic Windows:");
 		lblAutomaticWindowPin.setBounds(6, 90, 220, 16);
 		panel_1.add(lblAutomaticWindowPin);
-		cmbAvaliableAirConditioner = new JComboBox<AirConditioner>();
+		cmbAvaliable{{data.feature.actuador.name}} = new JComboBox<{{data.feature.actuador.name}}>();
 		updateAvaliableCombo();
-		cmbAvaliableAirConditioner.addActionListener(new ActionListener() {
+		cmbAvaliable{{data.feature.actuador.name}}.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				AirConditioner airConditioner = (AirConditioner) cmbAvaliableAirConditioner.getSelectedItem();
-				if(!automatedAirConditionerControl.getAirConditioners().contains(airConditioner)){
-					automatedAirConditionerControl.getAirConditioners().add(airConditioner);
-					updateAirConditionerToAutomateCombo();
+				{{data.feature.actuador.name}} actuador = ({{data.feature.actuador.name}}) cmbAvaliable{{data.feature.actuador.name}}.getSelectedItem();
+				if(!{{data.feature.name|lower}}.get{{data.feature.actuador.name}}s().contains(actuador)){
+					{{data.feature.name|lower}}.get{{data.feature.actuador.name}}s().add(actuador);
+					update{{data.feature.name}}ToAutomateCombo();
 				}
 			}
 		});
-		cmbAvaliableAirConditioner.setBounds(210, 85, 210, 30);
-		panel_1.add(cmbAvaliableAirConditioner);
+		cmbAvaliable{{data.feature.actuador.name}}.setBounds(210, 85, 210, 30);
+		panel_1.add(cmbAvaliable{{data.feature.actuador.name}});
 
-		JLabel lblCurrentAirConditioner = new JLabel("Automatic AirConditioner to Automate:");
-		lblCurrentAirConditioner.setBounds(6, 143, 220, 16);
-		panel_1.add(lblCurrentAirConditioner);
+		JLabel lblCurrent{{data.feature.actuador.name}} = new JLabel("Automatic {{data.feature.actuador.name}} to Automate:");
+		lblCurrent{{data.feature.actuador.name}}.setBounds(6, 143, 220, 16);
+		panel_1.add(lblCurrent{{data.feature.actuador.name}});
 
-		cmbCurrentAirConditioners = new JComboBox<AirConditioner>();
-		updateAirConditionerToAutomateCombo();
-		cmbCurrentAirConditioners.addActionListener(new ActionListener() {
+		cmbCurrent{{data.feature.actuador.name}}s = new JComboBox<{{data.feature.actuador.name}}>();
+		update{{data.feature.name}}ToAutomateCombo();
+		cmbCurrent{{data.feature.actuador.name}}s.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				AirConditioner airConditioner = (AirConditioner) cmbCurrentAirConditioners.getSelectedItem();
-				automatedAirConditionerControl.getAirConditioners().remove(airConditioner);
-				updateAirConditionerToAutomateCombo();
+				{{data.feature.actuador.name}} actuador = ({{data.feature.actuador.name}}) cmbCurrent{{data.feature.actuador.name}}s.getSelectedItem();
+				{{data.feature.name|lower}}.get{{data.feature.actuador.name}}s().remove(actuador);
+				update{{data.feature.name}}ToAutomateCombo();
 			}
 		});
-		cmbCurrentAirConditioners.setBounds(245, 135, 175, 30);
-		panel_1.add(cmbCurrentAirConditioners);
+		cmbCurrent{{data.feature.actuador.name}}s.setBounds(245, 135, 175, 30);
+		panel_1.add(cmbCurrent{{data.feature.actuador.name}}s);
 
-		JLabel lblWhen = new JLabel("Clicking in a current AirConditioner combo item you remove them to the feature.");
+		JLabel lblWhen = new JLabel("Clicking in a current {{data.feature.actuador.name}} combo item you remove them to the feature.");
 		lblWhen.setForeground(Color.RED);
 		lblWhen.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblWhen.setBounds(6, 180, 412, 16);
@@ -118,11 +118,11 @@ public class AutomatedAirConditionerControlUI extends FeatureUIBase {
 		lblAvaliableSensors.setBounds(6, 40, 114, 16);
 		panel_1.add(lblAvaliableSensors);
 		
-		cmbSensor = new JComboBox<TemperatureSensor>();
+		cmbSensor = new JComboBox<{{data.feature.sensor.name}}>();
 		cmbSensor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TemperatureSensor temperatureSensor = (TemperatureSensor) cmbSensor.getSelectedItem();
-				automatedAirConditionerControl.setTemperatureSensor(temperatureSensor);
+				{{data.feature.sensor.name}} temperatureSensor = ({{data.feature.sensor.name}}) cmbSensor.getSelectedItem();
+				{{data.feature.name|lower}}.set{{data.feature.sensor.name}}(temperatureSensor);
 			}
 		});
 		cmbSensor.setBounds(125, 36, 293, 27);
@@ -130,36 +130,36 @@ public class AutomatedAirConditionerControlUI extends FeatureUIBase {
 	}
 	
 	private void updateAvaliableCombo() {
-		ArrayList<AirConditioner> airConditioners = automatedAirConditionerControl.getAirConditioners();
-		AirConditioner[] airConditionerArray= new AirConditioner[airConditioners.size()];
+		ArrayList<{{data.feature.actuador.name}}> actuadors = {{data.feature.name|lower}}.get{{data.feature.actuador.name}}s();
+		{{data.feature.actuador.name}}[] actuadorsArray= new {{data.feature.actuador.name}}[actuadors.size()];
 		int i=0;
-		for (AirConditioner airConditioner : airConditioners) {
-			airConditionerArray[i] = (AirConditioner) airConditioner;
+		for ({{data.feature.actuador.name}} actuador : actuadors) {
+			actuadorsArray[i] = ({{data.feature.actuador.name}}) actuador;
 			i++;
 		}
-		cmbAvaliableAirConditioner.setModel(new DefaultComboBoxModel<AirConditioner>(airConditionerArray));
+		cmbAvaliable{{data.feature.actuador.name}}.setModel(new DefaultComboBoxModel<{{data.feature.actuador.name}}>(actuadorsArray));
 	}
 
-	private void updateTemperatureSensorCombo() {
-		ArrayList<Hardware> hardwares = Main.getHouseInstance().getAllHardwareByType(TemperatureSensor.class);
-		TemperatureSensor[] temperatureSensors= new TemperatureSensor[hardwares.size()];
+	private void update{{data.feature.sensor.name}}Combo() {
+		ArrayList<Hardware> hardwares = Main.getHouseInstance().getAllHardwareByType({{data.feature.sensor.name}}.class);
+		{{data.feature.sensor.name}}[] temperatureSensors= new {{data.feature.sensor.name}}[hardwares.size()];
 		int i=0;
 		for (Hardware hardware : hardwares) {
-			temperatureSensors[i] = (TemperatureSensor) hardware;
+			temperatureSensors[i] = ({{data.feature.sensor.name}}) hardware;
 			i++;
 		}
-		cmbSensor.setModel(new DefaultComboBoxModel<TemperatureSensor>(temperatureSensors));
+		cmbSensor.setModel(new DefaultComboBoxModel<{{data.feature.sensor.name}}>(temperatureSensors));
 	}
 
-	private void updateAirConditionerToAutomateCombo() {
-		ArrayList<AirConditioner> airConditioners = automatedAirConditionerControl.getAirConditioners();
-		AirConditioner[] airConditionerArray= new AirConditioner[airConditioners.size()];
+	private void update{{data.feature.name}}ToAutomateCombo() {
+		ArrayList<{{data.feature.actuador.name}}> actuadors = {{data.feature.name|lower}}.get{{data.feature.actuador.name}}s();
+		{{data.feature.actuador.name}}[] actuadorsArray= new {{data.feature.actuador.name}}[actuadors.size()];
 		int i=0;
-		for (AirConditioner airConditioner : airConditioners) {
-			airConditionerArray[i] = (AirConditioner) airConditioner;
+		for ({{data.feature.actuador.name}} actuador : actuadors) {
+			actuadorsArray[i] = ({{data.feature.actuador.name}}) actuador;
 			i++;
 		}
-		cmbCurrentAirConditioners.setModel(new DefaultComboBoxModel<AirConditioner>(airConditionerArray));
+		cmbCurrent{{data.feature.actuador.name}}s.setModel(new DefaultComboBoxModel<{{data.feature.actuador.name}}>(actuadorsArray));
 	}
 }
 

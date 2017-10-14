@@ -1,24 +1,42 @@
-package rise.smarthome.features;
+package {{systemName|lower}}.smarthome.features;
 
 import java.util.ArrayList;
 
-import rise.smarthome.featureModeling.FeatureBase;
-import rise.smarthome.featureModeling.MandatoryFeature;
-import rise.smarthome.model.devices.Led;
+{% if data.feature.extends %}
+import {{systemName|lower}}.smarthome.featureModeling.AdaptableFeature;
+{% else %}
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
+{% endif %}
+{% if data.feature.type %}
+import {{systemName|lower}}.smarthome.featureModeling.{{data.feature.type}}Feature;
+{% endif %}
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name}};
 
+{% if data.feature.type == "Mandatory" %}
 @MandatoryFeature
-public class UserIlumination extends FeatureBase{
+{% endif %}
+{% if data.feature.type == "Optional" %}
+@OptionalFeature
+{% endif %}
+{% if data.feature.type == "Alternative" %}
+@AlternativeFeature(alternatives={
+{% for altenative in data.feature.alternatives %}
+	{{altenative.name}}.class{% if not loop.last %},{% endif %}
+{% endfor %}
+})
+{% endif %}
+public class UserIlumination {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %}{
 
-	private ArrayList<Led> leds;
+	private ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s;
 	private static UserIlumination userIlumination = null;
 
 	protected UserIlumination(){}
 
-	public static UserIlumination getInstance(ArrayList<Led> leds) {
+	public static UserIlumination getInstance(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s) {
 		if(userIlumination == null){
 			userIlumination = new UserIlumination();
 			userIlumination.setName("User Illumination");
-			userIlumination.setLeds(leds);
+			userIlumination.set{{data.feature.actuador.name}}s({{data.feature.actuador.name|lower}}s);
 
 		}
 		return userIlumination;
@@ -32,15 +50,15 @@ public class UserIlumination extends FeatureBase{
 	public synchronized void proceedActions(String[] args) {
 		// [0] Led pin
 		// [1] action: 1 on; 0 off; -1 switch state
-		if(leds!=null){
-			for (Led led : leds) {
-				if(led.getPin()==Integer.parseInt(args[0])){
+		if({{data.feature.actuador.name|lower}}s!=null){
+			for ({{data.feature.actuador.name}} actuador : {{data.feature.actuador.name|lower}}s) {
+				if(actuador.getPin()==Integer.parseInt(args[0])){
 					if(Integer.parseInt(args[1]) == 1){
-						led.activate();
+						actuador.activate();
 					}else if (Integer.parseInt(args[1]) == 0 ){
-						led.deactivate();
+						actuador.deactivate();
 					}else if (Integer.parseInt(args[1]) == -1 ){
-						if(led.getState()==0) led.activate(); else led.deactivate();
+						if(actuador.getState()==0) actuador.activate(); else led.deactivate();
 					}
 				}
 			}
@@ -48,12 +66,12 @@ public class UserIlumination extends FeatureBase{
 	}
 
 
-	public ArrayList<Led> getLeds() {
-		return leds;
+	public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuador.name}}s() {
+		return {{data.feature.actuador.name|lower}}s;
 	}
 
 
-	public void setLeds(ArrayList<Led> leds) {
-		this.leds = leds;
+	public void set{{data.feature.actuador.name}}s(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s) {
+		this.{{data.feature.actuador.name|lower}}s = {{data.feature.actuador.name|lower}}s;
 	}
 }

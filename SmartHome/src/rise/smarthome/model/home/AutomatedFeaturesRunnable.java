@@ -1,10 +1,10 @@
-package rise.smarthome.model.home;
+package {{systemName|lower}}.smarthome.model.home;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
-import rise.smarthome.featureModeling.AdaptableFeature;
-import rise.smarthome.featureModeling.FeatureBase;
+import {{systemName|lower}}.smarthome.featureModeling.AdaptableFeature;
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
 
 public class AutomatedFeaturesRunnable implements Runnable {
 

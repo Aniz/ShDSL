@@ -1,5 +1,4 @@
 package {{systemName|lower}}.smarthome.model.home;
-
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
@@ -10,27 +9,35 @@ import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
 import {{systemName|lower}}.smarthome.gui.AlternativeFeatureSelectionDialog;
 import {{systemName|lower}}.smarthome.gui.Main;
 
-import rise.smarthome.features.AlarmAgainstRobbery;
-import rise.smarthome.features.AutomatedAirConditionerControl;
-import rise.smarthome.features.AutomatedIluminationByLuminosity;
-import rise.smarthome.features.AutomatedIluminationByPresence;
-import rise.smarthome.features.AutomatedWindowControl;
-import rise.smarthome.features.LockDoors;
-import rise.smarthome.features.PanicMode;
-import rise.smarthome.features.PresenceIlusion;
-import rise.smarthome.features.UserAirConditionerControl;
-import rise.smarthome.features.UserIlumination;
-import rise.smarthome.features.UserWindowControl;
+{% for k,feature in data.items() %}
+import {{systemName|lower}}.smarthome.features.{{feature["feature"].name}};
+{% endfor %}
 
-import rise.smarthome.model.devices.AirConditioner;
-import rise.smarthome.model.devices.Alarm;
-import rise.smarthome.model.devices.AutomaticDoor;
-import rise.smarthome.model.devices.AutomaticWindow;
-import rise.smarthome.model.devices.Hardware;
-import rise.smarthome.model.devices.Led;
-import rise.smarthome.model.devices.LightSensor;
-import rise.smarthome.model.devices.PresenceSensor;
-import rise.smarthome.model.devices.TemperatureSensor;
+{% for k,device in extraData.items() %}
+import {{systemName|lower}}.smarthome.model.devices.{{device["device"].name}};
+{% endfor %}
+
+import {{systemName|lower}}.smarthome.features.AlarmAgainstRobbery;
+import {{systemName|lower}}.smarthome.features.AutomatedAirConditionerControl;
+import {{systemName|lower}}.smarthome.features.AutomatedIluminationByLuminosity;
+import {{systemName|lower}}.smarthome.features.AutomatedIluminationByPresence;
+import {{systemName|lower}}.smarthome.features.AutomatedWindowControl;
+import {{systemName|lower}}.smarthome.features.LockDoors;
+import {{systemName|lower}}.smarthome.features.PanicMode;
+import {{systemName|lower}}.smarthome.features.PresenceIlusion;
+import {{systemName|lower}}.smarthome.features.UserAirConditionerControl;
+import {{systemName|lower}}.smarthome.features.UserIlumination;
+import {{systemName|lower}}.smarthome.features.UserWindowControl;
+
+import {{systemName|lower}}.smarthome.model.devices.AirConditioner;
+import {{systemName|lower}}.smarthome.model.devices.Alarm;
+import {{systemName|lower}}.smarthome.model.devices.AutomaticDoor;
+import {{systemName|lower}}.smarthome.model.devices.AutomaticWindow;
+import {{systemName|lower}}.smarthome.model.devices.Hardware;
+import {{systemName|lower}}.smarthome.model.devices.Led;
+import {{systemName|lower}}.smarthome.model.devices.LightSensor;
+import {{systemName|lower}}.smarthome.model.devices.PresenceSensor;
+import {{systemName|lower}}.smarthome.model.devices.TemperatureSensor;
 
 public class HouseFacade {
 	private static ArrayList<FeatureBase> avaliableFeatures;
@@ -53,13 +60,18 @@ public class HouseFacade {
 	}
 	private void loadAvaliableFeatures() {
 		avaliableFeatures = new ArrayList<FeatureBase>();
+		{% for key,feature in data.items() %}
+		{% if feature["feature"].sensor %}
+			avaliableFeatures.add({{feature["feature"].name}}.getInstance());
+		{% endif %}
+		{% endfor %}
+		
 		avaliableFeatures.add(AutomatedIluminationByLuminosity.getInstance());
 		avaliableFeatures.add(AutomatedIluminationByPresence.getInstance());
         avaliableFeatures.add(AutomatedWindowControl.getInstance());
 		avaliableFeatures.add(AutomatedAirConditionerControl.getInstance());
 		               
 	}
-
 
 	public FeatureBase getFeatureByType(Class<? extends FeatureBase> clazz){
 		for (FeatureBase feature : features) {
@@ -82,16 +94,29 @@ public class HouseFacade {
 
 
 	private void loadMandatoryFeatures() {
+		{% for key,feature in data.items() %}
+		{% if feature["feature"].type == "Mandatory" %}
+		{{feature["feature"].name}} {{feature["feature"].name|lower}} = {{feature["feature"].name}}.getInstance(new ArrayList<{{feature["feature"].actuador.name}}>());
+		addFeature({{feature["feature"].name|lower}});
+		{% endif %}
+		{% endfor %}
+		
 		UserIlumination userIlumination = UserIlumination.getInstance(new ArrayList<Led>());
 		addFeature(userIlumination);
 		PresenceIlusion presenceIlusion = PresenceIlusion.getInstance(userIlumination);
 		addFeature(presenceIlusion);
 		PanicMode panicMode = PanicMode.getInstance(userIlumination);
 		addFeature(panicMode);
-        
 	}
 	
 	private void loadOptionalFeatures() {
+		{% for key,feature in data.items() %}
+		{% if feature["feature"].type == "Optional" %}
+		{{feature["feature"].name}} {{feature["feature"].name|lower}} = {{feature["feature"].name}}.getInstance(new ArrayList<{{feature["feature"].actuador.name}}>());
+		addFeature({{feature["feature"].name|lower}});
+		{% endif %}
+		{% endfor %}
+		
 		LockDoors lockDoors = LockDoors.getInstance(new ArrayList<AutomaticDoor>());
 		addFeature(lockDoors);
 		AlarmAgainstRobbery alarmAgainstRobbery = AlarmAgainstRobbery.getInstance(new ArrayList<Alarm>());
@@ -124,7 +149,31 @@ public class HouseFacade {
 
 	private void removeHardwareFromFeatures(Hardware anyHardware) {
 		for (FeatureBase featureBase : features) {
-                    //
+            
+              {% for keyD,device in extraData.items() %}
+           if(anyHardware instanceof {{keyD}}){
+			{% for keyF,feature in data.items() %}
+				{% if device["device"].typeDevice == "Actuator" %}
+           		{% if feature["feature"].actuador.name == keyD %}
+           		if(featureBase instanceof {{feature["feature"].name}}){
+					{{feature["feature"].name}} {{feature["feature"].name|lower}} = ({{feature["feature"].name}}) featureBase;
+					{{feature["feature"].name|lower}}.get{{feature["feature"].actuador.name}}s().remove(anyHardware);
+				}
+				{% endif %}
+           		{% endif %}
+           		{% if device["device"].typeDevice == "Sensor" %}
+           		{% if feature["feature"].sensor.name == keyD %}
+           		if(featureBase instanceof {{feature["feature"].name}}){
+				{{feature["feature"].name}} {{feature["feature"].name|lower}} = ({{feature["feature"].name}}) featureBase;
+				{{feature["feature"].name|lower}}.set{{feature["feature"].sensor.name}}(null);
+		   		}
+		   		{% endif %}
+		   		{% endif %}
+           	{% endfor %}
+			}
+           {% endfor %}
+         
+                 //
 			if(anyHardware instanceof Led){
 				if(featureBase instanceof UserIlumination){
 					UserIlumination userIlumination = (UserIlumination) featureBase;
@@ -266,6 +315,23 @@ public class HouseFacade {
 		recreateFatherFeature(feature);
 	}
 	private void recreateFatherFeature(FeatureBase feature) {
+		{% set extendsArray = data|append %}
+		{% for kF,value in data.items() %}
+		{% if value.feature.extend %}
+		{% if value.feature.extend.name in extendsArray %}
+
+		if(feature instanceof {{value.feature.extend.name}}){
+			{{value.feature.extend.name}} {{value.feature.extend.name|lower}} = {{value.feature.extend.name}}.getInstance(((UserIlumination)feature).getLeds());
+			exchangeRequiredFeature(feature, {{value.feature.extend.name|lower}});
+			features.remove(feature);
+			addFeature({{value.feature.extend.name|lower}});
+		}
+		{% set extendsArray = extendsArray|remove(value.feature.extend.name) %}
+		{% endif %}
+		
+		{% endif %}
+		{% endfor %}
+
 		if(feature instanceof UserIlumination){
 			UserIlumination userIlumination = UserIlumination.getInstance(((UserIlumination)feature).getLeds());
 			exchangeRequiredFeature(feature, userIlumination);
@@ -308,43 +374,43 @@ public class HouseFacade {
 	}
 
 	private void exchangeBrotherFeaturesData(FeatureBase featureBase,FeatureBase newFeature) {
+		{% for kF,value in data.items() %}
+		{% if value.feature.type == "Alternative" and value.feature.name!= "AutomatedIluminationByPresence" and value.feature.name!= "AutomatedIluminationByLuminosity" %}
+		if(featureBase instanceof {{value.feature.name}}){
+			{{value.feature.name}} {{value.feature.name|lower}} = ({{value.feature.name}}) featureBase;
+			(({{value.feature.name}}) newFeature).set{{value.feature.sensor.name}}s({{value.feature.name|lower}}.get{{value.feature.actuador.name}}s());
+		}	
+		{% endif %}
+		{% endfor %}
+
 		if(featureBase instanceof AutomatedIluminationByPresence){
 			AutomatedIluminationByPresence automatedIluminationByPresence = (AutomatedIluminationByPresence) featureBase;
-			((AutomatedIluminationByLuminosity) newFeature).setLeds(automatedIluminationByPresence.getLeds());
+			((AutomatedIluminationByLuminosity) newFeature).set{{data.AutomatedIluminationByPresence.feature.actuador.name}}s(automatedIluminationByPresence.get{{data.AutomatedIluminationByPresence.feature.actuador.name}}s());
 		}
 		if(featureBase instanceof AutomatedIluminationByLuminosity){
 			AutomatedIluminationByLuminosity automatedIluminationByLuminosity = (AutomatedIluminationByLuminosity) featureBase;
-			((AutomatedIluminationByPresence) newFeature).setLeds(automatedIluminationByLuminosity.getLeds());
+			((AutomatedIluminationByPresence) newFeature).set{{data.AutomatedIluminationByLuminosity.feature.actuador.name}}s(automatedIluminationByLuminosity.get{{data.AutomatedIluminationByLuminosity.feature.actuador.name}}s());
 		}
-        if(featureBase instanceof AutomatedWindowControl){
-			AutomatedWindowControl automatedWindowControl = (AutomatedWindowControl) featureBase;
-			((AutomatedWindowControl) newFeature).setTemperatureSensor(automatedWindowControl.getTemperatureSensor());
-		}
-		if(featureBase instanceof AutomatedAirConditionerControl){
-			AutomatedAirConditionerControl automatedAirConditionerControl = (AutomatedAirConditionerControl) featureBase;
-			((AutomatedAirConditionerControl) newFeature).setTemperatureSensor(automatedAirConditionerControl.getTemperatureSensor());
-		}
-
 	}
 	
 	private void keepFeatureState(FeatureBase oldFeature, FeatureBase newFeature) {
 		if(oldFeature instanceof UserIlumination){
 			UserIlumination userIlumination = (UserIlumination) oldFeature;
 			if(newFeature instanceof AutomatedIluminationByLuminosity){
-				((AutomatedIluminationByLuminosity) newFeature).setLeds(userIlumination.getLeds());
+				((AutomatedIluminationByLuminosity) newFeature).set{{data.AutomatedIluminationByLuminosity.feature.actuador.name}}s(userIlumination.get{{data.AutomatedIluminationByLuminosity.feature.actuador.name}}s());
 			}else if (newFeature instanceof AutomatedIluminationByPresence){
-				((AutomatedIluminationByPresence) newFeature).setLeds(userIlumination.getLeds());
+				((AutomatedIluminationByPresence) newFeature).set{{data.AutomatedIluminationByPresence.feature.actuador.name}}s(userIlumination.get{{data.AutomatedIluminationByPresence.feature.actuador.name}}s());
 			}
 		}
 
 		if(oldFeature instanceof UserWindowControl){
 			UserWindowControl userWindowControl = (UserWindowControl) oldFeature;
-			((AutomatedWindowControl) newFeature).setAutomaticWindowsToAutomate((userWindowControl.getAutomaticWindows()));
+			((AutomatedWindowControl) newFeature).setAutomaticWindowsToAutomate((userWindowControl.get{{data.UserWindowControl.feature.actuador.name}}s()));
 		}
 
 		if(oldFeature instanceof UserAirConditionerControl){
 			UserAirConditionerControl userAirConditionerControl = (UserAirConditionerControl) oldFeature;
-			((UserAirConditionerControl) newFeature).setAirConditioners((userAirConditionerControl.getAirConditioners()));
+			((UserAirConditionerControl) newFeature).setAirConditioners((userAirConditionerControl.get{{data.UserAirConditionerControl.feature.actuador.name}}s()));
 		}
 	}
 

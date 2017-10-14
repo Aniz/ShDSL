@@ -1,24 +1,42 @@
-package rise.smarthome.features;
+package {{systemName|lower}}.smarthome.features;
 
 import java.util.ArrayList;
 
-import rise.smarthome.featureModeling.FeatureBase;
-import rise.smarthome.featureModeling.OptionalFeature;
-import rise.smarthome.model.devices.AutomaticWindow;
+{% if data.feature.extends %}
+import {{systemName|lower}}.smarthome.featureModeling.AdaptableFeature;
+{% else %}
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
+{% endif %}
+{% if data.feature.type %}
+import {{systemName|lower}}.smarthome.featureModeling.{{data.feature.type}}Feature;
+{% endif %}
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name}};
 
+{% if data.feature.type == "Mandatory" %}
+@MandatoryFeature
+{% endif %}
+{% if data.feature.type == "Optional" %}
 @OptionalFeature
-public class UserWindowControl extends FeatureBase {
+{% endif %}
+{% if data.feature.type == "Alternative" %}
+@AlternativeFeature(alternatives={
+{% for altenative in data.feature.alternatives %}
+	{{altenative.name}}.class{% if not loop.last %},{% endif %}
+{% endfor %}
+})
+{% endif %}
+public class UserWindowControl {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %} {
 
-	private ArrayList<AutomaticWindow> automaticWindows;
+	private ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s;
 	private static UserWindowControl userWindowControl = null;
 	
 	protected UserWindowControl(){}
 	
-	public static UserWindowControl getInstance(ArrayList<AutomaticWindow> automaticWindows) {
+	public static UserWindowControl getInstance(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s) {
 		if(userWindowControl == null){
 			userWindowControl = new UserWindowControl();
 			userWindowControl.setName("User Window Control");
-            userWindowControl.setAutomaticWindows(automaticWindows);
+            userWindowControl.set{{data.feature.actuador.name}}s({{data.feature.actuador.name|lower}}s);
 		}
 		return userWindowControl;
 	}
@@ -31,23 +49,23 @@ public class UserWindowControl extends FeatureBase {
 	public void proceedActions(String[] args) {
 		// [0] Led pin
 		// [1] action: 1 on; 0 off;
-		for (AutomaticWindow automaticWindow : automaticWindows) {
-			if(automaticWindow.getPin()==Integer.parseInt(args[0])){
+		for ({{data.feature.actuador.name}} actuador : {{data.feature.actuador.name|lower}}s) {
+			if(actuador.getPin()==Integer.parseInt(args[0])){
 				if(Integer.parseInt(args[1]) == 1){
-					automaticWindow.activate();
+					actuador.activate();
 				}else if (Integer.parseInt(args[1]) == 0 ){
-					automaticWindow.deactivate();
+					actuador.deactivate();
 				}
 			}
 		}
 	}
 
-	public ArrayList<AutomaticWindow> getAutomaticWindows() {
-		return automaticWindows;
+	public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuador.name}}s() {
+		return {{data.feature.actuador.name|lower}}s;
 	}
 
-	public void setAutomaticWindows(ArrayList<AutomaticWindow> automaticWindows) {
-		this.automaticWindows = automaticWindows;
+	public void set{{data.feature.actuador.name}}s(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s) {
+		this.{{data.feature.actuador.name|lower}}s = {{data.feature.actuador.name|lower}}s;
 	}
 
 }

@@ -1,4 +1,4 @@
-package rise.smarthome.gui;
+package {{systemName|lower}}.smarthome.gui;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -17,11 +17,11 @@ import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import rise.smarthome.featureModeling.FeatureBase;
-import rise.smarthome.featureModeling.MandatoryFeature;
-//import rise.smarthome.featureModeling.OptionalFeature;
-import rise.smarthome.features.PanicMode;
-import rise.smarthome.features.UserIlumination;
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
+import {{systemName|lower}}.smarthome.featureModeling.MandatoryFeature;
+//import {{systemName|lower}}.smarthome.featureModeling.OptionalFeature;
+import {{systemName|lower}}.smarthome.features.PanicMode;
+import {{systemName|lower}}.smarthome.features.UserIlumination;
 
 public class FeatureControlTab extends JPanel {
 

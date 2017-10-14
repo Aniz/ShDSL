@@ -1,15 +1,33 @@
 
-package rise.smarthome.features;
+package {{systemName|lower}}.smarthome.features;
 
 import java.util.ArrayList;
-import rise.smarthome.featureModeling.AdaptableFeature;
-import rise.smarthome.featureModeling.AlternativeFeature;
-import rise.smarthome.model.devices.AutomaticWindow;
-import rise.smarthome.model.devices.TemperatureSensor;
+{% if data.feature.extends %}
+import {{systemName|lower}}.smarthome.featureModeling.AdaptableFeature;
+{% else %}
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
+{% endif %}
+{% if data.feature.type %}
+import {{systemName|lower}}.smarthome.featureModeling.{{data.feature.type}}Feature;
+{% endif %}
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name}};
+import {{systemName|lower}}.smarthome.model.devices.TemperatureSensor;
 
-@AlternativeFeature(alternatives={AutomatedAirConditionerControl.class})
-public class AutomatedWindowControl extends UserAirConditionerControl implements AdaptableFeature{
-    
+{% if data.feature.type == "Mandatory" %}
+@MandatoryFeature
+{% endif %}
+{% if data.feature.type == "Optional" %}
+@OptionalFeature
+{% endif %}
+{% if data.feature.type == "Alternative" %}
+@AlternativeFeature(alternatives={
+{% for altenative in data.feature.alternatives %}
+	{{altenative.name}}.class{% if not loop.last %},{% endif %}
+{% endfor %}
+})
+{% endif %}
+public class AutomatedWindowControl {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% endif %}{
+
     private ArrayList<AutomaticWindow> automaticWindowsToAutomate;
     private TemperatureSensor temperatureSensor;
     private static AutomatedWindowControl automatedWindowControl = null;

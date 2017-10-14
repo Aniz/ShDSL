@@ -1,26 +1,44 @@
-package rise.smarthome.features;
+package {{systemName|lower}}.smarthome.features;
 
 import java.util.ArrayList;
 
-import rise.smarthome.featureModeling.FeatureBase;
-//import rise.smarthome.featureModeling.MandatoryFeature;
-import rise.smarthome.featureModeling.OptionalFeature;
-import rise.smarthome.model.devices.Alarm;
+//import {{systemName|lower}}.smarthome.featureModeling.MandatoryFeature;
+{% if data.feature.extends %}
+import {{systemName|lower}}.smarthome.featureModeling.AdaptableFeature;
+{% else %}
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
+{% endif %}
+{% if data.feature.type %}
+import {{systemName|lower}}.smarthome.featureModeling.{{data.feature.type}}Feature;
+{% endif %}
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name}};
 
+{% if data.feature.type == "Mandatory" %}
+@MandatoryFeature
+{% endif %}
+{% if data.feature.type == "Optional" %}
 @OptionalFeature
-public class AlarmAgainstRobbery extends FeatureBase {
+{% endif %}
+{% if data.feature.type == "Alternative" %}
+@AlternativeFeature(alternatives={
+{% for altenative in data.feature.alternatives %}
+	{{altenative.name}}.class{% if not loop.last %},{% endif %}
+{% endfor %}
+})
+{% endif %}
+public class AlarmAgainstRobbery {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %} {
 
-	private ArrayList<Alarm> alarms;
+	private ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s;
 	private AlarmAgainstRoberryThread alarmAgainstRobberyThread;
 	private static AlarmAgainstRobbery alarmAgainstRobbery = null;
 	
 	private AlarmAgainstRobbery() {}
 	
-	public static AlarmAgainstRobbery getInstance(ArrayList<Alarm> alarms) {
+	public static AlarmAgainstRobbery getInstance(ArrayList<Alarm> {{data.feature.actuador.name|lower}}s) {
 		if(alarmAgainstRobbery == null){
 			alarmAgainstRobbery = new AlarmAgainstRobbery();
-			alarmAgainstRobbery.setName("Alarm");
-                        alarmAgainstRobbery.setAlarms(alarms);
+			alarmAgainstRobbery.setName("{% if data.feature.actuador.alias %}{{data.feature.actuador.alias}}{% else %}{{data.feature.actuador.name|splitName}}{% endif %}");
+            alarmAgainstRobbery.set{{data.feature.actuador.name}}s({{data.feature.actuador.name|lower}}s);
 		}
 		return alarmAgainstRobbery;
 	}
@@ -34,7 +52,7 @@ public class AlarmAgainstRobbery extends FeatureBase {
 		// [0] - 1 to activate; 0 to deactivate
 		if(args[1].equals("1")){
 			if(alarmAgainstRobberyThread==null || !alarmAgainstRobberyThread.isAlive()){
-				alarmAgainstRobberyThread = new AlarmAgainstRoberryThread(alarms);
+				alarmAgainstRobberyThread = new AlarmAgainstRoberryThread({{data.feature.actuador.name|lower}}s);
 				alarmAgainstRobberyThread.run();
 			}
 		}else if (args[0].equals("0")){
@@ -45,18 +63,18 @@ public class AlarmAgainstRobbery extends FeatureBase {
 	}
 	
 	private class AlarmAgainstRoberryThread extends Thread{
-		private ArrayList<Alarm> alarms;
+		private ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s;
 		private boolean shouldInterrupt = false;
 		
-		public AlarmAgainstRoberryThread(ArrayList<Alarm> alarms){
-			this.alarms = alarms;
+		public AlarmAgainstRoberryThread(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s){
+			this.{{data.feature.actuador.name|lower}}s = {{data.feature.actuador.name|lower}}s;
 		}
 		
 		@Override
 		public void run() {
 			while(!shouldInterrupt){
-				for (Alarm alarm : alarms) {
-					alarm.activate();
+				for ({{data.feature.actuador.name}} actuador : {{data.feature.actuador.name|lower}}s) {
+					actuador.activate();
 				}
 			}
 		}
@@ -64,15 +82,15 @@ public class AlarmAgainstRobbery extends FeatureBase {
 		protected void finhishAction(){
 			shouldInterrupt = true;
 		}
-        }
-               public ArrayList<Alarm> getAlarms() {
-		return alarms;
+    }
+    
+    public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuador.name}}s() {
+		return {{data.feature.actuador.name|lower}}s;
 	}
 
-
-	public void setAlarms(ArrayList<Alarm> alarms) {
-		this.alarms = alarms;
+	public void set{{data.feature.actuador.name}}s(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s) {
+		this.{{data.feature.actuador.name|lower}}s = {{data.feature.actuador.name|lower}}s;
 	}
-        }
+}
         
 

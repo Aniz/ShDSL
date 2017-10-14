@@ -3,7 +3,7 @@
 */
 
 SmartHomeModel: 
-  'Create' name=ID pin=ID
+  'Create' name=ID pin=STRING
   components*=Component
 ;
 
@@ -24,15 +24,21 @@ TypeDevice:
 ;
 
 Device:
-  'set' entity=ID 'as' type=[Type] typeDevice=[TypeDevice]
+  'set' name=ID 'as' type=[Type] typeDevice=[TypeDevice]
   ('call as' alias=ID)* 
   ('using' condition=Condition '()')*
 ;
 
 Feature:
-  'new' entity=ID 
-  'dependes on' feature*=[Feature] 
-  type=Type
+  'use' type=Type name=Entity 
+  ('dependes on' feature*=[Feature])* 
+  ('extends:' extend=[Feature])*
+  ('alternatives:' alternatives*=[Feature][','])*
+  'actuador:' actuador=[Device]  
+  ('sensor:' sensor=[Device])* 
+  'serial:' serial=STRING
+  
+  /*'using {' devices*=[Device][','] '}'*/
 ;
 
 Statment:
@@ -41,11 +47,11 @@ Statment:
 ;
 
 Type: 
-  'Mandatory' | 'Optional' | 'Alternate' 
+  'Mandatory' | 'Optional' | 'Alternative' 
 ;
 
 Entity:
-  'AlarmAgainsRobbery'|'AutomatedAirConditioner'|'AutomatedIlumination'|'AutomatedWindowControl'|'LockDoors'| 'PanicMode' | 'PresenceIlusion'|'UserAirConditionerControl'|'UserIlumination'|'UserWindowControl'
+  'AlarmAgainstRobbery'|'AutomatedAirConditionerControl'|'AutomatedIluminationByLuminosity'| 'AutomatedIluminationByPresence' |'AutomatedWindowControl'|'LockDoors'| 'PanicMode' | 'PresenceIlusion'|'UserAirConditionerControl'|'UserIlumination'|'UserWindowControl'
 ;
 
 // Special rule for comments. Comments start with //

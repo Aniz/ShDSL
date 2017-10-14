@@ -1,25 +1,43 @@
-package rise.smarthome.features;
+package {{systemName|lower}}.smarthome.features;
 
 import java.util.ArrayList;
 
-import rise.smarthome.featureModeling.FeatureBase;
-import rise.smarthome.featureModeling.OptionalFeature;
-import rise.smarthome.model.devices.AutomaticDoor;
+{% if data.feature.extends %}
+import {{systemName|lower}}.smarthome.featureModeling.AdaptableFeature;
+{% else %}
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
+{% endif %}
+{% if data.feature.type %}
+import {{systemName|lower}}.smarthome.featureModeling.{{data.feature.type}}Feature;
+{% endif %}
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name}};
 
+{% if data.feature.type == "Mandatory" %}
+@MandatoryFeature
+{% endif %}
+{% if data.feature.type == "Optional" %}
 @OptionalFeature
-public class LockDoors extends FeatureBase {
+{% endif %}
+{% if data.feature.type == "Alternative" %}
+@AlternativeFeature(alternatives={
+{% for altenative in data.feature.alternatives %}
+	{{altenative.name}}.class{% if not loop.last %},{% endif %}
+{% endfor %}
+})
+{% endif %}
+public class LockDoors {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %} {
 
-	private ArrayList<AutomaticDoor> automaticDoors;
+	private ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuator}}s;
 
 	private static LockDoors lockDoors = null;
 	
 	protected LockDoors(){}
 	
-	public static LockDoors getInstance(ArrayList<AutomaticDoor> automaticDoors) {
+	public static LockDoors getInstance(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuator}}s) {
 		if(lockDoors == null){
 			lockDoors = new LockDoors();
-			lockDoors.setName("Lock Doors");
-                        lockDoors.setautomaticDoors(automaticDoors);
+			lockDoors.setName("{{data.feature.name|splitName}}");
+            lockDoors.set{{data.feature.actuator}}s({{data.feature.actuator}}s);
 		}
 		return lockDoors;
 	}
@@ -31,20 +49,20 @@ public class LockDoors extends FeatureBase {
 	@Override
 	public void proceedActions(String[] args) {
 		// [0] - 0 Lock all doors; 1 Unlock all doors
-		for (AutomaticDoor automaticDoor : automaticDoors) {
+		for ({{data.feature.actuador.name}} actuator : {{data.feature.actuator}}s) {
 			if(args[0].equals("0"))
-				automaticDoor.deactivate();
+				actuator.deactivate();
 			else if(args[0].equals("1"))
-				automaticDoor.activate();
+				actuator.activate();
 		}
 	}
-        public ArrayList<AutomaticDoor> getautomaticDoors() {
-		return automaticDoors;
+        public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuator}}s() {
+		return {{data.feature.actuator}}s;
 	}
 
 
-	public void setautomaticDoors(ArrayList<AutomaticDoor> automaticDoors) {
-		this.automaticDoors = automaticDoors;
+	public void set{{data.feature.actuator}}s(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuator}}s) {
+		this.{{data.feature.actuator}}s = {{data.feature.actuator}}s;
 	}
 
 }

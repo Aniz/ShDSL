@@ -1,4 +1,4 @@
-package rise.smarthome.gui;
+package {{systemName|lower}}.smarthome.gui;
 
 import java.awt.EventQueue;
 
@@ -7,32 +7,38 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
-import rise.smarthome.arduino.ArduinoControl;
-import rise.smarthome.featureModeling.FeatureBase;
-import rise.smarthome.features.AlarmAgainstRobbery;
-import rise.smarthome.features.AutomatedAirConditionerControl;
-import rise.smarthome.features.AutomatedIluminationByLuminosity;
-import rise.smarthome.features.AutomatedIluminationByPresence;
-import rise.smarthome.features.AutomatedWindowControl;
-import rise.smarthome.features.LockDoors;
-import rise.smarthome.features.PanicMode;
-import rise.smarthome.features.PresenceIlusion;
-import rise.smarthome.features.UserAirConditionerControl;
-import rise.smarthome.features.UserIlumination;
-import rise.smarthome.features.UserWindowControl;
-import rise.smarthome.featuresUI.AlarmAgainstRobberyUI;
-import rise.smarthome.featuresUI.AutomatedAirConditionerControlUI;
-import rise.smarthome.featuresUI.AutomatedIluminationByLuminosityUI;
-import rise.smarthome.featuresUI.AutomatedIluminationByPresenceUI;
-import rise.smarthome.featuresUI.AutomatedWindowControlUI;
-import rise.smarthome.featuresUI.FeatureUIBase;
-import rise.smarthome.featuresUI.LockDoorsUI;
-import rise.smarthome.featuresUI.PanicModeUI;
-import rise.smarthome.featuresUI.PresenceIlusionUI;
-import rise.smarthome.featuresUI.UserAirConditionerControlUI;
-import rise.smarthome.featuresUI.UserIluminationUI;
-import rise.smarthome.featuresUI.UserWindowControlUI;
-import rise.smarthome.model.home.HouseFacade;
+import {{systemName|lower}}.smarthome.arduino.ArduinoControl;
+import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
+
+{% for k,feature in data.items() %}
+import {{systemName|lower}}.smarthome.features.{{feature["feature"].name}};			
+import {{systemName|lower}}.smarthome.featuresUI.{{feature["feature"].name}}UI;			
+{% endfor %}
+
+import {{systemName|lower}}.smarthome.features.AlarmAgainstRobbery;
+import {{systemName|lower}}.smarthome.features.AutomatedAirConditionerControl;
+import {{systemName|lower}}.smarthome.features.AutomatedIluminationByLuminosity;
+import {{systemName|lower}}.smarthome.features.AutomatedIluminationByPresence;
+import {{systemName|lower}}.smarthome.features.AutomatedWindowControl;
+import {{systemName|lower}}.smarthome.features.LockDoors;
+import {{systemName|lower}}.smarthome.features.PanicMode;
+import {{systemName|lower}}.smarthome.features.PresenceIlusion;
+import {{systemName|lower}}.smarthome.features.UserAirConditionerControl;
+import {{systemName|lower}}.smarthome.features.UserIlumination;
+import {{systemName|lower}}.smarthome.features.UserWindowControl;
+import {{systemName|lower}}.smarthome.featuresUI.AlarmAgainstRobberyUI;
+import {{systemName|lower}}.smarthome.featuresUI.AutomatedAirConditionerControlUI;
+import {{systemName|lower}}.smarthome.featuresUI.AutomatedIluminationByLuminosityUI;
+import {{systemName|lower}}.smarthome.featuresUI.AutomatedIluminationByPresenceUI;
+import {{systemName|lower}}.smarthome.featuresUI.AutomatedWindowControlUI;
+import {{systemName|lower}}.smarthome.featuresUI.FeatureUIBase;
+import {{systemName|lower}}.smarthome.featuresUI.LockDoorsUI;
+import {{systemName|lower}}.smarthome.featuresUI.PanicModeUI;
+import {{systemName|lower}}.smarthome.featuresUI.PresenceIlusionUI;
+import {{systemName|lower}}.smarthome.featuresUI.UserAirConditionerControlUI;
+import {{systemName|lower}}.smarthome.featuresUI.UserIluminationUI;
+import {{systemName|lower}}.smarthome.featuresUI.UserWindowControlUI;
+import {{systemName|lower}}.smarthome.model.home.HouseFacade;
 
 public class Main extends JFrame {
 
@@ -60,6 +66,24 @@ public class Main extends JFrame {
 
 	public static void updateFeaturesTabs(){
 		for (FeatureBase feature : house.getFeatures()) {
+			{% for k,feature in data.items() %}
+			if(feature instanceof {{feature["feature"].name}}){
+				boolean alreadyExist = false;
+				for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+					if(tabbedPane.getComponentAt(i) instanceof FeatureUIBase){
+						FeatureUIBase featureTab = (FeatureUIBase) tabbedPane.getComponentAt(i);
+						if(featureTab.isForClass({{feature["feature"].name}}.class)){
+							alreadyExist = true;
+							break;
+						}
+					}
+				}
+				if(!alreadyExist){
+					{{feature["feature"].name}}UI feature{{loop.index}} = new {{feature["feature"].name}}UI();
+					tabbedPane.addTab("{{feature["feature"].name|splitName}}", null, feature{{loop.index}});
+				}
+			}
+			{% endfor %}	
 			
 			if(feature instanceof PresenceIlusion){
 				boolean alreadyExist = false;
@@ -278,7 +302,18 @@ public class Main extends JFrame {
 	}
 
 	public static void removeFeatureTab(Class<? extends FeatureBase> clazz) {
-		
+		{% for feature in data.features %}
+            if(clazz.equals({{feature["feature"].name}}.class)){
+			for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+				if(tabbedPane.getComponentAt(i) instanceof FeatureUIBase){
+					FeatureUIBase featureTab = (FeatureUIBase) tabbedPane.getComponentAt(i);
+					if(featureTab.isForClass({{feature["feature"].name}}.class)){
+						tabbedPane.removeTabAt(i);
+					}
+				}
+			}
+		}
+		{% endfor %}
             if(clazz.equals(AutomatedIluminationByLuminosity.class)){
 			for (int i = 0; i < tabbedPane.getTabCount(); i++) {
 				if(tabbedPane.getComponentAt(i) instanceof FeatureUIBase){

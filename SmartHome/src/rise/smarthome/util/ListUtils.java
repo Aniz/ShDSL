@@ -1,4 +1,4 @@
-package rise.smarthome.util;
+package {{systemName|lower}}.smarthome.util;
 
 public class ListUtils {
 	private ListUtils(){}

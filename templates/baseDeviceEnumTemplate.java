@@ -3,9 +3,9 @@ package {{systemName}}.smarthome.enums;
 public enum {{extraData}}Enum {
 	{% for key,value in data.items() %}
 		{% if loop.last %}
-		{{value.device.entity|splitName|replace(" ","_")|upper}}({% if value.device.alias%}"{{value.device.alias}}"{% else %}"{{value.device.entity|splitName}}"{% endif %});
+		{{value.device.name|splitName|replace(" ","_")|upper}}({% if value.device.alias%}"{{value.device.alias}}"{% else %}"{{value.device.name|splitName}}"{% endif %});
 		{% else %}
-		{{value.device.entity|splitName|replace(" ","_")|upper}}({% if value.device.alias%}"{{value.device.alias}}"{% else %}"{{value.device.entity|splitName}}"{% endif %}),
+		{{value.device.name|splitName|replace(" ","_")|upper}}({% if value.device.alias%}"{{value.device.alias}}"{% else %}"{{value.device.name|splitName}}"{% endif %}),
 		{% endif %}
 	{% endfor %}
 	
