@@ -8,7 +8,7 @@ import rise.smarthome.featureModeling.MandatoryFeature;
 import rise.smarthome.model.devices.Led;
 
 @MandatoryFeature
-public class PresenceIlusion  extends FeatureBase  {
+public class PresenceIlusion extends FeatureBase{
 
 	private PresenceIlusionThread presenceIlusionThread;
 
@@ -16,12 +16,12 @@ public class PresenceIlusion  extends FeatureBase  {
 
 	protected PresenceIlusion(){}
 
-	public static PresenceIlusion getInstance( ) {
+	public static PresenceIlusion getInstance(UserIlumination userIlumination) {
 		if(presenceIlusion == null){
 			presenceIlusion = new PresenceIlusion();
 			presenceIlusion.setActive(true);
 			presenceIlusion.setName("Presence Ilusion");
-			presenceIlusion.addRequiredFeature();
+			presenceIlusion.addRequiredFeature(userIlumination);
 		}
 		return presenceIlusion;
 	}
@@ -38,16 +38,16 @@ public class PresenceIlusion  extends FeatureBase  {
 		// [0] - 1 to activate; 0 to deactivate
 		// [1] - time to automaticaly deactivate the feature (-1 to only deactivate when command)
 		// [2] - interval time to change the state of a sorted led
-		  = () getRequiredFeatures().get(0);
-		if(.getLeds() != null){
+		UserIlumination userIlumination = (UserIlumination) getRequiredFeatures().get(0);
+		if(userIlumination.getLeds() != null){
 			if(isActive()){
 				if(args==null){
-					presenceIlusionThread = new PresenceIlusionThread(() getRequiredFeatures().get(0));
+					presenceIlusionThread = new PresenceIlusionThread((UserIlumination) getRequiredFeatures().get(0));
 					presenceIlusionThread.start();
 				}else{
 					if(args[0].equals("1")){
 						presenceIlusionThread = new PresenceIlusionThread(Integer.parseInt(args[1]), 
-								Integer.parseInt(args[2]), () getRequiredFeatures().get(0));
+								Integer.parseInt(args[2]), (UserIlumination) getRequiredFeatures().get(0));
 					}else if (args[0].equals("0")){
 						if(presenceIlusionThread!=null && presenceIlusionThread.isAlive()){
 							presenceIlusionThread.finhishAction();
@@ -59,30 +59,30 @@ public class PresenceIlusion  extends FeatureBase  {
 	}
 
 	private class PresenceIlusionThread extends Thread{
-		private  ;
+		private UserIlumination userIlumination;
 		private int intervalTime;
 		private int timeToStop;
 		private boolean shouldInterrupt = false;
 
 		public PresenceIlusionThread(int timeToStop, int intervalTime, 
-				 ) {
+				UserIlumination userIlumination) {
 			this.timeToStop = timeToStop;
 			this.intervalTime = intervalTime;
-			this. = ;
+			this.userIlumination = userIlumination;
 		}
 
-		public PresenceIlusionThread( ){
-			this(-1, 5000, );
+		public PresenceIlusionThread(UserIlumination userIlumination){
+			this(-1, 5000, userIlumination);
 		}
 
 		@Override
 		public synchronized void run(){
 			while(!shouldInterrupt && timeToStop!=0){
 				try{
-					if(.getLeds().size()!=0){
-						synchronized () {
-							String instructionsArray[] = {String.valueOf(.getLeds().get(new Random().nextInt(.getLeds().size())).getPin()),"-1"};
-							.proceedActions(instructionsArray);
+					if(userIlumination.getLeds().size()!=0){
+						synchronized (userIlumination) {
+							String instructionsArray[] = {String.valueOf(userIlumination.getLeds().get(new Random().nextInt(userIlumination.getLeds().size())).getPin()),"-1"};
+							userIlumination.proceedActions(instructionsArray);
 						}
 					}
 					try {
@@ -93,9 +93,9 @@ public class PresenceIlusion  extends FeatureBase  {
 					timeToStop--;
 				}catch(ConcurrentModificationException ex){}
 			}
-			for (Led led : .getLeds()) {
+			for (Led led : userIlumination.getLeds()) {
 				String[] args = {String.valueOf(led.getPin()),"0"};
-				.proceedActions(args);
+				userIlumination.proceedActions(args);
 			}
 		}
 

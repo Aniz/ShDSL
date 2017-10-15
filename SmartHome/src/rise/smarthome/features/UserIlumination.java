@@ -58,7 +58,7 @@ public class UserIlumination {% if data.feature.extends %}extends {{data.feature
 					}else if (Integer.parseInt(args[1]) == 0 ){
 						actuador.deactivate();
 					}else if (Integer.parseInt(args[1]) == -1 ){
-						if(actuador.getState()==0) actuador.activate(); else led.deactivate();
+						if(actuador.getState()==0) actuador.activate(); else actuador.deactivate();
 					}
 				}
 			}

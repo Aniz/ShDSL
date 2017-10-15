@@ -3,7 +3,7 @@ package {{systemName|lower}}.smarthome.features;
 import java.util.ConcurrentModificationException;
 import java.util.Random;
 
-{% if data.feature.extends %}
+{% if data.feature.extend %}
 import {{systemName|lower}}.smarthome.featureModeling.AdaptableFeature;
 {% else %}
 import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
@@ -26,7 +26,7 @@ import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name
 {% endfor %}
 })
 {% endif %}
-public class PresenceIlusion {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %} {
+public class PresenceIlusion extends FeatureBase{
 
 	private PresenceIlusionThread presenceIlusionThread;
 
@@ -34,12 +34,12 @@ public class PresenceIlusion {% if data.feature.extends %}extends {{data.feature
 
 	protected PresenceIlusion(){}
 
-	public static PresenceIlusion getInstance({{data.feature.extends|lower}} {{data.feature.extends|lower}}) {
+	public static PresenceIlusion getInstance(UserIlumination userIlumination) {
 		if(presenceIlusion == null){
 			presenceIlusion = new PresenceIlusion();
 			presenceIlusion.setActive(true);
 			presenceIlusion.setName("Presence Ilusion");
-			presenceIlusion.addRequiredFeature({{data.feature.extends|lower}});
+			presenceIlusion.addRequiredFeature(userIlumination);
 		}
 		return presenceIlusion;
 	}
@@ -56,16 +56,16 @@ public class PresenceIlusion {% if data.feature.extends %}extends {{data.feature
 		// [0] - 1 to activate; 0 to deactivate
 		// [1] - time to automaticaly deactivate the feature (-1 to only deactivate when command)
 		// [2] - interval time to change the state of a sorted led
-		{{data.feature.extends|lower}} {{data.feature.extends|lower}} = ({{data.feature.extends|lower}}) getRequiredFeatures().get(0);
-		if({{data.feature.extends|lower}}.get{{data.feature.actuador.name}}s() != null){
+		UserIlumination userIlumination = (UserIlumination) getRequiredFeatures().get(0);
+		if(userIlumination.getLeds() != null){
 			if(isActive()){
 				if(args==null){
-					presenceIlusionThread = new PresenceIlusionThread(({{data.feature.extends|lower}}) getRequiredFeatures().get(0));
+					presenceIlusionThread = new PresenceIlusionThread((UserIlumination) getRequiredFeatures().get(0));
 					presenceIlusionThread.start();
 				}else{
 					if(args[0].equals("1")){
 						presenceIlusionThread = new PresenceIlusionThread(Integer.parseInt(args[1]), 
-								Integer.parseInt(args[2]), ({{data.feature.extends|lower}}) getRequiredFeatures().get(0));
+								Integer.parseInt(args[2]), (UserIlumination) getRequiredFeatures().get(0));
 					}else if (args[0].equals("0")){
 						if(presenceIlusionThread!=null && presenceIlusionThread.isAlive()){
 							presenceIlusionThread.finhishAction();
@@ -77,30 +77,30 @@ public class PresenceIlusion {% if data.feature.extends %}extends {{data.feature
 	}
 
 	private class PresenceIlusionThread extends Thread{
-		private {{data.feature.extends|lower}} {{data.feature.extends|lower}};
+		private UserIlumination userIlumination;
 		private int intervalTime;
 		private int timeToStop;
 		private boolean shouldInterrupt = false;
 
 		public PresenceIlusionThread(int timeToStop, int intervalTime, 
-				{{data.feature.extends|lower}} {{data.feature.extends|lower}}) {
+				UserIlumination userIlumination) {
 			this.timeToStop = timeToStop;
 			this.intervalTime = intervalTime;
-			this.{{data.feature.extends|lower}} = {{data.feature.extends|lower}};
+			this.userIlumination = userIlumination;
 		}
 
-		public PresenceIlusionThread({{data.feature.extends|lower}} {{data.feature.extends|lower}}){
-			this(-1, 5000, {{data.feature.extends|lower}});
+		public PresenceIlusionThread(UserIlumination userIlumination){
+			this(-1, 5000, userIlumination);
 		}
 
 		@Override
 		public synchronized void run(){
 			while(!shouldInterrupt && timeToStop!=0){
 				try{
-					if({{data.feature.extends|lower}}.get{{data.feature.actuador.name}}s().size()!=0){
-						synchronized ({{data.feature.extends|lower}}) {
-							String instructionsArray[] = {String.valueOf({{data.feature.extends|lower}}.get{{data.feature.actuador.name}}s().get(new Random().nextInt({{data.feature.extends|lower}}.get{{data.feature.actuador.name}}s().size())).getPin()),"-1"};
-							{{data.feature.extends|lower}}.proceedActions(instructionsArray);
+					if(userIlumination.getLeds().size()!=0){
+						synchronized (userIlumination) {
+							String instructionsArray[] = {String.valueOf(userIlumination.getLeds().get(new Random().nextInt(userIlumination.getLeds().size())).getPin()),"-1"};
+							userIlumination.proceedActions(instructionsArray);
 						}
 					}
 					try {
@@ -111,9 +111,9 @@ public class PresenceIlusion {% if data.feature.extends %}extends {{data.feature
 					timeToStop--;
 				}catch(ConcurrentModificationException ex){}
 			}
-			for (Led led : {{data.feature.extends|lower}}.get{{data.feature.actuador.name}}s()) {
+			for (Led led : userIlumination.getLeds()) {
 				String[] args = {String.valueOf(led.getPin()),"0"};
-				{{data.feature.extends|lower}}.proceedActions(args);
+				userIlumination.proceedActions(args);
 			}
 		}
 
