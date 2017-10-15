@@ -6,8 +6,10 @@ public class PresenceSensor extends Sensor {
 	public PresenceSensor(int pin, boolean isAnalog) {
 		super(pin, isAnalog,"Presence Sensor");
  	}
-        @Override
-	public String toString() {
-		return "Presence Sensor [state=" + getState() + ", pin=" + getPin()+ "]";
+
+    @Override
+	protected int[] activationValues() {
+		int[] activated = {0};
+		return activated;
 	}
 }

@@ -377,11 +377,11 @@ public class HouseFacade {
 	}
 	private void recreateFatherFeature(FeatureBase feature) {
 
-		if(feature instanceof UserWindowControl){
-			UserWindowControl userwindowcontrol = UserWindowControl.getInstance(((UserIlumination)feature).getLeds());
-			exchangeRequiredFeature(feature, userwindowcontrol);
+		if(feature instanceof UserAirConditionerControl){
+			UserAirConditionerControl userairconditionercontrol = UserAirConditionerControl.getInstance(((UserIlumination)feature).getLeds());
+			exchangeRequiredFeature(feature, userairconditionercontrol);
 			features.remove(feature);
-			addFeature(userwindowcontrol);
+			addFeature(userairconditionercontrol);
 		}
 		
 
@@ -393,13 +393,6 @@ public class HouseFacade {
 		}
 		
 		
-
-		if(feature instanceof UserAirConditionerControl){
-			UserAirConditionerControl userairconditionercontrol = UserAirConditionerControl.getInstance(((UserIlumination)feature).getLeds());
-			exchangeRequiredFeature(feature, userairconditionercontrol);
-			features.remove(feature);
-			addFeature(userairconditionercontrol);
-		}
 		
 
 		if(feature instanceof UserIlumination){

@@ -1,7 +1,7 @@
 package rise.smarthome.enums;
 
 public enum SensorEnum {
-		TEMPERATURE_SENSOR("bu"),
+		TEMPERATURE_SENSOR("Temperature Sensor"),
 		LIGHT_SENSOR("Light Sensor"),
 		PRESENCE_SENSOR("Presence Sensor");
 	

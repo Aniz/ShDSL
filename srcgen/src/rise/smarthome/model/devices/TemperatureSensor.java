@@ -4,10 +4,11 @@ package rise.smarthome.model.devices;
 public class TemperatureSensor extends Sensor {
 
 	public TemperatureSensor(int pin, boolean isAnalog) {
-		super(pin, isAnalog,"bu");
+		super(pin, isAnalog,"Temperature Sensor");
  	}
-        @Override
-	public String toString() {
-		return "bu [state=" + getState() + ", pin=" + getPin()+ "]";
+
+    @Override
+	protected int[] activationValues() {
+		return ListUtils.createArrayRange(0, 100);
 	}
 }

@@ -6,8 +6,9 @@ public class AirConditioner extends Actuator {
 	public AirConditioner(int pin, boolean isAnalog) {
 		super(pin, isAnalog,"Air Conditioner");
  	}
-        @Override
-	public String toString() {
+
+    @Override
+    public String toString() {
 		return "Air Conditioner [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

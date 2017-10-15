@@ -23,8 +23,13 @@ TypeDevice:
 "Sensor" | "Actuador" | "Hardware"
 ;
 
+SimpleType:
+"BOOL"|"RANGE"|"INFO"
+;
+
 Device:
-  'set' name=ID 'as' type=[Type] typeDevice=[TypeDevice]
+  'set' name=ID typeDevice=[TypeDevice]
+  'as' type=SimpleType 
   ('call as' alias=ID)* 
   ('using' condition=Condition '()')*
 ;

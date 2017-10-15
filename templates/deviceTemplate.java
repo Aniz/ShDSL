@@ -6,8 +6,22 @@ public class {{data.device.name}} extends {{data.device.typeDevice}} {
 	public {{data.device.name}}(int pin, boolean isAnalog) {
 		super(pin, isAnalog,{% if data.device.alias %}"{{data.device.alias}}"{% else %}"{{data.device.name|splitName}}"{% endif %});
  	}
-        @Override
-	public String toString() {
+
+    @Override
+    {% if data.device.type == "BOOL" %}
+	protected int[] activationValues() {
+		int[] activated = {0};
+		return activated;
+	}
+    {% endif %}
+    {% if data.device.type == "RANGE" %}
+	protected int[] activationValues() {
+		return ListUtils.createArrayRange(0, 100);
+	}
+	{% endif %}
+    {% if data.device.type == "INFO" %}
+    public String toString() {
 		return "{% if data.device.alias %}{{data.device.alias}}{% else %}{{data.device.name|splitName}}{% endif %} [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
+    {% endif %}
 }

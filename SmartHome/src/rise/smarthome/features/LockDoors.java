@@ -37,7 +37,7 @@ public class LockDoors {% if data.feature.extends %}extends {{data.feature.exten
 		if(lockDoors == null){
 			lockDoors = new LockDoors();
 			lockDoors.setName("{{data.feature.name|splitName}}");
-            lockDoors.set{{data.feature.actuador.name}}s({{data.feature.actuador.name}}s);
+            lockDoors.set{{data.feature.actuador.name}}s({{data.feature.actuador.name|lower}}s);
 		}
 		return lockDoors;
 	}

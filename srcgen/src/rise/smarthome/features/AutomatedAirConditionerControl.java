@@ -9,7 +9,7 @@ import rise.smarthome.model.devices.TemperatureSensor;
 
 @AlternativeFeature(alternatives={
 	UserAirConditionerControl.class})
-public class AutomatedAirConditionerControl extends UserWindowControl implements AdaptableFeature {
+public class AutomatedAirConditionerControl extends UserAirConditionerControl implements AdaptableFeature {
     private ArrayList<AirConditioner> automatedairconditionercontrolToAutomate;
     private TemperatureSensor temperaturesensor;
     private static AutomatedAirConditionerControl automatedairconditionercontrol = null;

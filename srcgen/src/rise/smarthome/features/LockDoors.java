@@ -19,7 +19,7 @@ public class LockDoors  extends FeatureBase  {
 		if(lockDoors == null){
 			lockDoors = new LockDoors();
 			lockDoors.setName("Lock Doors");
-            lockDoors.setAutomaticDoors(AutomaticDoors);
+            lockDoors.setAutomaticDoors(automaticdoors);
 		}
 		return lockDoors;
 	}
