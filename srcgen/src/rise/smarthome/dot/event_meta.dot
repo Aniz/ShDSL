@@ -11,59 +11,59 @@
     edge[dir=black,arrowtail=empty]
 
 
-140236560577800 -> 140236560579656[arrowtail=diamond, dir=both, headlabel="components 0..*"]
-140236560577800[ label="{SmartHomeModel|+name:ID\l+pin:STRING\l}"]
+140292948762376 -> 140292948764232[arrowtail=diamond, dir=both, headlabel="components 0..*"]
+140292948762376[ label="{SmartHomeModel|+name:ID\l+pin:STRING\l}"]
 
-140236560579656[ label="{*Component|}"]
-140236560579656 -> 140236560587080 [dir=back]
-140236560579656 -> 140236560588936 [dir=back]
-140236560579656 -> 140236560590792 [dir=back]
+140292948764232[ label="{*Component|}"]
+140292948764232 -> 140292948771656 [dir=back]
+140292948764232 -> 140292948773512 [dir=back]
+140292948764232 -> 140292948775368 [dir=back]
 
-140236560581512[ label="{Condition|Luminosity\|Presence}"]
+140292948766088[ label="{Condition|Luminosity\|Presence}"]
 
-140236560583368[ label="{Command|bbb\|ccc}"]
+140292948767944[ label="{Command|bbb\|ccc}"]
 
-140236560585224[ label="{TypeDevice|Sensor\|Actuador\|Hardware}"]
+140292948769800[ label="{TypeDevice|Sensor\|Actuador\|Hardware}"]
 
-140236560191992[ label="{SimpleType|BOOL\|RANGE\|INFO}"]
+140292947459352[ label="{SimpleType|BOOL\|RANGE\|INFO}"]
 
-140236560587080[ label="{Device|+name:ID\l+typeDevice:TypeDevice\l+type:SimpleType\l+alias:ID\l+condition:Condition\l}"]
+140292948771656[ label="{Device|+name:ID\l+typeDevice:TypeDevice\l+type:SimpleType\l+alias:ID\l+condition:Condition\l}"]
 
-140236560588936 -> 140236560588936[headlabel="feature 0..*"]
-140236560588936 -> 140236560588936[headlabel="extend "]
-140236560588936 -> 140236560588936[headlabel="alternatives 0..*"]
-140236560588936 -> 140236560587080[headlabel="actuador "]
-140236560588936 -> 140236560587080[headlabel="sensor "]
-140236560588936[ label="{Feature|+type:Type\l+name:Entity\l+serial:STRING\l}"]
+140292948773512 -> 140292948773512[headlabel="feature 0..*"]
+140292948773512 -> 140292948773512[headlabel="extend "]
+140292948773512 -> 140292948773512[headlabel="alternatives 0..*"]
+140292948773512 -> 140292948771656[headlabel="actuador "]
+140292948773512 -> 140292948771656[headlabel="sensor "]
+140292948773512[ label="{Feature|+type:Type\l+name:Entity\l+serial:STRING\l}"]
 
-140236560590792 -> 140236560588936[headlabel="feature "]
-140236560590792[ label="{Statment|+entity:ID\l+command:Command\l}"]
+140292948775368 -> 140292948773512[headlabel="feature "]
+140292948775368[ label="{Statment|+entity:ID\l+command:Command\l}"]
 
-140236560592648[ label="{Type|Mandatory\|Optional\|Alternative}"]
+140292947478184[ label="{Type|Mandatory\|Optional\|Alternative}"]
 
-140236560594504[ label="{Entity|AlarmAgainstRobbery\|AutomatedAirConditionerControl\|AutomatedIluminationByLuminosity\|AutomatedIluminationByPresence\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
+140292947480040[ label="{Entity|AlarmAgainstRobbery\|AutomatedAirConditionerControl\|AutomatedIluminationByLuminosity\|AutomatedIluminationByPresence\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
 
-140236560209288[ label="{Comment|\\/\\/.*$}"]
+140292947481896[ label="{Comment|\\/\\/.*$}"]
 
-140236559342744[ label="{ID|}"]
+140292948452632[ label="{ID|}"]
 
-140236559273640[ label="{STRING|}"]
+140292948468424[ label="{STRING|}"]
 
-140236559356408[ label="{BOOL|}"]
+140292948461832[ label="{BOOL|}"]
 
-140236559358840[ label="{INT|}"]
+140292948486888[ label="{INT|}"]
 
-140236559361272[ label="{FLOAT|}"]
+140292948488744[ label="{FLOAT|}"]
 
-140236559363704[ label="{NUMBER|}"]
-140236559363704 -> 140236559361272 [dir=back]
-140236559363704 -> 140236559358840 [dir=back]
+140292948492136[ label="{NUMBER|}"]
+140292948492136 -> 140292948488744 [dir=back]
+140292948492136 -> 140292948486888 [dir=back]
 
-140236559365560[ label="{BASETYPE|}"]
-140236559365560 -> 140236559363704 [dir=back]
-140236559365560 -> 140236559356408 [dir=back]
-140236559365560 -> 140236559342744 [dir=back]
-140236559365560 -> 140236559273640 [dir=back]
+140292948602792[ label="{BASETYPE|}"]
+140292948602792 -> 140292948492136 [dir=back]
+140292948602792 -> 140292948461832 [dir=back]
+140292948602792 -> 140292948452632 [dir=back]
+140292948602792 -> 140292948468424 [dir=back]
 
 
 }

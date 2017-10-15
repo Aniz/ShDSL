@@ -434,11 +434,11 @@ public class HouseFacade {
 	private void exchangeBrotherFeaturesData(FeatureBase featureBase,FeatureBase newFeature) {
 		if(featureBase instanceof AutomatedAirConditionerControl){
 			AutomatedAirConditionerControl automatedairconditionercontrol = (AutomatedAirConditionerControl) featureBase;
-			((AutomatedAirConditionerControl) newFeature).setTemperatureSensors(automatedairconditionercontrol.getAirConditioners());
+			((AutomatedAirConditionerControl) newFeature).setTemperatureSensor(automatedairconditionercontrol.getTemperatureSensors());
 		}	
 		if(featureBase instanceof AutomatedWindowControl){
 			AutomatedWindowControl automatedwindowcontrol = (AutomatedWindowControl) featureBase;
-			((AutomatedWindowControl) newFeature).setTemperatureSensors(automatedwindowcontrol.getAutomaticWindows());
+			((AutomatedWindowControl) newFeature).setTemperatureSensor(automatedwindowcontrol.getTemperatureSensors());
 		}	
 
 		if(featureBase instanceof AutomatedIluminationByPresence){

@@ -371,7 +371,7 @@ public class HouseFacade {
 		{% if value.feature.type == "Alternative" and value.feature.name!= "AutomatedIluminationByPresence" and value.feature.name!= "AutomatedIluminationByLuminosity" %}
 		if(featureBase instanceof {{value.feature.name}}){
 			{{value.feature.name}} {{value.feature.name|lower}} = ({{value.feature.name}}) featureBase;
-			(({{value.feature.name}}) newFeature).set{{value.feature.sensor.name}}s({{value.feature.name|lower}}.get{{value.feature.actuador.name}}s());
+			(({{value.feature.name}}) newFeature).set{{value.feature.sensor.name}}({{value.feature.name|lower}}.get{{value.feature.sensor.name}}s());
 		}	
 		{% endif %}
 		{% endfor %}
