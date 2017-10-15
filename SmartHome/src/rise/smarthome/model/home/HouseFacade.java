@@ -17,28 +17,6 @@ import {{systemName|lower}}.smarthome.features.{{feature["feature"].name}};
 import {{systemName|lower}}.smarthome.model.devices.{{device["device"].name}};
 {% endfor %}
 
-import {{systemName|lower}}.smarthome.features.AlarmAgainstRobbery;
-import {{systemName|lower}}.smarthome.features.AutomatedAirConditionerControl;
-import {{systemName|lower}}.smarthome.features.AutomatedIluminationByLuminosity;
-import {{systemName|lower}}.smarthome.features.AutomatedIluminationByPresence;
-import {{systemName|lower}}.smarthome.features.AutomatedWindowControl;
-import {{systemName|lower}}.smarthome.features.LockDoors;
-import {{systemName|lower}}.smarthome.features.PanicMode;
-import {{systemName|lower}}.smarthome.features.PresenceIlusion;
-import {{systemName|lower}}.smarthome.features.UserAirConditionerControl;
-import {{systemName|lower}}.smarthome.features.UserIlumination;
-import {{systemName|lower}}.smarthome.features.UserWindowControl;
-
-import {{systemName|lower}}.smarthome.model.devices.AirConditioner;
-import {{systemName|lower}}.smarthome.model.devices.Alarm;
-import {{systemName|lower}}.smarthome.model.devices.AutomaticDoor;
-import {{systemName|lower}}.smarthome.model.devices.AutomaticWindow;
-import {{systemName|lower}}.smarthome.model.devices.Hardware;
-import {{systemName|lower}}.smarthome.model.devices.Led;
-import {{systemName|lower}}.smarthome.model.devices.LightSensor;
-import {{systemName|lower}}.smarthome.model.devices.PresenceSensor;
-import {{systemName|lower}}.smarthome.model.devices.TemperatureSensor;
-
 public class HouseFacade {
 	private static ArrayList<FeatureBase> avaliableFeatures;
 	private static ArrayList<FeatureBase> features;
@@ -64,13 +42,7 @@ public class HouseFacade {
 		{% if feature["feature"].sensor %}
 			avaliableFeatures.add({{feature["feature"].name}}.getInstance());
 		{% endif %}
-		{% endfor %}
-		
-		avaliableFeatures.add(AutomatedIluminationByLuminosity.getInstance());
-		avaliableFeatures.add(AutomatedIluminationByPresence.getInstance());
-        avaliableFeatures.add(AutomatedWindowControl.getInstance());
-		avaliableFeatures.add(AutomatedAirConditionerControl.getInstance());
-		               
+		{% endfor %}		               
 	}
 
 	public FeatureBase getFeatureByType(Class<? extends FeatureBase> clazz){
@@ -108,17 +80,7 @@ public class HouseFacade {
 		{{feature["feature"].name}} {{feature["feature"].name|lower}} = {{feature["feature"].name}}.getInstance(new ArrayList<{{feature["feature"].actuador.name}}>());
 		addFeature({{feature["feature"].name|lower}});
 		{% endif %}
-		{% endfor %}
-		
-		LockDoors lockDoors = LockDoors.getInstance(new ArrayList<AutomaticDoor>());
-		addFeature(lockDoors);
-		AlarmAgainstRobbery alarmAgainstRobbery = AlarmAgainstRobbery.getInstance(new ArrayList<Alarm>());
-        addFeature(alarmAgainstRobbery);
-		UserAirConditionerControl userAirConditionerControl = UserAirConditionerControl.getInstance(new ArrayList<AirConditioner>());
-		addFeature(userAirConditionerControl);
-		UserWindowControl userWindowControl = UserWindowControl.getInstance(new ArrayList<AutomaticWindow>());
-		addFeature(userWindowControl);
-		
+		{% endfor %}	
 	}
 	
 	public void removeHardware(int pin, boolean isAnalog){
@@ -165,78 +127,8 @@ public class HouseFacade {
            	{% endfor %}
 			}
            {% endfor %}
-         
-                 //
-			if(anyHardware instanceof Led){
-				if(featureBase instanceof UserIlumination){
-					UserIlumination userIlumination = (UserIlumination) featureBase;
-					userIlumination.getLeds().remove(anyHardware);
-				}
-				if(featureBase instanceof AutomatedIluminationByLuminosity){
-					AutomatedIluminationByLuminosity au = (AutomatedIluminationByLuminosity) featureBase;
-					au.getLedsToAutomate().remove(anyHardware);
-				}
-				if(featureBase instanceof AutomatedIluminationByPresence){
-					AutomatedIluminationByPresence ap = (AutomatedIluminationByPresence) featureBase;
-					ap.getLedsToAutomate().remove(anyHardware);
-				}
-			}else if(anyHardware instanceof LightSensor){
-				if(featureBase instanceof AutomatedIluminationByLuminosity){
-					AutomatedIluminationByLuminosity au = (AutomatedIluminationByLuminosity) featureBase;
-					au.setLightSensor(null);
-				}
-			}else if(anyHardware instanceof TemperatureSensor){
-				if(featureBase instanceof AutomatedWindowControl){
-					AutomatedWindowControl automatedWindowControlau = (AutomatedWindowControl) featureBase;
-					automatedWindowControlau.setTemperatureSensor(null);
-				}
-                        
-                        }else if(anyHardware instanceof TemperatureSensor){
-				if(featureBase instanceof AutomatedAirConditionerControl){
-					AutomatedAirConditionerControl automatedAirConditionerControlau = (AutomatedAirConditionerControl) featureBase;
-					automatedAirConditionerControlau.setTemperatureSensor(null);
-				}
-                        
-                        }else if(anyHardware instanceof PresenceSensor){
-				if(featureBase instanceof AutomatedIluminationByPresence){
-					AutomatedIluminationByPresence ap = (AutomatedIluminationByPresence) featureBase;
-					ap.setPresenceSensor(null);
-				}
-			} else if(anyHardware instanceof AutomaticWindow){
-                            if(featureBase instanceof UserWindowControl){
-                                UserWindowControl userWindowControl = (UserWindowControl) featureBase;
-                                userWindowControl.getAutomaticWindows().remove(anyHardware);
-                                
-                            }
-                            if(featureBase instanceof AutomatedWindowControl){
-                                AutomatedWindowControl automatedWindowControl = (AutomatedWindowControl) featureBase;
-                                automatedWindowControl.getAutomaticWindowsToAutomate().remove(anyHardware);
-                            }
-                            }else if(anyHardware instanceof AirConditioner){
-                                 if(featureBase instanceof AutomatedAirConditionerControl){
-                                AutomatedAirConditionerControl automatedAirConditionerControl = (AutomatedAirConditionerControl) featureBase;
-                                automatedAirConditionerControl.getAirConditionersToAutomate().remove(anyHardware);
-                                 }
-                                 if(featureBase instanceof UserAirConditionerControl){
-                                UserAirConditionerControl userAirConditionerControl = (UserAirConditionerControl) featureBase;
-                                userAirConditionerControl.getAirConditioners().remove(anyHardware);  
-                                 }
-                            }else if(anyHardware instanceof Alarm){
-                                if(featureBase instanceof AlarmAgainstRobbery){
-                                    AlarmAgainstRobbery alarmAgainstRobbery = (AlarmAgainstRobbery) featureBase;
-                                alarmAgainstRobbery.getAlarms().remove(anyHardware); 
-                                    
-                                }
-                              
-                            }else if(anyHardware instanceof AutomaticDoor){
-                                if(featureBase instanceof LockDoors){
-                                    LockDoors lockDoors = (LockDoors) featureBase;
-                                lockDoors.getautomaticDoors().remove(anyHardware);
-                                
-                            }
-		}
-        }
-                }
+     	}         
+	}
         
 	public void addHardware(Hardware newHardware){
 		if (hardwareList.contains(newHardware)){
@@ -312,9 +204,8 @@ public class HouseFacade {
 		{% for kF,value in data.items() %}
 		{% if value.feature.extend %}
 		{% if value.feature.extend.name in extendsArray %}
-
 		if(feature instanceof {{value.feature.extend.name}}){
-			{{value.feature.extend.name}} {{value.feature.extend.name|lower}} = {{value.feature.extend.name}}.getInstance(((UserIlumination)feature).getLeds());
+			{{value.feature.extend.name}} {{value.feature.extend.name|lower}} = {{value.feature.extend.name}}.getInstance((({{value.feature.extend.name}})feature).get{{value.feature.actuador.name}}s());
 			exchangeRequiredFeature(feature, {{value.feature.extend.name|lower}});
 			features.remove(feature);
 			addFeature({{value.feature.extend.name|lower}});
@@ -323,25 +214,7 @@ public class HouseFacade {
 		{% endif %}
 		
 		{% endif %}
-		{% endfor %}
-
-		if(feature instanceof UserIlumination){
-			UserIlumination userIlumination = UserIlumination.getInstance(((UserIlumination)feature).getLeds());
-			exchangeRequiredFeature(feature, userIlumination);
-			features.remove(feature);
-			addFeature(userIlumination);
-		}else if(feature instanceof UserWindowControl){
-                     UserWindowControl userWindowControl = UserWindowControl.getInstance(((UserWindowControl)feature).getAutomaticWindows());
-			exchangeRequiredFeature(feature, userWindowControl);
-			features.remove(feature);
-			addFeature(userWindowControl);
-                }else if(feature instanceof UserAirConditionerControl){
-                    UserAirConditionerControl userAirConditionerControl = UserAirConditionerControl.getInstance(((UserAirConditionerControl)feature).getAirConditioners());
-			exchangeRequiredFeature(feature, userAirConditionerControl);
-			features.remove(feature);
-			addFeature(userAirConditionerControl);
-                }
-                
+		{% endfor %}        
 	}
 
 	private  boolean evaluationForFeatureHierarchy(FeatureBase newFeature){
@@ -371,7 +244,7 @@ public class HouseFacade {
 		{% if value.feature.type == "Alternative" and value.feature.name!= "AutomatedIluminationByPresence" and value.feature.name!= "AutomatedIluminationByLuminosity" %}
 		if(featureBase instanceof {{value.feature.name}}){
 			{{value.feature.name}} {{value.feature.name|lower}} = ({{value.feature.name}}) featureBase;
-			(({{value.feature.name}}) newFeature).set{{value.feature.sensor.name}}({{value.feature.name|lower}}.get{{value.feature.sensor.name}}s());
+			(({{value.feature.name}}) newFeature).set{{value.feature.sensor.name}}({{value.feature.name|lower}}.get{{value.feature.sensor.name}}());
 		}	
 		{% endif %}
 		{% endfor %}

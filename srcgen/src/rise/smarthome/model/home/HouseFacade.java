@@ -30,28 +30,6 @@ import rise.smarthome.model.devices.AutomaticWindow;
 import rise.smarthome.model.devices.LightSensor;
 import rise.smarthome.model.devices.PresenceSensor;
 
-import rise.smarthome.features.AlarmAgainstRobbery;
-import rise.smarthome.features.AutomatedAirConditionerControl;
-import rise.smarthome.features.AutomatedIluminationByLuminosity;
-import rise.smarthome.features.AutomatedIluminationByPresence;
-import rise.smarthome.features.AutomatedWindowControl;
-import rise.smarthome.features.LockDoors;
-import rise.smarthome.features.PanicMode;
-import rise.smarthome.features.PresenceIlusion;
-import rise.smarthome.features.UserAirConditionerControl;
-import rise.smarthome.features.UserIlumination;
-import rise.smarthome.features.UserWindowControl;
-
-import rise.smarthome.model.devices.AirConditioner;
-import rise.smarthome.model.devices.Alarm;
-import rise.smarthome.model.devices.AutomaticDoor;
-import rise.smarthome.model.devices.AutomaticWindow;
-import rise.smarthome.model.devices.Hardware;
-import rise.smarthome.model.devices.Led;
-import rise.smarthome.model.devices.LightSensor;
-import rise.smarthome.model.devices.PresenceSensor;
-import rise.smarthome.model.devices.TemperatureSensor;
-
 public class HouseFacade {
 	private static ArrayList<FeatureBase> avaliableFeatures;
 	private static ArrayList<FeatureBase> features;
@@ -77,11 +55,6 @@ public class HouseFacade {
 			avaliableFeatures.add(AutomatedIluminationByPresence.getInstance());
 			avaliableFeatures.add(AutomatedIluminationByLuminosity.getInstance());
 			avaliableFeatures.add(AutomatedWindowControl.getInstance());
-		
-		avaliableFeatures.add(AutomatedIluminationByLuminosity.getInstance());
-		avaliableFeatures.add(AutomatedIluminationByPresence.getInstance());
-        avaliableFeatures.add(AutomatedWindowControl.getInstance());
-		avaliableFeatures.add(AutomatedAirConditionerControl.getInstance());
 		               
 	}
 
@@ -123,16 +96,7 @@ public class HouseFacade {
 		addFeature(alarmagainstrobbery);
 		LockDoors lockdoors = LockDoors.getInstance(new ArrayList<AutomaticDoor>());
 		addFeature(lockdoors);
-		
-		LockDoors lockDoors = LockDoors.getInstance(new ArrayList<AutomaticDoor>());
-		addFeature(lockDoors);
-		AlarmAgainstRobbery alarmAgainstRobbery = AlarmAgainstRobbery.getInstance(new ArrayList<Alarm>());
-        addFeature(alarmAgainstRobbery);
-		UserAirConditionerControl userAirConditionerControl = UserAirConditionerControl.getInstance(new ArrayList<AirConditioner>());
-		addFeature(userAirConditionerControl);
-		UserWindowControl userWindowControl = UserWindowControl.getInstance(new ArrayList<AutomaticWindow>());
-		addFeature(userWindowControl);
-		
+	
 	}
 	
 	public void removeHardware(int pin, boolean isAnalog){
@@ -221,78 +185,8 @@ public class HouseFacade {
 				automatediluminationbypresence.setPresenceSensor(null);
 		   		}
 			}
-         
-                 //
-			if(anyHardware instanceof Led){
-				if(featureBase instanceof UserIlumination){
-					UserIlumination userIlumination = (UserIlumination) featureBase;
-					userIlumination.getLeds().remove(anyHardware);
-				}
-				if(featureBase instanceof AutomatedIluminationByLuminosity){
-					AutomatedIluminationByLuminosity au = (AutomatedIluminationByLuminosity) featureBase;
-					au.getLedsToAutomate().remove(anyHardware);
-				}
-				if(featureBase instanceof AutomatedIluminationByPresence){
-					AutomatedIluminationByPresence ap = (AutomatedIluminationByPresence) featureBase;
-					ap.getLedsToAutomate().remove(anyHardware);
-				}
-			}else if(anyHardware instanceof LightSensor){
-				if(featureBase instanceof AutomatedIluminationByLuminosity){
-					AutomatedIluminationByLuminosity au = (AutomatedIluminationByLuminosity) featureBase;
-					au.setLightSensor(null);
-				}
-			}else if(anyHardware instanceof TemperatureSensor){
-				if(featureBase instanceof AutomatedWindowControl){
-					AutomatedWindowControl automatedWindowControlau = (AutomatedWindowControl) featureBase;
-					automatedWindowControlau.setTemperatureSensor(null);
-				}
-                        
-                        }else if(anyHardware instanceof TemperatureSensor){
-				if(featureBase instanceof AutomatedAirConditionerControl){
-					AutomatedAirConditionerControl automatedAirConditionerControlau = (AutomatedAirConditionerControl) featureBase;
-					automatedAirConditionerControlau.setTemperatureSensor(null);
-				}
-                        
-                        }else if(anyHardware instanceof PresenceSensor){
-				if(featureBase instanceof AutomatedIluminationByPresence){
-					AutomatedIluminationByPresence ap = (AutomatedIluminationByPresence) featureBase;
-					ap.setPresenceSensor(null);
-				}
-			} else if(anyHardware instanceof AutomaticWindow){
-                            if(featureBase instanceof UserWindowControl){
-                                UserWindowControl userWindowControl = (UserWindowControl) featureBase;
-                                userWindowControl.getAutomaticWindows().remove(anyHardware);
-                                
-                            }
-                            if(featureBase instanceof AutomatedWindowControl){
-                                AutomatedWindowControl automatedWindowControl = (AutomatedWindowControl) featureBase;
-                                automatedWindowControl.getAutomaticWindowsToAutomate().remove(anyHardware);
-                            }
-                            }else if(anyHardware instanceof AirConditioner){
-                                 if(featureBase instanceof AutomatedAirConditionerControl){
-                                AutomatedAirConditionerControl automatedAirConditionerControl = (AutomatedAirConditionerControl) featureBase;
-                                automatedAirConditionerControl.getAirConditionersToAutomate().remove(anyHardware);
-                                 }
-                                 if(featureBase instanceof UserAirConditionerControl){
-                                UserAirConditionerControl userAirConditionerControl = (UserAirConditionerControl) featureBase;
-                                userAirConditionerControl.getAirConditioners().remove(anyHardware);  
-                                 }
-                            }else if(anyHardware instanceof Alarm){
-                                if(featureBase instanceof AlarmAgainstRobbery){
-                                    AlarmAgainstRobbery alarmAgainstRobbery = (AlarmAgainstRobbery) featureBase;
-                                alarmAgainstRobbery.getAlarms().remove(anyHardware); 
-                                    
-                                }
-                              
-                            }else if(anyHardware instanceof AutomaticDoor){
-                                if(featureBase instanceof LockDoors){
-                                    LockDoors lockDoors = (LockDoors) featureBase;
-                                lockDoors.getautomaticDoors().remove(anyHardware);
-                                
-                            }
-		}
-        }
-                }
+     	}         
+	}
         
 	public void addHardware(Hardware newHardware){
 		if (hardwareList.contains(newHardware)){
@@ -364,15 +258,13 @@ public class HouseFacade {
 		recreateFatherFeature(feature);
 	}
 	private void recreateFatherFeature(FeatureBase feature) {
-
 		if(feature instanceof UserAirConditionerControl){
-			UserAirConditionerControl userairconditionercontrol = UserAirConditionerControl.getInstance(((UserIlumination)feature).getLeds());
+			UserAirConditionerControl userairconditionercontrol = UserAirConditionerControl.getInstance(((UserAirConditionerControl)feature).getAirConditioners());
 			exchangeRequiredFeature(feature, userairconditionercontrol);
 			features.remove(feature);
 			addFeature(userairconditionercontrol);
 		}
 		
-
 		if(feature instanceof UserIlumination){
 			UserIlumination userilumination = UserIlumination.getInstance(((UserIlumination)feature).getLeds());
 			exchangeRequiredFeature(feature, userilumination);
@@ -381,32 +273,14 @@ public class HouseFacade {
 		}
 		
 		
-
 		if(feature instanceof UserWindowControl){
-			UserWindowControl userwindowcontrol = UserWindowControl.getInstance(((UserIlumination)feature).getLeds());
+			UserWindowControl userwindowcontrol = UserWindowControl.getInstance(((UserWindowControl)feature).getAutomaticWindows());
 			exchangeRequiredFeature(feature, userwindowcontrol);
 			features.remove(feature);
 			addFeature(userwindowcontrol);
 		}
 		
-
-		if(feature instanceof UserIlumination){
-			UserIlumination userIlumination = UserIlumination.getInstance(((UserIlumination)feature).getLeds());
-			exchangeRequiredFeature(feature, userIlumination);
-			features.remove(feature);
-			addFeature(userIlumination);
-		}else if(feature instanceof UserWindowControl){
-                     UserWindowControl userWindowControl = UserWindowControl.getInstance(((UserWindowControl)feature).getAutomaticWindows());
-			exchangeRequiredFeature(feature, userWindowControl);
-			features.remove(feature);
-			addFeature(userWindowControl);
-                }else if(feature instanceof UserAirConditionerControl){
-                    UserAirConditionerControl userAirConditionerControl = UserAirConditionerControl.getInstance(((UserAirConditionerControl)feature).getAirConditioners());
-			exchangeRequiredFeature(feature, userAirConditionerControl);
-			features.remove(feature);
-			addFeature(userAirConditionerControl);
-                }
-                
+        
 	}
 
 	private  boolean evaluationForFeatureHierarchy(FeatureBase newFeature){
@@ -434,11 +308,11 @@ public class HouseFacade {
 	private void exchangeBrotherFeaturesData(FeatureBase featureBase,FeatureBase newFeature) {
 		if(featureBase instanceof AutomatedAirConditionerControl){
 			AutomatedAirConditionerControl automatedairconditionercontrol = (AutomatedAirConditionerControl) featureBase;
-			((AutomatedAirConditionerControl) newFeature).setTemperatureSensor(automatedairconditionercontrol.getTemperatureSensors());
+			((AutomatedAirConditionerControl) newFeature).setTemperatureSensor(automatedairconditionercontrol.getTemperatureSensor());
 		}	
 		if(featureBase instanceof AutomatedWindowControl){
 			AutomatedWindowControl automatedwindowcontrol = (AutomatedWindowControl) featureBase;
-			((AutomatedWindowControl) newFeature).setTemperatureSensor(automatedwindowcontrol.getTemperatureSensors());
+			((AutomatedWindowControl) newFeature).setTemperatureSensor(automatedwindowcontrol.getTemperatureSensor());
 		}	
 
 		if(featureBase instanceof AutomatedIluminationByPresence){
