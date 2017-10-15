@@ -8,15 +8,7 @@ SmartHomeModel:
 ;
 
 Component:  
-     Device | Feature | Statment
-;
-
-Condition:
-  "Luminosity" | "Presence" 
-;
-
-Command:
-  "bbb" | "ccc" 
+     Device | Feature 
 ;
 
 TypeDevice:
@@ -31,24 +23,15 @@ Device:
   'set' name=ID typeDevice=[TypeDevice]
   'as' type=SimpleType 
   ('call as' alias=ID)* 
-  ('using' condition=Condition '()')*
 ;
 
 Feature:
   'use' type=Type name=Entity 
-  ('dependes on' feature*=[Feature])* 
   ('extends:' extend=[Feature])*
   ('alternatives:' alternatives*=[Feature][','])*
   'actuador:' actuador=[Device]  
   ('sensor:' sensor=[Device])* 
-  'serial:' serial=STRING
-  
-  /*'using {' devices*=[Device][','] '}'*/
-;
-
-Statment:
-  'if' entity=ID
-  'then' command=Command feature=[Feature]
+  'serial:' serial=STRING  
 ;
 
 Type: 
