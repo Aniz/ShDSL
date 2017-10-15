@@ -8,6 +8,6 @@ public class Led extends Actuator {
  	}
         @Override
 	public String toString() {
-		return ""Led" [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "Led [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

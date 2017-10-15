@@ -9,17 +9,17 @@ import rise.smarthome.model.devices.AutomaticDoor;
 @OptionalFeature
 public class LockDoors  extends FeatureBase  {
 
-	private ArrayList<AutomaticDoor> <textx:Device object at 0x10c59dd68>s;
+	private ArrayList<AutomaticDoor> <textx:Device object at 0x11045ddd8>s;
 
 	private static LockDoors lockDoors = null;
 	
 	protected LockDoors(){}
 	
-	public static LockDoors getInstance(ArrayList<AutomaticDoor> <textx:Device object at 0x10c59dd68>s) {
+	public static LockDoors getInstance(ArrayList<AutomaticDoor> <textx:Device object at 0x11045ddd8>s) {
 		if(lockDoors == null){
 			lockDoors = new LockDoors();
 			lockDoors.setName("Lock Doors");
-            lockDoors.set<textx:Device object at 0x10c59dd68>s(<textx:Device object at 0x10c59dd68>s);
+            lockDoors.set<textx:Device object at 0x11045ddd8>s(<textx:Device object at 0x11045ddd8>s);
 		}
 		return lockDoors;
 	}
@@ -31,20 +31,20 @@ public class LockDoors  extends FeatureBase  {
 	@Override
 	public void proceedActions(String[] args) {
 		// [0] - 0 Lock all doors; 1 Unlock all doors
-		for (AutomaticDoor actuador : <textx:Device object at 0x10c59dd68>s) {
+		for (AutomaticDoor actuador : <textx:Device object at 0x11045ddd8>s) {
 			if(args[0].equals("0"))
 				actuador.deactivate();
 			else if(args[0].equals("1"))
 				actuador.activate();
 		}
 	}
-        public ArrayList<AutomaticDoor> get<textx:Device object at 0x10c59dd68>s() {
-		return <textx:Device object at 0x10c59dd68>s;
+        public ArrayList<AutomaticDoor> get<textx:Device object at 0x11045ddd8>s() {
+		return <textx:Device object at 0x11045ddd8>s;
 	}
 
 
-	public void set<textx:Device object at 0x10c59dd68>s(ArrayList<AutomaticDoor> <textx:Device object at 0x10c59dd68>s) {
-		this.<textx:Device object at 0x10c59dd68>s = <textx:Device object at 0x10c59dd68>s;
+	public void set<textx:Device object at 0x11045ddd8>s(ArrayList<AutomaticDoor> <textx:Device object at 0x11045ddd8>s) {
+		this.<textx:Device object at 0x11045ddd8>s = <textx:Device object at 0x11045ddd8>s;
 	}
 
 }

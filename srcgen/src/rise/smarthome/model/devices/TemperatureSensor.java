@@ -8,6 +8,6 @@ public class TemperatureSensor extends Sensor {
  	}
         @Override
 	public String toString() {
-		return ""bu" [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "bu [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

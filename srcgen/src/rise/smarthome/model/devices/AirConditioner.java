@@ -8,6 +8,6 @@ public class AirConditioner extends Actuator {
  	}
         @Override
 	public String toString() {
-		return ""Air Conditioner" [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "Air Conditioner [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

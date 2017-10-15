@@ -64,27 +64,13 @@ public class HardwareControlTab extends JPanel {
 
 				{% for k,device in extraData.items() %}
 				{% if device["device"].typeDevice == "Sensor" %}
-				case {{device["device"].name|upper}}:
+				case {{device["device"].name|splitName|replace(" ","_")|upper}}:
 					{{device["device"].name}} {{device["device"].name|lower}} = new {{device["device"].name}}(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware({{device["device"].name|lower}});
 					break;
 				{% endif %}
 				{% endfor %}
 
-				case LIGHT_SENSOR:
-					LightSensor lightSensor = new LightSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
-					Main.getHouseInstance().addHardware(lightSensor);
-					break;
-				case PRESENCE_SENSOR:
-					PresenceSensor presenceSensor = new PresenceSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
-					Main.getHouseInstance().addHardware(presenceSensor);
-					break;
-				case TEMPERATURE_SENSOR:
-					TemperatureSensor temperatureSensor = new TemperatureSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
-					Main.getHouseInstance().addHardware(temperatureSensor);
-					break;
-				default:
-					break;
 				}
 				cmbSensors.setSelectedIndex(0);
 				txtSensorPin.setText("");
@@ -135,33 +121,13 @@ public class HardwareControlTab extends JPanel {
 
 				{% for k,device in extraData.items() %}
 				{% if device["device"].typeDevice == "Actuator" %}
-				case {{device["device"].name|upper}}:
+				case {{device["device"].name|splitName|replace(" ","_")|upper}}:
 					{{device["device"].name}} {{device["device"].name|lower}} = new {{device["device"].name}}(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware({{device["device"].name|lower}});
 					break;
 				{% endif %}
 				{% endfor %}
 
-				case LED:
-					Led led = new Led(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(led);
-					break;
-				case AIR_CONDITIONER:
-					AirConditioner airConditioner = new AirConditioner(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(airConditioner);
-					break;
-				case ALARM:
-					Alarm alarm = new Alarm(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(alarm);
-					break;
-				case AUTOMATIC_DOOR:
-					AutomaticDoor automaticDoor = new AutomaticDoor(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(automaticDoor);
-					break;
-				case AUTOMATIC_WINDOW:
-					AutomaticWindow automaticWindow = new AutomaticWindow(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(automaticWindow);
-					break;
 				default:
 					break;
 				}

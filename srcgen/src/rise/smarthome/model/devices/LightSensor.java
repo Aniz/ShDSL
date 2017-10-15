@@ -8,6 +8,6 @@ public class LightSensor extends Sensor {
  	}
         @Override
 	public String toString() {
-		return ""Light Sensor" [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "Light Sensor [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

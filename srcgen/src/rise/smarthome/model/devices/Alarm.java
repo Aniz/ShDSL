@@ -8,6 +8,6 @@ public class Alarm extends Actuator {
  	}
         @Override
 	public String toString() {
-		return ""Alarm" [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "Alarm [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

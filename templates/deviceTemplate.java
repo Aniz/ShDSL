@@ -8,6 +8,6 @@ public class {{data.device.name}} extends {{data.device.typeDevice}} {
  	}
         @Override
 	public String toString() {
-		return "{% if data.device.alias %}"{{data.device.alias}}"{% else %}"{{data.device.name|splitName}}"{% endif %} [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "{% if data.device.alias %}{{data.device.alias}}{% else %}{{data.device.name|splitName}}{% endif %} [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

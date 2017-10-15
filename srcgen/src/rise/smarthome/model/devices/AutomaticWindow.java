@@ -8,6 +8,6 @@ public class AutomaticWindow extends Actuator {
  	}
         @Override
 	public String toString() {
-		return ""Automatic Window" [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "Automatic Window [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

@@ -8,6 +8,6 @@ public class PresenceSensor extends Sensor {
  	}
         @Override
 	public String toString() {
-		return ""Presence Sensor" [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "Presence Sensor [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }

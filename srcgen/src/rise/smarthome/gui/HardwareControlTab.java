@@ -57,33 +57,19 @@ public class HardwareControlTab extends JPanel {
 				SensorEnum sensorEnum = (SensorEnum) cmbSensors.getSelectedItem(); 
 				switch (sensorEnum) {
 
-				case TEMPERATURESENSOR:
+				case TEMPERATURE_SENSOR:
 					TemperatureSensor temperaturesensor = new TemperatureSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(temperaturesensor);
 					break;
-				case LIGHTSENSOR:
+				case LIGHT_SENSOR:
 					LightSensor lightsensor = new LightSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(lightsensor);
 					break;
-				case PRESENCESENSOR:
+				case PRESENCE_SENSOR:
 					PresenceSensor presencesensor = new PresenceSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(presencesensor);
 					break;
 
-				case LIGHT_SENSOR:
-					LightSensor lightSensor = new LightSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
-					Main.getHouseInstance().addHardware(lightSensor);
-					break;
-				case PRESENCE_SENSOR:
-					PresenceSensor presenceSensor = new PresenceSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
-					Main.getHouseInstance().addHardware(presenceSensor);
-					break;
-				case TEMPERATURE_SENSOR:
-					TemperatureSensor temperatureSensor = new TemperatureSensor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
-					Main.getHouseInstance().addHardware(temperatureSensor);
-					break;
-				default:
-					break;
 				}
 				cmbSensors.setSelectedIndex(0);
 				txtSensorPin.setText("");
@@ -136,7 +122,7 @@ public class HardwareControlTab extends JPanel {
 					Led led = new Led(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(led);
 					break;
-				case AIRCONDITIONER:
+				case AIR_CONDITIONER:
 					AirConditioner airconditioner = new AirConditioner(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(airconditioner);
 					break;
@@ -144,35 +130,15 @@ public class HardwareControlTab extends JPanel {
 					Alarm alarm = new Alarm(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(alarm);
 					break;
-				case AUTOMATICDOOR:
+				case AUTOMATIC_DOOR:
 					AutomaticDoor automaticdoor = new AutomaticDoor(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(automaticdoor);
 					break;
-				case AUTOMATICWINDOW:
+				case AUTOMATIC_WINDOW:
 					AutomaticWindow automaticwindow = new AutomaticWindow(Integer.parseInt(txtSensorPin.getText()),chkAnalogSensor.isSelected());
 					Main.getHouseInstance().addHardware(automaticwindow);
 					break;
 
-				case LED:
-					Led led = new Led(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(led);
-					break;
-				case AIR_CONDITIONER:
-					AirConditioner airConditioner = new AirConditioner(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(airConditioner);
-					break;
-				case ALARM:
-					Alarm alarm = new Alarm(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(alarm);
-					break;
-				case AUTOMATIC_DOOR:
-					AutomaticDoor automaticDoor = new AutomaticDoor(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(automaticDoor);
-					break;
-				case AUTOMATIC_WINDOW:
-					AutomaticWindow automaticWindow = new AutomaticWindow(Integer.parseInt(txtActuatorPin.getText()),!chkDigitalActuator.isSelected());
-					Main.getHouseInstance().addHardware(automaticWindow);
-					break;
 				default:
 					break;
 				}

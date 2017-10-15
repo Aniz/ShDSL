@@ -8,6 +8,6 @@ public class AutomaticDoor extends Actuator {
  	}
         @Override
 	public String toString() {
-		return ""Automatic Door" [state=" + getState() + ", pin=" + getPin()+ "]";
+		return "Automatic Door [state=" + getState() + ", pin=" + getPin()+ "]";
 	}
 }
