@@ -11,57 +11,57 @@
     edge[dir=black,arrowtail=empty]
 
 
-140484878925960 -> 140484878927816[arrowtail=diamond, dir=both, headlabel="components 0..*"]
-140484878925960[ label="{SmartHomeModel|+name:ID\l+pin:STRING\l}"]
+140234639442200 -> 140234639465448[arrowtail=diamond, dir=both, headlabel="components 0..*"]
+140234639442200[ label="{SmartHomeModel|+name:ID\l+pin:STRING\l}"]
 
-140484878927816[ label="{*Component|}"]
-140484878927816 -> 140484880126040 [dir=back]
-140484878927816 -> 140484880127896 [dir=back]
-140484878927816 -> 140484880129752 [dir=back]
+140234639465448[ label="{*Component|}"]
+140234639465448 -> 140234639472872 [dir=back]
+140234639465448 -> 140234639410184 [dir=back]
+140234639465448 -> 140234639572344 [dir=back]
 
-140484878929672[ label="{Condition|Luminosity\|Presence}"]
+140234639467304[ label="{Condition|Luminosity\|Presence}"]
 
-140484878932824[ label="{Command|bbb\|ccc}"]
+140234639469160[ label="{Command|bbb\|ccc}"]
 
-140484880124184[ label="{TypeDevice|Sensor\|Actuador\|Hardware}"]
+140234639471016[ label="{TypeDevice|Sensor\|Actuador\|Hardware}"]
 
-140484880126040[ label="{Device|+name:ID\l+type:Type\l+typeDevice:TypeDevice\l+alias:ID\l+condition:Condition\l}"]
+140234639472872[ label="{Device|+name:ID\l+type:Type\l+typeDevice:TypeDevice\l+alias:ID\l+condition:Condition\l}"]
 
-140484880127896 -> 140484880127896[headlabel="feature 0..*"]
-140484880127896 -> 140484880127896[headlabel="extend "]
-140484880127896 -> 140484880127896[headlabel="alternatives 0..*"]
-140484880127896 -> 140484880126040[headlabel="actuador "]
-140484880127896 -> 140484880126040[headlabel="sensor "]
-140484880127896[ label="{Feature|+type:Type\l+name:Entity\l+serial:STRING\l}"]
+140234639410184 -> 140234639410184[headlabel="feature 0..*"]
+140234639410184 -> 140234639410184[headlabel="extend "]
+140234639410184 -> 140234639410184[headlabel="alternatives 0..*"]
+140234639410184 -> 140234639472872[headlabel="actuador "]
+140234639410184 -> 140234639472872[headlabel="sensor "]
+140234639410184[ label="{Feature|+type:Type\l+name:Entity\l+serial:STRING\l}"]
 
-140484880129752 -> 140484880127896[headlabel="feature "]
-140484880129752[ label="{Statment|+entity:ID\l+command:Command\l}"]
+140234639572344 -> 140234639410184[headlabel="feature "]
+140234639572344[ label="{Statment|+entity:ID\l+command:Command\l}"]
 
-140484880131608[ label="{Type|Mandatory\|Optional\|Alternative}"]
+140234639574200[ label="{Type|Mandatory\|Optional\|Alternative}"]
 
-140484880133464[ label="{Entity|AlarmAgainstRobbery\|AutomatedAirConditionerControl\|AutomatedIluminationByLuminosity\|AutomatedIluminationByPresence\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
+140234639576056[ label="{Entity|AlarmAgainstRobbery\|AutomatedAirConditionerControl\|AutomatedIluminationByLuminosity\|AutomatedIluminationByPresence\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
 
-140484880135320[ label="{Comment|\\/\\/.*$}"]
+140234639577912[ label="{Comment|\\/\\/.*$}"]
 
-140484879713656[ label="{ID|}"]
+140234638045128[ label="{ID|}"]
 
-140484879716088[ label="{STRING|}"]
+140234638080744[ label="{STRING|}"]
 
-140484879719528[ label="{BOOL|}"]
+140234638082600[ label="{BOOL|}"]
 
-140484879721960[ label="{INT|}"]
+140234638085032[ label="{INT|}"]
 
-140484879724392[ label="{FLOAT|}"]
+140234638087464[ label="{FLOAT|}"]
 
-140484879726824[ label="{NUMBER|}"]
-140484879726824 -> 140484879724392 [dir=back]
-140484879726824 -> 140484879721960 [dir=back]
+140234638089896[ label="{NUMBER|}"]
+140234638089896 -> 140234638087464 [dir=back]
+140234638089896 -> 140234638085032 [dir=back]
 
-140484879728680[ label="{BASETYPE|}"]
-140484879728680 -> 140484879726824 [dir=back]
-140484879728680 -> 140484879719528 [dir=back]
-140484879728680 -> 140484879713656 [dir=back]
-140484879728680 -> 140484879716088 [dir=back]
+140234638091752[ label="{BASETYPE|}"]
+140234638091752 -> 140234638089896 [dir=back]
+140234638091752 -> 140234638082600 [dir=back]
+140234638091752 -> 140234638045128 [dir=back]
+140234638091752 -> 140234638080744 [dir=back]
 
 
 }

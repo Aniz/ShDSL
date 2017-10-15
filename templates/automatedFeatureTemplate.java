@@ -2,7 +2,7 @@ package {{systemName|lower}}.smarthome.features;
 
 import java.util.ArrayList;
 
-{% if data.feature.extends %}
+{% if data.feature.extend %}
 import {{systemName|lower}}.smarthome.featureModeling.AdaptableFeature;
 {% else %}
 import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
@@ -10,8 +10,8 @@ import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
 {% if data.feature.type %}
 import {{systemName|lower}}.smarthome.featureModeling.{{data.feature.type}}Feature;
 {% endif %}
-import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name.name}};
-import {{systemName|lower}}.smarthome.model.devices.LightSensor;
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name}};
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.sensor.name}};
 
 {% if data.feature.type == "Mandatory" %}
 @MandatoryFeature
@@ -26,8 +26,7 @@ import {{systemName|lower}}.smarthome.model.devices.LightSensor;
 {% endfor %}
 })
 {% endif %}
-public class {{data.feature.name}} {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %}{
-    
+public class {{data.feature.name}} {% if data.feature.extend %}extends {{data.feature.extend.name}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %}{
     private ArrayList<{{data.feature.actuador.name}}> {{data.feature.name|lower}}ToAutomate;
     private {{data.feature.sensor.name}} {{data.feature.sensor.name|lower}};
     private static {{data.feature.name}} {{data.feature.name|lower}} = null;

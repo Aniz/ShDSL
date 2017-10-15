@@ -9,17 +9,17 @@ import rise.smarthome.model.devices.AutomaticDoor;
 @OptionalFeature
 public class LockDoors  extends FeatureBase  {
 
-	private ArrayList<AutomaticDoor> s;
+	private ArrayList<AutomaticDoor> <textx:Device object at 0x10c59dd68>s;
 
 	private static LockDoors lockDoors = null;
 	
 	protected LockDoors(){}
 	
-	public static LockDoors getInstance(ArrayList<AutomaticDoor> s) {
+	public static LockDoors getInstance(ArrayList<AutomaticDoor> <textx:Device object at 0x10c59dd68>s) {
 		if(lockDoors == null){
 			lockDoors = new LockDoors();
 			lockDoors.setName("Lock Doors");
-            lockDoors.sets(s);
+            lockDoors.set<textx:Device object at 0x10c59dd68>s(<textx:Device object at 0x10c59dd68>s);
 		}
 		return lockDoors;
 	}
@@ -31,20 +31,20 @@ public class LockDoors  extends FeatureBase  {
 	@Override
 	public void proceedActions(String[] args) {
 		// [0] - 0 Lock all doors; 1 Unlock all doors
-		for (AutomaticDoor actuator : s) {
+		for (AutomaticDoor actuador : <textx:Device object at 0x10c59dd68>s) {
 			if(args[0].equals("0"))
-				actuator.deactivate();
+				actuador.deactivate();
 			else if(args[0].equals("1"))
-				actuator.activate();
+				actuador.activate();
 		}
 	}
-        public ArrayList<AutomaticDoor> gets() {
-		return s;
+        public ArrayList<AutomaticDoor> get<textx:Device object at 0x10c59dd68>s() {
+		return <textx:Device object at 0x10c59dd68>s;
 	}
 
 
-	public void sets(ArrayList<AutomaticDoor> s) {
-		this.s = s;
+	public void set<textx:Device object at 0x10c59dd68>s(ArrayList<AutomaticDoor> <textx:Device object at 0x10c59dd68>s) {
+		this.<textx:Device object at 0x10c59dd68>s = <textx:Device object at 0x10c59dd68>s;
 	}
 
 }

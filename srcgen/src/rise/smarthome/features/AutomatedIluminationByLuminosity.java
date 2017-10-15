@@ -2,15 +2,14 @@ package rise.smarthome.features;
 
 import java.util.ArrayList;
 
-import rise.smarthome.featureModeling.FeatureBase;
+import rise.smarthome.featureModeling.AdaptableFeature;
 import rise.smarthome.featureModeling.AlternativeFeature;
-import rise.smarthome.model.devices.;
+import rise.smarthome.model.devices.Led;
 import rise.smarthome.model.devices.LightSensor;
 
 @AlternativeFeature(alternatives={
 	AutomatedIluminationByPresence.class})
-public class AutomatedIluminationByLuminosity  extends FeatureBase {
-    
+public class AutomatedIluminationByLuminosity extends UserIlumination implements AdaptableFeature {
     private ArrayList<Led> automatediluminationbyluminosityToAutomate;
     private LightSensor lightsensor;
     private static AutomatedIluminationByLuminosity automatediluminationbyluminosity = null;

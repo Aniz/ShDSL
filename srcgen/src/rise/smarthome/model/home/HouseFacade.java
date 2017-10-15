@@ -106,13 +106,6 @@ public class HouseFacade {
 
 
 	private void loadMandatoryFeatures() {
-		PresenceIlusion presenceilusion = PresenceIlusion.getInstance(new ArrayList<Led>());
-		addFeature(presenceilusion);
-		UserIlumination userilumination = UserIlumination.getInstance(new ArrayList<Led>());
-		addFeature(userilumination);
-		PanicMode panicmode = PanicMode.getInstance(new ArrayList<Led>());
-		addFeature(panicmode);
-		
 		UserIlumination userIlumination = UserIlumination.getInstance(new ArrayList<Led>());
 		addFeature(userIlumination);
 		PresenceIlusion presenceIlusion = PresenceIlusion.getInstance(userIlumination);

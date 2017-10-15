@@ -32,13 +32,11 @@ public class PanicMode {% if data.feature.extends %}extends {{data.feature.exten
 	
 	protected PanicMode(){}
 	
-	public static PanicMode getInstance({{data.feature.extends}} {{data.feature.extends|lower}}) {
+	public static PanicMode getInstance(UserIlumination userIlumination) {
 		if(panicMode == null){
 			panicMode = new PanicMode();
 			panicMode.setName("Panic Mode");
-			{% if data.feature.extends %}
-			panicMode.addRequiredFeature({{data.feature.extends|lower}});
-			{% endif %}
+			panicMode.addRequiredFeature(userIlumination);
 		}
 		return panicMode;
 	}
@@ -64,26 +62,26 @@ public class PanicMode {% if data.feature.extends %}extends {{data.feature.exten
 
 
 	private class PanicModeThread extends Thread{
-		private {{data.feature.extends}} {{data.feature.extends|lower}};
+		private UserIlumination userIlumination;
 		private boolean shouldInterrupt = false;
 
-		public PanicModeThread ({{data.feature.extends}} {{data.feature.extends|lower}}){
-			this.{{data.feature.extends|lower}} = {{data.feature.extends|lower}};
+		public PanicModeThread (UserIlumination userIlumination){
+			this.userIlumination = userIlumination;
 		}
 
 		@Override
 		public void run() {
 			while(!shouldInterrupt){
-				for ({{data.feature.actuador.name}} {{data.feature.actuador.name|lower}} : {{data.feature.extends|lower}}.get{{data.feature.actuador.name}}s()) {
-					String instructionsArray[] = {String.valueOf({{data.feature.actuador.name|lower}}.getPin()),"0"};
-					{{data.feature.extends|lower}}.proceedActions(instructionsArray);
+				for (Led led : userIlumination.getLeds()) {
+					String instructionsArray[] = {String.valueOf(led.getPin()),"0"};
+					userIlumination.proceedActions(instructionsArray);
 				}
 				try {
 					sleep(500);
 				} catch (InterruptedException e) {e.printStackTrace();}
-				for ({{data.feature.actuador.name}} {{data.feature.actuador.name|lower}} : {{data.feature.extends|lower}}.get{{data.feature.actuador.name}}s()) {
-					String instructionsArray[] = {String.valueOf({{data.feature.actuador.name|lower}}.getPin()),"1"};
-					{{data.feature.extends|lower}}.proceedActions(instructionsArray);
+				for (Led led : userIlumination.getLeds()) {
+					String instructionsArray[] = {String.valueOf(led.getPin()),"1"};
+					userIlumination.proceedActions(instructionsArray);
 				}
 				try {
 					sleep(500);

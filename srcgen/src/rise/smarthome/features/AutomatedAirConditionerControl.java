@@ -2,15 +2,14 @@ package rise.smarthome.features;
 
 import java.util.ArrayList;
 
-import rise.smarthome.featureModeling.FeatureBase;
+import rise.smarthome.featureModeling.AdaptableFeature;
 import rise.smarthome.featureModeling.AlternativeFeature;
-import rise.smarthome.model.devices.;
-import rise.smarthome.model.devices.LightSensor;
+import rise.smarthome.model.devices.AirConditioner;
+import rise.smarthome.model.devices.TemperatureSensor;
 
 @AlternativeFeature(alternatives={
 	UserAirConditionerControl.class})
-public class AutomatedAirConditionerControl  extends FeatureBase {
-    
+public class AutomatedAirConditionerControl extends UserWindowControl implements AdaptableFeature {
     private ArrayList<AirConditioner> automatedairconditionercontrolToAutomate;
     private TemperatureSensor temperaturesensor;
     private static AutomatedAirConditionerControl automatedairconditionercontrol = null;

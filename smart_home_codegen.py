@@ -157,12 +157,13 @@ def main(debug=False):
     generateFile(templateFolder,featureModelingFolder,'featureHelperTemplate.java',"FeatureHelper",jinja_env,componentFeatureDict,"",systemName,".java")
     
     for keyF, feature in componentFeatureDict.items():
+        
         if feature["feature"].sensor:
             generateFile(templateFolder,featuresFolder,"automatedFeatureTemplate.java",keyF,jinja_env,feature,"",systemName,".java") 
             generateFile(templateFolder,uiFolder,"automatedFeatureUITemplate.java",keyF+"UI",jinja_env,feature,componentExtraData,systemName)
         else:
             if keyF not in ["PresenceIlusion","PanicMode"]:
-                generateFile(templateFolder,uiFolder,"listFeatureUITemplate.java",keyF,jinja_env,feature,"",systemName,".java")             
+                generateFile(templateFolder,uiFolder,"listFeatureUITemplate.java",keyF+"UI",jinja_env,feature,"",systemName,".java")             
             else:
                 copyCodeFile(uiCodeFolder,uiFolder,keyF+"UI",jinja_env,feature,componentExtraData,systemName)
  

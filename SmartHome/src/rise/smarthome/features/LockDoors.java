@@ -27,17 +27,17 @@ import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name
 {% endif %}
 public class LockDoors {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %} {
 
-	private ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuator}}s;
+	private ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador}}s;
 
 	private static LockDoors lockDoors = null;
 	
 	protected LockDoors(){}
 	
-	public static LockDoors getInstance(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuator}}s) {
+	public static LockDoors getInstance(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador}}s) {
 		if(lockDoors == null){
 			lockDoors = new LockDoors();
 			lockDoors.setName("{{data.feature.name|splitName}}");
-            lockDoors.set{{data.feature.actuator}}s({{data.feature.actuator}}s);
+            lockDoors.set{{data.feature.actuador}}s({{data.feature.actuador}}s);
 		}
 		return lockDoors;
 	}
@@ -49,20 +49,20 @@ public class LockDoors {% if data.feature.extends %}extends {{data.feature.exten
 	@Override
 	public void proceedActions(String[] args) {
 		// [0] - 0 Lock all doors; 1 Unlock all doors
-		for ({{data.feature.actuador.name}} actuator : {{data.feature.actuator}}s) {
+		for ({{data.feature.actuador.name}} actuador : {{data.feature.actuador}}s) {
 			if(args[0].equals("0"))
-				actuator.deactivate();
+				actuador.deactivate();
 			else if(args[0].equals("1"))
-				actuator.activate();
+				actuador.activate();
 		}
 	}
-        public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuator}}s() {
-		return {{data.feature.actuator}}s;
+        public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuador}}s() {
+		return {{data.feature.actuador}}s;
 	}
 
 
-	public void set{{data.feature.actuator}}s(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuator}}s) {
-		this.{{data.feature.actuator}}s = {{data.feature.actuator}}s;
+	public void set{{data.feature.actuador}}s(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador}}s) {
+		this.{{data.feature.actuador}}s = {{data.feature.actuador}}s;
 	}
 
 }

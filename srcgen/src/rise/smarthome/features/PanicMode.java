@@ -14,10 +14,11 @@ public class PanicMode  extends FeatureBase  {
 	
 	protected PanicMode(){}
 	
-	public static PanicMode getInstance( ) {
+	public static PanicMode getInstance(UserIlumination userIlumination) {
 		if(panicMode == null){
 			panicMode = new PanicMode();
 			panicMode.setName("Panic Mode");
+			panicMode.addRequiredFeature(userIlumination);
 		}
 		return panicMode;
 	}
@@ -43,26 +44,26 @@ public class PanicMode  extends FeatureBase  {
 
 
 	private class PanicModeThread extends Thread{
-		private  ;
+		private UserIlumination userIlumination;
 		private boolean shouldInterrupt = false;
 
-		public PanicModeThread ( ){
-			this. = ;
+		public PanicModeThread (UserIlumination userIlumination){
+			this.userIlumination = userIlumination;
 		}
 
 		@Override
 		public void run() {
 			while(!shouldInterrupt){
-				for (Led led : .getLeds()) {
+				for (Led led : userIlumination.getLeds()) {
 					String instructionsArray[] = {String.valueOf(led.getPin()),"0"};
-					.proceedActions(instructionsArray);
+					userIlumination.proceedActions(instructionsArray);
 				}
 				try {
 					sleep(500);
 				} catch (InterruptedException e) {e.printStackTrace();}
-				for (Led led : .getLeds()) {
+				for (Led led : userIlumination.getLeds()) {
 					String instructionsArray[] = {String.valueOf(led.getPin()),"1"};
-					.proceedActions(instructionsArray);
+					userIlumination.proceedActions(instructionsArray);
 				}
 				try {
 					sleep(500);

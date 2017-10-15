@@ -94,14 +94,7 @@ public class HouseFacade {
 
 
 	private void loadMandatoryFeatures() {
-		{% for key,feature in data.items() %}
-		{% if feature["feature"].type == "Mandatory" %}
-		{{feature["feature"].name}} {{feature["feature"].name|lower}} = {{feature["feature"].name}}.getInstance(new ArrayList<{{feature["feature"].actuador.name}}>());
-		addFeature({{feature["feature"].name|lower}});
-		{% endif %}
-		{% endfor %}
-		
-		UserIlumination userIlumination = UserIlumination.getInstance(new ArrayList<Led>());
+		UserIlumination userIlumination = UserIlumination.getInstance(new ArrayList<{{data.UserIlumination.feature.actuador.name}}>());
 		addFeature(userIlumination);
 		PresenceIlusion presenceIlusion = PresenceIlusion.getInstance(userIlumination);
 		addFeature(presenceIlusion);
