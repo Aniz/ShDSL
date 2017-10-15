@@ -49,7 +49,7 @@ actuador: AutomaticWindow
 serial: "5575292698449566428L"
 
 use Alternative AutomatedWindowControl 
-extends: UserAirConditionerControl 
+extends: UserWindowControl 
 alternatives: UserAirConditionerControl
 actuador: AutomaticWindow
 sensor: TemperatureSensor

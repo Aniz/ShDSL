@@ -42,11 +42,11 @@ public class AutomatedIluminationByPresence extends UserIlumination implements A
 	}
 
 	
-    public ArrayList<Led> getAutomatedIluminationByPresence() {
+    public ArrayList<Led> getLedToAutomate() {
 		return automatediluminationbypresenceToAutomate;
 	}
 
-	public void setAutomatedIluminationByPresence(ArrayList<Led> automatediluminationbypresenceToAutomate) {
+	public void setLedToAutomate(ArrayList<Led> automatediluminationbypresenceToAutomate) {
 		this.automatediluminationbypresenceToAutomate = automatediluminationbypresenceToAutomate;
 	}
 	

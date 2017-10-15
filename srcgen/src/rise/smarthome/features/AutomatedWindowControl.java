@@ -9,7 +9,7 @@ import rise.smarthome.model.devices.TemperatureSensor;
 
 @AlternativeFeature(alternatives={
 	UserAirConditionerControl.class})
-public class AutomatedWindowControl extends UserAirConditionerControl implements AdaptableFeature {
+public class AutomatedWindowControl extends UserWindowControl implements AdaptableFeature {
     private ArrayList<AutomaticWindow> automatedwindowcontrolToAutomate;
     private TemperatureSensor temperaturesensor;
     private static AutomatedWindowControl automatedwindowcontrol = null;
@@ -42,11 +42,11 @@ public class AutomatedWindowControl extends UserAirConditionerControl implements
 	}
 
 	
-    public ArrayList<AutomaticWindow> getAutomatedWindowControl() {
+    public ArrayList<AutomaticWindow> getAutomaticWindowToAutomate() {
 		return automatedwindowcontrolToAutomate;
 	}
 
-	public void setAutomatedWindowControl(ArrayList<AutomaticWindow> automatedwindowcontrolToAutomate) {
+	public void setAutomaticWindowToAutomate(ArrayList<AutomaticWindow> automatedwindowcontrolToAutomate) {
 		this.automatedwindowcontrolToAutomate = automatedwindowcontrolToAutomate;
 	}
 	

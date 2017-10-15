@@ -42,11 +42,11 @@ public class AutomatedAirConditionerControl extends UserAirConditionerControl im
 	}
 
 	
-    public ArrayList<AirConditioner> getAutomatedAirConditionerControl() {
+    public ArrayList<AirConditioner> getAirConditionerToAutomate() {
 		return automatedairconditionercontrolToAutomate;
 	}
 
-	public void setAutomatedAirConditionerControl(ArrayList<AirConditioner> automatedairconditionercontrolToAutomate) {
+	public void setAirConditionerToAutomate(ArrayList<AirConditioner> automatedairconditionercontrolToAutomate) {
 		this.automatedairconditionercontrolToAutomate = automatedairconditionercontrolToAutomate;
 	}
 	

@@ -42,11 +42,11 @@ public class AutomatedIluminationByLuminosity extends UserIlumination implements
 	}
 
 	
-    public ArrayList<Led> getAutomatedIluminationByLuminosity() {
+    public ArrayList<Led> getLedToAutomate() {
 		return automatediluminationbyluminosityToAutomate;
 	}
 
-	public void setAutomatedIluminationByLuminosity(ArrayList<Led> automatediluminationbyluminosityToAutomate) {
+	public void setLedToAutomate(ArrayList<Led> automatediluminationbyluminosityToAutomate) {
 		this.automatediluminationbyluminosityToAutomate = automatediluminationbyluminosityToAutomate;
 	}
 	

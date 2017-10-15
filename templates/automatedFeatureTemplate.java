@@ -59,11 +59,11 @@ public class {{data.feature.name}} {% if data.feature.extend %}extends {{data.fe
 	}
 
 	
-    public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.name}}() {
+    public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuador.name}}ToAutomate() {
 		return {{data.feature.name|lower}}ToAutomate;
 	}
 
-	public void set{{data.feature.name}}(ArrayList<{{data.feature.actuador.name}}> {{data.feature.name|lower}}ToAutomate) {
+	public void set{{data.feature.actuador.name}}ToAutomate(ArrayList<{{data.feature.actuador.name}}> {{data.feature.name|lower}}ToAutomate) {
 		this.{{data.feature.name|lower}}ToAutomate = {{data.feature.name|lower}}ToAutomate;
 	}
 	

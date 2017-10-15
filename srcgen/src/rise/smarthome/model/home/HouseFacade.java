@@ -393,6 +393,13 @@ public class HouseFacade {
 		}
 		
 		
+
+		if(feature instanceof UserWindowControl){
+			UserWindowControl userwindowcontrol = UserWindowControl.getInstance(((UserIlumination)feature).getLeds());
+			exchangeRequiredFeature(feature, userwindowcontrol);
+			features.remove(feature);
+			addFeature(userwindowcontrol);
+		}
 		
 
 		if(feature instanceof UserIlumination){
