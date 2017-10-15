@@ -8,6 +8,7 @@ import rise.smarthome.featureModeling.AlternativeFeature;
 import rise.smarthome.featureModeling.FeatureBase;
 import rise.smarthome.gui.AlternativeFeatureSelectionDialog;
 import rise.smarthome.gui.Main;
+import rise.smarthome.model.devices.Hardware;
 
 import rise.smarthome.features.UserAirConditionerControl;
 import rise.smarthome.features.AutomatedAirConditionerControl;

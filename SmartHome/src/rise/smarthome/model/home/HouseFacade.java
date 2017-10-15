@@ -8,6 +8,7 @@ import {{systemName|lower}}.smarthome.featureModeling.AlternativeFeature;
 import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
 import {{systemName|lower}}.smarthome.gui.AlternativeFeatureSelectionDialog;
 import {{systemName|lower}}.smarthome.gui.Main;
+import {{systemName|lower}}.smarthome.model.devices.Hardware;
 
 {% for k,feature in data.items() %}
 import {{systemName|lower}}.smarthome.features.{{feature["feature"].name}};
