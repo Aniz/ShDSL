@@ -147,7 +147,7 @@ public class HouseFacade {
            if(anyHardware instanceof {{keyD}}){
 			{% for keyF,feature in data.items() %}
 				{% if device["device"].typeDevice == "Actuator" %}
-           		{% if feature["feature"].actuador.name == keyD %}
+           		{% if feature["feature"].actuador.name == keyD and feature["feature"].type != "Mandatory" %}
            		if(featureBase instanceof {{feature["feature"].name}}){
 					{{feature["feature"].name}} {{feature["feature"].name|lower}} = ({{feature["feature"].name}}) featureBase;
 					{{feature["feature"].name|lower}}.get{{feature["feature"].actuador.name}}s().remove(anyHardware);

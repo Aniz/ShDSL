@@ -20,7 +20,7 @@ public class AutomatedAirConditionerControl extends UserAirConditionerControl im
 		if(automatedairconditionercontrol == null){
 			automatedairconditionercontrol = new AutomatedAirConditionerControl();
 			automatedairconditionercontrol.setName("Automated Air Conditioner Control");
-            automatedairconditionercontrol.setAutomatedAirConditionerControl(new ArrayList<AirConditioner>());
+            automatedairconditionercontrol.setAirConditionersToAutomate(new ArrayList<AirConditioner>());
 			automatedairconditionercontrol.setActive(false);
 		}
 		return automatedairconditionercontrol;
@@ -42,11 +42,11 @@ public class AutomatedAirConditionerControl extends UserAirConditionerControl im
 	}
 
 	
-    public ArrayList<AirConditioner> getAirConditionerToAutomate() {
+    public ArrayList<AirConditioner> getAirConditionersToAutomate() {
 		return automatedairconditionercontrolToAutomate;
 	}
 
-	public void setAirConditionerToAutomate(ArrayList<AirConditioner> automatedairconditionercontrolToAutomate) {
+	public void setAirConditionersToAutomate(ArrayList<AirConditioner> automatedairconditionercontrolToAutomate) {
 		this.automatedairconditionercontrolToAutomate = automatedairconditionercontrolToAutomate;
 	}
 	

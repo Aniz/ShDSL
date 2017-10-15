@@ -20,7 +20,7 @@ public class AutomatedIluminationByLuminosity extends UserIlumination implements
 		if(automatediluminationbyluminosity == null){
 			automatediluminationbyluminosity = new AutomatedIluminationByLuminosity();
 			automatediluminationbyluminosity.setName("Automated Ilumination By Luminosity");
-            automatediluminationbyluminosity.setAutomatedIluminationByLuminosity(new ArrayList<Led>());
+            automatediluminationbyluminosity.setLedsToAutomate(new ArrayList<Led>());
 			automatediluminationbyluminosity.setActive(false);
 		}
 		return automatediluminationbyluminosity;
@@ -42,11 +42,11 @@ public class AutomatedIluminationByLuminosity extends UserIlumination implements
 	}
 
 	
-    public ArrayList<Led> getLedToAutomate() {
+    public ArrayList<Led> getLedsToAutomate() {
 		return automatediluminationbyluminosityToAutomate;
 	}
 
-	public void setLedToAutomate(ArrayList<Led> automatediluminationbyluminosityToAutomate) {
+	public void setLedsToAutomate(ArrayList<Led> automatediluminationbyluminosityToAutomate) {
 		this.automatediluminationbyluminosityToAutomate = automatediluminationbyluminosityToAutomate;
 	}
 	

@@ -20,7 +20,7 @@ public class AutomatedWindowControl extends UserWindowControl implements Adaptab
 		if(automatedwindowcontrol == null){
 			automatedwindowcontrol = new AutomatedWindowControl();
 			automatedwindowcontrol.setName("Automated Window Control");
-            automatedwindowcontrol.setAutomatedWindowControl(new ArrayList<AutomaticWindow>());
+            automatedwindowcontrol.setAutomaticWindowsToAutomate(new ArrayList<AutomaticWindow>());
 			automatedwindowcontrol.setActive(false);
 		}
 		return automatedwindowcontrol;
@@ -42,11 +42,11 @@ public class AutomatedWindowControl extends UserWindowControl implements Adaptab
 	}
 
 	
-    public ArrayList<AutomaticWindow> getAutomaticWindowToAutomate() {
+    public ArrayList<AutomaticWindow> getAutomaticWindowsToAutomate() {
 		return automatedwindowcontrolToAutomate;
 	}
 
-	public void setAutomaticWindowToAutomate(ArrayList<AutomaticWindow> automatedwindowcontrolToAutomate) {
+	public void setAutomaticWindowsToAutomate(ArrayList<AutomaticWindow> automatedwindowcontrolToAutomate) {
 		this.automatedwindowcontrolToAutomate = automatedwindowcontrolToAutomate;
 	}
 	

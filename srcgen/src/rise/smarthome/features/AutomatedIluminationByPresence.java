@@ -20,7 +20,7 @@ public class AutomatedIluminationByPresence extends UserIlumination implements A
 		if(automatediluminationbypresence == null){
 			automatediluminationbypresence = new AutomatedIluminationByPresence();
 			automatediluminationbypresence.setName("Automated Ilumination By Presence");
-            automatediluminationbypresence.setAutomatedIluminationByPresence(new ArrayList<Led>());
+            automatediluminationbypresence.setLedsToAutomate(new ArrayList<Led>());
 			automatediluminationbypresence.setActive(false);
 		}
 		return automatediluminationbypresence;
@@ -42,11 +42,11 @@ public class AutomatedIluminationByPresence extends UserIlumination implements A
 	}
 
 	
-    public ArrayList<Led> getLedToAutomate() {
+    public ArrayList<Led> getLedsToAutomate() {
 		return automatediluminationbypresenceToAutomate;
 	}
 
-	public void setLedToAutomate(ArrayList<Led> automatediluminationbypresenceToAutomate) {
+	public void setLedsToAutomate(ArrayList<Led> automatediluminationbypresenceToAutomate) {
 		this.automatediluminationbypresenceToAutomate = automatediluminationbypresenceToAutomate;
 	}
 	

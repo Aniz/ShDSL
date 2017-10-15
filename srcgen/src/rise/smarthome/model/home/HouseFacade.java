@@ -168,25 +168,13 @@ public class HouseFacade {
 		   		}
 			}
            if(anyHardware instanceof Led){
-           		if(featureBase instanceof PresenceIlusion){
-					PresenceIlusion presenceilusion = (PresenceIlusion) featureBase;
-					presenceilusion.getLeds().remove(anyHardware);
-				}
            		if(featureBase instanceof AutomatedIluminationByPresence){
 					AutomatedIluminationByPresence automatediluminationbypresence = (AutomatedIluminationByPresence) featureBase;
 					automatediluminationbypresence.getLeds().remove(anyHardware);
 				}
-           		if(featureBase instanceof UserIlumination){
-					UserIlumination userilumination = (UserIlumination) featureBase;
-					userilumination.getLeds().remove(anyHardware);
-				}
            		if(featureBase instanceof AutomatedIluminationByLuminosity){
 					AutomatedIluminationByLuminosity automatediluminationbyluminosity = (AutomatedIluminationByLuminosity) featureBase;
 					automatediluminationbyluminosity.getLeds().remove(anyHardware);
-				}
-           		if(featureBase instanceof PanicMode){
-					PanicMode panicmode = (PanicMode) featureBase;
-					panicmode.getLeds().remove(anyHardware);
 				}
 			}
            if(anyHardware instanceof AirConditioner){

@@ -37,7 +37,7 @@ public class {{data.feature.name}} {% if data.feature.extend %}extends {{data.fe
 		if({{data.feature.name|lower}} == null){
 			{{data.feature.name|lower}} = new {{data.feature.name}}();
 			{{data.feature.name|lower}}.setName("{{data.feature.name|splitName}}");
-            {{data.feature.name|lower}}.set{{data.feature.name}}(new ArrayList<{{data.feature.actuador.name}}>());
+            {{data.feature.name|lower}}.set{{data.feature.actuador.name}}sToAutomate(new ArrayList<{{data.feature.actuador.name}}>());
 			{{data.feature.name|lower}}.setActive(false);
 		}
 		return {{data.feature.name|lower}};
@@ -59,11 +59,11 @@ public class {{data.feature.name}} {% if data.feature.extend %}extends {{data.fe
 	}
 
 	
-    public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuador.name}}ToAutomate() {
+    public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuador.name}}sToAutomate() {
 		return {{data.feature.name|lower}}ToAutomate;
 	}
 
-	public void set{{data.feature.actuador.name}}ToAutomate(ArrayList<{{data.feature.actuador.name}}> {{data.feature.name|lower}}ToAutomate) {
+	public void set{{data.feature.actuador.name}}sToAutomate(ArrayList<{{data.feature.actuador.name}}> {{data.feature.name|lower}}ToAutomate) {
 		this.{{data.feature.name|lower}}ToAutomate = {{data.feature.name|lower}}ToAutomate;
 	}
 	
