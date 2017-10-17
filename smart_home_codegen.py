@@ -199,15 +199,15 @@ def split(fullName):
 
 def createDotFiles(smart_home_mm,smart_home_model,dotFolder):
     # Export to .dot file for visualization
-    metamodel_export(smart_home_mm, join(dotFolder, 'event_meta.dot'))
+    metamodel_export(smart_home_mm, join(dotFolder, 'smart_home_meta.dot'))
     # Export to .dot file for visualization
-    model_export(smart_home_model, join(dotFolder, 'event.dot'))
+    model_export(smart_home_model, join(dotFolder, 'smart_home.dot'))
 
-    (graph,) = pydot.graph_from_dot_file(join(dotFolder,'event_meta.dot'))
-    graph.write_png(join(dotFolder,'event_meta.png'))
+    (graph,) = pydot.graph_from_dot_file(join(dotFolder,'smart_home_meta.dot'))
+    graph.write_png(join(dotFolder,'smart_home_meta.png'))
     
-    (graph,) = pydot.graph_from_dot_file(join(dotFolder,'event.dot'))
-    graph.write_png(join(dotFolder,'event.png'))
+    (graph,) = pydot.graph_from_dot_file(join(dotFolder,'smart_home.dot'))
+    graph.write_png(join(dotFolder,'smart_home.png'))
     
 def copyCodeFile(src,dest,nameFile,jinja_env,var,extraVar,systemName):
     codeFileTemplate = jinja_env.get_template(join(src,nameFile+'.java'))

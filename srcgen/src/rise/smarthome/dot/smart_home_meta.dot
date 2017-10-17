@@ -1,0 +1,60 @@
+
+    digraph xtext {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+140529346799144 -> 140529346801000[arrowtail=diamond, dir=both, headlabel="components 0..*"]
+140529346799144[ label="{SmartHomeModel|+name:ID\l+pin:STRING\l}"]
+
+140529346801000[ label="{*Component|}"]
+140529346801000 -> 140529346804712 [dir=back]
+140529346801000 -> 140529346806568 [dir=back]
+
+140529346802856[ label="{TypeDevice|Sensor\|Actuador\|Hardware}"]
+
+140529346503528[ label="{SimpleType|BOOL\|RANGE\|INFO}"]
+
+140529346804712[ label="{Device|+name:ID\l+typeDevice:TypeDevice\l+type:SimpleType\l+alias:ID\l}"]
+
+140529346806568 -> 140529346806568[headlabel="extend "]
+140529346806568 -> 140529346806568[headlabel="alternatives 0..*"]
+140529346806568 -> 140529346804712[headlabel="actuador "]
+140529346806568 -> 140529346804712[headlabel="sensor "]
+140529346806568[ label="{Feature|+type:Type\l+name:Entity\l+serial:STRING\l}"]
+
+140529346808424[ label="{Type|Mandatory\|Optional\|Alternative}"]
+
+140529346810280[ label="{Entity|AlarmAgainstRobbery\|AutomatedAirConditionerControl\|AutomatedIluminationByLuminosity\|AutomatedIluminationByPresence\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
+
+140529346812136[ label="{Comment|\\/\\/.*$}"]
+
+140529346664648[ label="{ID|}"]
+
+140529346662152[ label="{STRING|}"]
+
+140529346592504[ label="{BOOL|}"]
+
+140529346632952[ label="{INT|}"]
+
+140529346566392[ label="{FLOAT|}"]
+
+140529346601688[ label="{NUMBER|}"]
+140529346601688 -> 140529346566392 [dir=back]
+140529346601688 -> 140529346632952 [dir=back]
+
+140529346603544[ label="{BASETYPE|}"]
+140529346603544 -> 140529346601688 [dir=back]
+140529346603544 -> 140529346592504 [dir=back]
+140529346603544 -> 140529346664648 [dir=back]
+140529346603544 -> 140529346662152 [dir=back]
+
+
+}
