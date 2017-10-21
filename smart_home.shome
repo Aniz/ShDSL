@@ -26,9 +26,9 @@ use Mandatory PresenceIlusion
 actuador: Led
 serial: "4435596811596503762L"
 
-use Alternative AutomatedIluminationByPresence 
+use OR AutomatedIluminationByPresence 
 extends: UserIlumination 
-alternatives: AutomatedIluminationByLuminosity
+brother: AutomatedIluminationByLuminosity
 actuador: Led
 sensor: PresenceSensor
 serial: "4435596811596503762L"
@@ -37,9 +37,9 @@ use Mandatory UserIlumination
 actuador: Led
 serial: "4435596811596503762L"
 
-use Alternative AutomatedIluminationByLuminosity 
+use OR AutomatedIluminationByLuminosity 
 extends: UserIlumination 
-alternatives: AutomatedIluminationByPresence
+brother: AutomatedIluminationByPresence
 actuador: Led
 sensor: LightSensor
 serial: "4435596811596503762L"

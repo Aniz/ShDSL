@@ -29,13 +29,14 @@ Feature:
   'use' type=Type name=Entity 
   ('extends:' extend=[Feature])*
   ('alternatives:' alternatives*=[Feature][','])*
+  ('brother:' brother=[Feature])*
   'actuador:' actuador=[Device]  
   ('sensor:' sensor=[Device])* 
   'serial:' serial=STRING  
 ;
 
 Type: 
-  'Mandatory' | 'Optional' | 'Alternative' 
+  'Mandatory' | 'Optional' | 'Alternative' | 'OR'
 ;
 
 Entity:

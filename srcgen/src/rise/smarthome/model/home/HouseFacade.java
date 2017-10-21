@@ -307,23 +307,15 @@ public class HouseFacade {
 	}
 
 	private void exchangeBrotherFeaturesData(FeatureBase featureBase,FeatureBase newFeature) {
-		if(featureBase instanceof AutomatedAirConditionerControl){
-			AutomatedAirConditionerControl automatedairconditionercontrol = (AutomatedAirConditionerControl) featureBase;
-			((AutomatedAirConditionerControl) newFeature).setTemperatureSensor(automatedairconditionercontrol.getTemperatureSensor());
+		if(featureBase instanceof AutomatedIluminationByPresence){
+			AutomatedIluminationByPresence automatediluminationbypresence = (AutomatedIluminationByPresence) featureBase;
+			((AutomatedIluminationByLuminosity) newFeature).setLeds(automatediluminationbypresence.getLeds());
 		}	
-		if(featureBase instanceof AutomatedWindowControl){
-			AutomatedWindowControl automatedwindowcontrol = (AutomatedWindowControl) featureBase;
-			((AutomatedWindowControl) newFeature).setTemperatureSensor(automatedwindowcontrol.getTemperatureSensor());
+		if(featureBase instanceof AutomatedIluminationByLuminosity){
+			AutomatedIluminationByLuminosity automatediluminationbyluminosity = (AutomatedIluminationByLuminosity) featureBase;
+			((AutomatedIluminationByPresence) newFeature).setLeds(automatediluminationbyluminosity.getLeds());
 		}	
 
-		if(featureBase instanceof AutomatedIluminationByPresence){
-			AutomatedIluminationByPresence automatedIluminationByPresence = (AutomatedIluminationByPresence) featureBase;
-			((AutomatedIluminationByLuminosity) newFeature).setLeds(automatedIluminationByPresence.getLeds());
-		}
-		if(featureBase instanceof AutomatedIluminationByLuminosity){
-			AutomatedIluminationByLuminosity automatedIluminationByLuminosity = (AutomatedIluminationByLuminosity) featureBase;
-			((AutomatedIluminationByPresence) newFeature).setLeds(automatedIluminationByLuminosity.getLeds());
-		}
 	}
 	
 	private void keepFeatureState(FeatureBase oldFeature, FeatureBase newFeature) {

@@ -242,22 +242,14 @@ public class HouseFacade {
 
 	private void exchangeBrotherFeaturesData(FeatureBase featureBase,FeatureBase newFeature) {
 		{% for kF,value in data.items() %}
-		{% if value.feature.type == "Alternative" and value.feature.name!= "AutomatedIluminationByPresence" and value.feature.name!= "AutomatedIluminationByLuminosity" %}
+		{% if value.feature.type == "OR" %}
 		if(featureBase instanceof {{value.feature.name}}){
 			{{value.feature.name}} {{value.feature.name|lower}} = ({{value.feature.name}}) featureBase;
-			(({{value.feature.name}}) newFeature).set{{value.feature.sensor.name}}({{value.feature.name|lower}}.get{{value.feature.sensor.name}}());
+			(({{value.feature.brother.name}}) newFeature).set{{value.feature.actuador.name}}s({{value.feature.name|lower}}.get{{value.feature.actuador.name}}s());
 		}	
 		{% endif %}
 		{% endfor %}
 
-		if(featureBase instanceof AutomatedIluminationByPresence){
-			AutomatedIluminationByPresence automatedIluminationByPresence = (AutomatedIluminationByPresence) featureBase;
-			((AutomatedIluminationByLuminosity) newFeature).set{{data.AutomatedIluminationByPresence.feature.actuador.name}}s(automatedIluminationByPresence.get{{data.AutomatedIluminationByPresence.feature.actuador.name}}s());
-		}
-		if(featureBase instanceof AutomatedIluminationByLuminosity){
-			AutomatedIluminationByLuminosity automatedIluminationByLuminosity = (AutomatedIluminationByLuminosity) featureBase;
-			((AutomatedIluminationByPresence) newFeature).set{{data.AutomatedIluminationByLuminosity.feature.actuador.name}}s(automatedIluminationByLuminosity.get{{data.AutomatedIluminationByLuminosity.feature.actuador.name}}s());
-		}
 	}
 	
 	private void keepFeatureState(FeatureBase oldFeature, FeatureBase newFeature) {
