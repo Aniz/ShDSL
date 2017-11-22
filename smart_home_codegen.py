@@ -180,7 +180,7 @@ def main(debug=False):
 def append(data):
     newA = []
     for k,v in data.items():
-        if v["feature"].extend: 
+        if hasattr(v["feature"].extend, 'name'): 
             if v["feature"].extend.name not in newA:
                 newA = newA + [v["feature"].extend.name]   
     return newA
