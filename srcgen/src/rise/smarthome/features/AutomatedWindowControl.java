@@ -34,8 +34,8 @@ public class AutomatedWindowControl extends UserWindowControl implements Adaptab
 	public void proceedActions() {
         if(isActive()){
 			if(automatedwindowcontrolToAutomate!= null && temperaturesensor!=null){
-				for (AutomaticWindow actuador : automatedwindowcontrolToAutomate) {
-					temperaturesensor.act(actuador);
+				for (AutomaticWindow actuator : automatedwindowcontrolToAutomate) {
+					temperaturesensor.act(actuator);
 				}
 			}
 		}

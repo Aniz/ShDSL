@@ -10,7 +10,7 @@ import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
 {% if data.feature.type %}
 import {{systemName|lower}}.smarthome.featureModeling.{{data.feature.type}}Feature;
 {% endif %}
-import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name}};
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuator.name}};
 
 {% if data.feature.type == "Mandatory" %}
 @MandatoryFeature
@@ -27,17 +27,17 @@ import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name
 {% endif %}
 public class LockDoors {% if data.feature.extends %}extends {{data.feature.extends}} implements AdaptableFeature {% else %} extends FeatureBase {% endif %} {
 
-	private ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name}}s;
+	private ArrayList<{{data.feature.actuator.name}}> {{data.feature.actuator.name}}s;
 
 	private static LockDoors lockDoors = null;
 	
 	protected LockDoors(){}
 	
-	public static LockDoors getInstance(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name|lower}}s) {
+	public static LockDoors getInstance(ArrayList<{{data.feature.actuator.name}}> {{data.feature.actuator.name|lower}}s) {
 		if(lockDoors == null){
 			lockDoors = new LockDoors();
 			lockDoors.setName("{{data.feature.name|splitName}}");
-            lockDoors.set{{data.feature.actuador.name}}s({{data.feature.actuador.name|lower}}s);
+            lockDoors.set{{data.feature.actuator.name}}s({{data.feature.actuator.name|lower}}s);
 		}
 		return lockDoors;
 	}
@@ -49,20 +49,20 @@ public class LockDoors {% if data.feature.extends %}extends {{data.feature.exten
 	@Override
 	public void proceedActions(String[] args) {
 		// [0] - 0 Lock all doors; 1 Unlock all doors
-		for ({{data.feature.actuador.name}} actuador : {{data.feature.actuador.name}}s) {
+		for ({{data.feature.actuator.name}} actuator : {{data.feature.actuator.name}}s) {
 			if(args[0].equals("0"))
-				actuador.deactivate();
+				actuator.deactivate();
 			else if(args[0].equals("1"))
-				actuador.activate();
+				actuator.activate();
 		}
 	}
-        public ArrayList<{{data.feature.actuador.name}}> get{{data.feature.actuador.name}}s() {
-		return {{data.feature.actuador.name}}s;
+        public ArrayList<{{data.feature.actuator.name}}> get{{data.feature.actuator.name}}s() {
+		return {{data.feature.actuator.name}}s;
 	}
 
 
-	public void set{{data.feature.actuador.name}}s(ArrayList<{{data.feature.actuador.name}}> {{data.feature.actuador.name}}s) {
-		this.{{data.feature.actuador.name}}s = {{data.feature.actuador.name}}s;
+	public void set{{data.feature.actuator.name}}s(ArrayList<{{data.feature.actuator.name}}> {{data.feature.actuator.name}}s) {
+		this.{{data.feature.actuator.name}}s = {{data.feature.actuator.name}}s;
 	}
 
 }

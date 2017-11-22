@@ -81,9 +81,9 @@ public class AutomatedWindowControlUI extends FeatureUIBase {
 		cmbAvaliableAutomaticWindow.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				AutomaticWindow actuador = (AutomaticWindow) cmbAvaliableAutomaticWindow.getSelectedItem();
-				if(!automatedwindowcontrol.getAutomaticWindows().contains(actuador)){
-					automatedwindowcontrol.getAutomaticWindows().add(actuador);
+				AutomaticWindow actuator = (AutomaticWindow) cmbAvaliableAutomaticWindow.getSelectedItem();
+				if(!automatedwindowcontrol.getAutomaticWindows().contains(actuator)){
+					automatedwindowcontrol.getAutomaticWindows().add(actuator);
 					updateAutomatedWindowControlToAutomateCombo();
 				}
 			}
@@ -100,8 +100,8 @@ public class AutomatedWindowControlUI extends FeatureUIBase {
 		cmbCurrentAutomaticWindows.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				AutomaticWindow actuador = (AutomaticWindow) cmbCurrentAutomaticWindows.getSelectedItem();
-				automatedwindowcontrol.getAutomaticWindows().remove(actuador);
+				AutomaticWindow actuator = (AutomaticWindow) cmbCurrentAutomaticWindows.getSelectedItem();
+				automatedwindowcontrol.getAutomaticWindows().remove(actuator);
 				updateAutomatedWindowControlToAutomateCombo();
 			}
 		});
@@ -130,14 +130,14 @@ public class AutomatedWindowControlUI extends FeatureUIBase {
 	}
 	
 	private void updateAvaliableCombo() {
-		ArrayList<AutomaticWindow> actuadors = automatedwindowcontrol.getAutomaticWindows();
-		AutomaticWindow[] actuadorsArray= new AutomaticWindow[actuadors.size()];
+		ArrayList<AutomaticWindow> actuators = automatedwindowcontrol.getAutomaticWindows();
+		AutomaticWindow[] actuatorsArray= new AutomaticWindow[actuators.size()];
 		int i=0;
-		for (AutomaticWindow actuador : actuadors) {
-			actuadorsArray[i] = (AutomaticWindow) actuador;
+		for (AutomaticWindow actuator : actuators) {
+			actuatorsArray[i] = (AutomaticWindow) actuator;
 			i++;
 		}
-		cmbAvaliableAutomaticWindow.setModel(new DefaultComboBoxModel<AutomaticWindow>(actuadorsArray));
+		cmbAvaliableAutomaticWindow.setModel(new DefaultComboBoxModel<AutomaticWindow>(actuatorsArray));
 	}
 
 	private void updateTemperatureSensorCombo() {
@@ -152,13 +152,13 @@ public class AutomatedWindowControlUI extends FeatureUIBase {
 	}
 
 	private void updateAutomatedWindowControlToAutomateCombo() {
-		ArrayList<AutomaticWindow> actuadors = automatedwindowcontrol.getAutomaticWindows();
-		AutomaticWindow[] actuadorsArray= new AutomaticWindow[actuadors.size()];
+		ArrayList<AutomaticWindow> actuators = automatedwindowcontrol.getAutomaticWindows();
+		AutomaticWindow[] actuatorsArray= new AutomaticWindow[actuators.size()];
 		int i=0;
-		for (AutomaticWindow actuador : actuadors) {
-			actuadorsArray[i] = (AutomaticWindow) actuador;
+		for (AutomaticWindow actuator : actuators) {
+			actuatorsArray[i] = (AutomaticWindow) actuator;
 			i++;
 		}
-		cmbCurrentAutomaticWindows.setModel(new DefaultComboBoxModel<AutomaticWindow>(actuadorsArray));
+		cmbCurrentAutomaticWindows.setModel(new DefaultComboBoxModel<AutomaticWindow>(actuatorsArray));
 	}
 }

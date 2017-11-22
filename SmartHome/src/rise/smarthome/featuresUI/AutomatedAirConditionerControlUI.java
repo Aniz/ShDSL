@@ -19,16 +19,16 @@ import javax.swing.border.TitledBorder;
 
 import rise.smarthome.features.{{data.feature.name}};
 import rise.smarthome.gui.Main;
-import rise.smarthome.model.devices.{{data.feature.actuador.name}};
+import rise.smarthome.model.devices.{{data.feature.actuator.name}};
 import rise.smarthome.model.devices.Hardware;
 import rise.smarthome.model.devices.{{data.feature.sensor.name}};
 
 public class {{data.feature.name}}UI extends FeatureUIBase {
 
 	private static final long serialVersionUID = 4435596811596503762L;
-	private JComboBox<{{data.feature.actuador.name}}> cmbAvaliable{{data.feature.actuador.name}};
+	private JComboBox<{{data.feature.actuator.name}}> cmbAvaliable{{data.feature.actuator.name}};
 	private {{data.feature.name}} {{data.feature.name|lower}};
-    private JComboBox<{{data.feature.actuador.name}}> cmbCurrent{{data.feature.actuador.name}}s;
+    private JComboBox<{{data.feature.actuator.name}}> cmbCurrent{{data.feature.actuator.name}}s;
 	private JComboBox<{{data.feature.sensor.name}}> cmbSensor;
 	private JToggleButton tglActivateFeature;
 
@@ -76,39 +76,39 @@ public class {{data.feature.name}}UI extends FeatureUIBase {
 		JLabel lblAutomaticWindowPin = new JLabel("Avaliable Automatic Windows:");
 		lblAutomaticWindowPin.setBounds(6, 90, 220, 16);
 		panel_1.add(lblAutomaticWindowPin);
-		cmbAvaliable{{data.feature.actuador.name}} = new JComboBox<{{data.feature.actuador.name}}>();
+		cmbAvaliable{{data.feature.actuator.name}} = new JComboBox<{{data.feature.actuator.name}}>();
 		updateAvaliableCombo();
-		cmbAvaliable{{data.feature.actuador.name}}.addActionListener(new ActionListener() {
+		cmbAvaliable{{data.feature.actuator.name}}.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				{{data.feature.actuador.name}} actuador = ({{data.feature.actuador.name}}) cmbAvaliable{{data.feature.actuador.name}}.getSelectedItem();
-				if(!{{data.feature.name|lower}}.get{{data.feature.actuador.name}}s().contains(actuador)){
-					{{data.feature.name|lower}}.get{{data.feature.actuador.name}}s().add(actuador);
+				{{data.feature.actuator.name}} actuator = ({{data.feature.actuator.name}}) cmbAvaliable{{data.feature.actuator.name}}.getSelectedItem();
+				if(!{{data.feature.name|lower}}.get{{data.feature.actuator.name}}s().contains(actuator)){
+					{{data.feature.name|lower}}.get{{data.feature.actuator.name}}s().add(actuator);
 					update{{data.feature.name}}ToAutomateCombo();
 				}
 			}
 		});
-		cmbAvaliable{{data.feature.actuador.name}}.setBounds(210, 85, 210, 30);
-		panel_1.add(cmbAvaliable{{data.feature.actuador.name}});
+		cmbAvaliable{{data.feature.actuator.name}}.setBounds(210, 85, 210, 30);
+		panel_1.add(cmbAvaliable{{data.feature.actuator.name}});
 
-		JLabel lblCurrent{{data.feature.actuador.name}} = new JLabel("Automatic {{data.feature.actuador.name}} to Automate:");
-		lblCurrent{{data.feature.actuador.name}}.setBounds(6, 143, 220, 16);
-		panel_1.add(lblCurrent{{data.feature.actuador.name}});
+		JLabel lblCurrent{{data.feature.actuator.name}} = new JLabel("Automatic {{data.feature.actuator.name}} to Automate:");
+		lblCurrent{{data.feature.actuator.name}}.setBounds(6, 143, 220, 16);
+		panel_1.add(lblCurrent{{data.feature.actuator.name}});
 
-		cmbCurrent{{data.feature.actuador.name}}s = new JComboBox<{{data.feature.actuador.name}}>();
+		cmbCurrent{{data.feature.actuator.name}}s = new JComboBox<{{data.feature.actuator.name}}>();
 		update{{data.feature.name}}ToAutomateCombo();
-		cmbCurrent{{data.feature.actuador.name}}s.addActionListener(new ActionListener() {
+		cmbCurrent{{data.feature.actuator.name}}s.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				{{data.feature.actuador.name}} actuador = ({{data.feature.actuador.name}}) cmbCurrent{{data.feature.actuador.name}}s.getSelectedItem();
-				{{data.feature.name|lower}}.get{{data.feature.actuador.name}}s().remove(actuador);
+				{{data.feature.actuator.name}} actuator = ({{data.feature.actuator.name}}) cmbCurrent{{data.feature.actuator.name}}s.getSelectedItem();
+				{{data.feature.name|lower}}.get{{data.feature.actuator.name}}s().remove(actuator);
 				update{{data.feature.name}}ToAutomateCombo();
 			}
 		});
-		cmbCurrent{{data.feature.actuador.name}}s.setBounds(245, 135, 175, 30);
-		panel_1.add(cmbCurrent{{data.feature.actuador.name}}s);
+		cmbCurrent{{data.feature.actuator.name}}s.setBounds(245, 135, 175, 30);
+		panel_1.add(cmbCurrent{{data.feature.actuator.name}}s);
 
-		JLabel lblWhen = new JLabel("Clicking in a current {{data.feature.actuador.name}} combo item you remove them to the feature.");
+		JLabel lblWhen = new JLabel("Clicking in a current {{data.feature.actuator.name}} combo item you remove them to the feature.");
 		lblWhen.setForeground(Color.RED);
 		lblWhen.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblWhen.setBounds(6, 180, 412, 16);
@@ -130,14 +130,14 @@ public class {{data.feature.name}}UI extends FeatureUIBase {
 	}
 	
 	private void updateAvaliableCombo() {
-		ArrayList<{{data.feature.actuador.name}}> actuadors = {{data.feature.name|lower}}.get{{data.feature.actuador.name}}s();
-		{{data.feature.actuador.name}}[] actuadorsArray= new {{data.feature.actuador.name}}[actuadors.size()];
+		ArrayList<{{data.feature.actuator.name}}> actuators = {{data.feature.name|lower}}.get{{data.feature.actuator.name}}s();
+		{{data.feature.actuator.name}}[] actuatorsArray= new {{data.feature.actuator.name}}[actuators.size()];
 		int i=0;
-		for ({{data.feature.actuador.name}} actuador : actuadors) {
-			actuadorsArray[i] = ({{data.feature.actuador.name}}) actuador;
+		for ({{data.feature.actuator.name}} actuator : actuators) {
+			actuatorsArray[i] = ({{data.feature.actuator.name}}) actuator;
 			i++;
 		}
-		cmbAvaliable{{data.feature.actuador.name}}.setModel(new DefaultComboBoxModel<{{data.feature.actuador.name}}>(actuadorsArray));
+		cmbAvaliable{{data.feature.actuator.name}}.setModel(new DefaultComboBoxModel<{{data.feature.actuator.name}}>(actuatorsArray));
 	}
 
 	private void update{{data.feature.sensor.name}}Combo() {
@@ -152,14 +152,14 @@ public class {{data.feature.name}}UI extends FeatureUIBase {
 	}
 
 	private void update{{data.feature.name}}ToAutomateCombo() {
-		ArrayList<{{data.feature.actuador.name}}> actuadors = {{data.feature.name|lower}}.get{{data.feature.actuador.name}}s();
-		{{data.feature.actuador.name}}[] actuadorsArray= new {{data.feature.actuador.name}}[actuadors.size()];
+		ArrayList<{{data.feature.actuator.name}}> actuators = {{data.feature.name|lower}}.get{{data.feature.actuator.name}}s();
+		{{data.feature.actuator.name}}[] actuatorsArray= new {{data.feature.actuator.name}}[actuators.size()];
 		int i=0;
-		for ({{data.feature.actuador.name}} actuador : actuadors) {
-			actuadorsArray[i] = ({{data.feature.actuador.name}}) actuador;
+		for ({{data.feature.actuator.name}} actuator : actuators) {
+			actuatorsArray[i] = ({{data.feature.actuator.name}}) actuator;
 			i++;
 		}
-		cmbCurrent{{data.feature.actuador.name}}s.setModel(new DefaultComboBoxModel<{{data.feature.actuador.name}}>(actuadorsArray));
+		cmbCurrent{{data.feature.actuator.name}}s.setModel(new DefaultComboBoxModel<{{data.feature.actuator.name}}>(actuatorsArray));
 	}
 }
 

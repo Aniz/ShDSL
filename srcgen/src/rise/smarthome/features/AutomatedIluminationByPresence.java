@@ -32,8 +32,8 @@ public class AutomatedIluminationByPresence extends UserIlumination implements A
 	public void proceedActions() {
         if(isActive()){
 			if(automatediluminationbypresenceToAutomate!= null && presencesensor!=null){
-				for (Led actuador : automatediluminationbypresenceToAutomate) {
-					presencesensor.act(actuador);
+				for (Led actuator : automatediluminationbypresenceToAutomate) {
+					presencesensor.act(actuator);
 				}
 			}
 		}

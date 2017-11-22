@@ -34,8 +34,8 @@ public class AutomatedAirConditionerControl extends UserAirConditionerControl im
 	public void proceedActions() {
         if(isActive()){
 			if(automatedairconditionercontrolToAutomate!= null && temperaturesensor!=null){
-				for (AirConditioner actuador : automatedairconditionercontrolToAutomate) {
-					temperaturesensor.act(actuador);
+				for (AirConditioner actuator : automatedairconditionercontrolToAutomate) {
+					temperaturesensor.act(actuator);
 				}
 			}
 		}

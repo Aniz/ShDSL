@@ -81,9 +81,9 @@ public class AutomatedIluminationByPresenceUI extends FeatureUIBase {
 		cmbAvaliableLed.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				Led actuador = (Led) cmbAvaliableLed.getSelectedItem();
-				if(!automatediluminationbypresence.getLeds().contains(actuador)){
-					automatediluminationbypresence.getLeds().add(actuador);
+				Led actuator = (Led) cmbAvaliableLed.getSelectedItem();
+				if(!automatediluminationbypresence.getLeds().contains(actuator)){
+					automatediluminationbypresence.getLeds().add(actuator);
 					updateAutomatedIluminationByPresenceToAutomateCombo();
 				}
 			}
@@ -100,8 +100,8 @@ public class AutomatedIluminationByPresenceUI extends FeatureUIBase {
 		cmbCurrentLeds.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				Led actuador = (Led) cmbCurrentLeds.getSelectedItem();
-				automatediluminationbypresence.getLeds().remove(actuador);
+				Led actuator = (Led) cmbCurrentLeds.getSelectedItem();
+				automatediluminationbypresence.getLeds().remove(actuator);
 				updateAutomatedIluminationByPresenceToAutomateCombo();
 			}
 		});
@@ -130,14 +130,14 @@ public class AutomatedIluminationByPresenceUI extends FeatureUIBase {
 	}
 	
 	private void updateAvaliableCombo() {
-		ArrayList<Led> actuadors = automatediluminationbypresence.getLeds();
-		Led[] actuadorsArray= new Led[actuadors.size()];
+		ArrayList<Led> actuators = automatediluminationbypresence.getLeds();
+		Led[] actuatorsArray= new Led[actuators.size()];
 		int i=0;
-		for (Led actuador : actuadors) {
-			actuadorsArray[i] = (Led) actuador;
+		for (Led actuator : actuators) {
+			actuatorsArray[i] = (Led) actuator;
 			i++;
 		}
-		cmbAvaliableLed.setModel(new DefaultComboBoxModel<Led>(actuadorsArray));
+		cmbAvaliableLed.setModel(new DefaultComboBoxModel<Led>(actuatorsArray));
 	}
 
 	private void updatePresenceSensorCombo() {
@@ -152,13 +152,13 @@ public class AutomatedIluminationByPresenceUI extends FeatureUIBase {
 	}
 
 	private void updateAutomatedIluminationByPresenceToAutomateCombo() {
-		ArrayList<Led> actuadors = automatediluminationbypresence.getLeds();
-		Led[] actuadorsArray= new Led[actuadors.size()];
+		ArrayList<Led> actuators = automatediluminationbypresence.getLeds();
+		Led[] actuatorsArray= new Led[actuators.size()];
 		int i=0;
-		for (Led actuador : actuadors) {
-			actuadorsArray[i] = (Led) actuador;
+		for (Led actuator : actuators) {
+			actuatorsArray[i] = (Led) actuator;
 			i++;
 		}
-		cmbCurrentLeds.setModel(new DefaultComboBoxModel<Led>(actuadorsArray));
+		cmbCurrentLeds.setModel(new DefaultComboBoxModel<Led>(actuatorsArray));
 	}
 }

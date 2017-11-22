@@ -12,7 +12,7 @@ Component:
 ;
 
 TypeDevice:
-"Sensor" | "Actuador" | "Hardware"
+"Sensor" | "Actuator" | "Hardware"
 ;
 
 SimpleType:
@@ -30,7 +30,7 @@ Feature:
   ('extends:' extend=[Feature])*
   ('alternatives:' alternatives*=[Feature][','])*
   ('brother:' brother=[Feature])*
-  'actuador:' actuador=[Device]  
+  'actuator:' actuator=[Device]  
   ('sensor:' sensor=[Device])* 
   'serial:' serial=STRING  
 ;

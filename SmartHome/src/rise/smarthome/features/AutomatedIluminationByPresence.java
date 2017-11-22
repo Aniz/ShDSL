@@ -10,7 +10,7 @@ import {{systemName|lower}}.smarthome.featureModeling.FeatureBase;
 {% if data.feature.type %}
 import {{systemName|lower}}.smarthome.featureModeling.{{data.feature.type}}Feature;
 {% endif %}
-import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuador.name}};
+import {{systemName|lower}}.smarthome.model.devices.{{data.feature.actuator.name}};
 import {{systemName|lower}}.smarthome.model.devices.PresenceSensor;
 
 {% if data.feature.type == "Mandatory" %}

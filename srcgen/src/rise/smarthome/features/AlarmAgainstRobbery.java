@@ -55,8 +55,8 @@ public class AlarmAgainstRobbery  extends FeatureBase  {
 		@Override
 		public void run() {
 			while(!shouldInterrupt){
-				for (Alarm actuador : alarms) {
-					actuador.activate();
+				for (Alarm actuator : alarms) {
+					actuator.activate();
 				}
 			}
 		}

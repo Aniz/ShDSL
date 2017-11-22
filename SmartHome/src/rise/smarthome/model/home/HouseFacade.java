@@ -67,7 +67,7 @@ public class HouseFacade {
 
 
 	private void loadMandatoryFeatures() {
-		UserIlumination userIlumination = UserIlumination.getInstance(new ArrayList<{{data.UserIlumination.feature.actuador.name}}>());
+		UserIlumination userIlumination = UserIlumination.getInstance(new ArrayList<{{data.UserIlumination.feature.actuator.name}}>());
 		addFeature(userIlumination);
 		PresenceIlusion presenceIlusion = PresenceIlusion.getInstance(userIlumination);
 		addFeature(presenceIlusion);
@@ -78,7 +78,7 @@ public class HouseFacade {
 	private void loadOptionalFeatures() {
 		{% for key,feature in data.items() %}
 		{% if feature["feature"].type == "Optional" %}
-		{{feature["feature"].name}} {{feature["feature"].name|lower}} = {{feature["feature"].name}}.getInstance(new ArrayList<{{feature["feature"].actuador.name}}>());
+		{{feature["feature"].name}} {{feature["feature"].name|lower}} = {{feature["feature"].name}}.getInstance(new ArrayList<{{feature["feature"].actuator.name}}>());
 		addFeature({{feature["feature"].name|lower}});
 		{% endif %}
 		{% endfor %}	
@@ -110,10 +110,10 @@ public class HouseFacade {
            if(anyHardware instanceof {{keyD}}){
 			{% for keyF,feature in data.items() %}
 				{% if device["device"].typeDevice == "Actuator" %}
-           		{% if feature["feature"].actuador.name == keyD and feature["feature"].type != "Mandatory" %}
+           		{% if feature["feature"].actuator.name == keyD and feature["feature"].type != "Mandatory" %}
            		if(featureBase instanceof {{feature["feature"].name}}){
 					{{feature["feature"].name}} {{feature["feature"].name|lower}} = ({{feature["feature"].name}}) featureBase;
-					{{feature["feature"].name|lower}}.get{{feature["feature"].actuador.name}}s().remove(anyHardware);
+					{{feature["feature"].name|lower}}.get{{feature["feature"].actuator.name}}s().remove(anyHardware);
 				}
 				{% endif %}
            		{% endif %}
@@ -206,7 +206,7 @@ public class HouseFacade {
 		{% if value.feature.extend %}
 		{% if value.feature.extend.name in extendsArray %}
 		if(feature instanceof {{value.feature.extend.name}}){
-			{{value.feature.extend.name}} {{value.feature.extend.name|lower}} = {{value.feature.extend.name}}.getInstance((({{value.feature.extend.name}})feature).get{{value.feature.actuador.name}}s());
+			{{value.feature.extend.name}} {{value.feature.extend.name|lower}} = {{value.feature.extend.name}}.getInstance((({{value.feature.extend.name}})feature).get{{value.feature.actuator.name}}s());
 			exchangeRequiredFeature(feature, {{value.feature.extend.name|lower}});
 			features.remove(feature);
 			addFeature({{value.feature.extend.name|lower}});
@@ -245,7 +245,7 @@ public class HouseFacade {
 		{% if value.feature.type == "OR" %}
 		if(featureBase instanceof {{value.feature.name}}){
 			{{value.feature.name}} {{value.feature.name|lower}} = ({{value.feature.name}}) featureBase;
-			(({{value.feature.brother.name}}) newFeature).set{{value.feature.actuador.name}}s({{value.feature.name|lower}}.get{{value.feature.actuador.name}}s());
+			(({{value.feature.brother.name}}) newFeature).set{{value.feature.actuator.name}}s({{value.feature.name|lower}}.get{{value.feature.actuator.name}}s());
 		}	
 		{% endif %}
 		{% endfor %}
@@ -256,20 +256,20 @@ public class HouseFacade {
 		if(oldFeature instanceof UserIlumination){
 			UserIlumination userIlumination = (UserIlumination) oldFeature;
 			if(newFeature instanceof AutomatedIluminationByLuminosity){
-				((AutomatedIluminationByLuminosity) newFeature).set{{data.AutomatedIluminationByLuminosity.feature.actuador.name}}s(userIlumination.get{{data.AutomatedIluminationByLuminosity.feature.actuador.name}}s());
+				((AutomatedIluminationByLuminosity) newFeature).set{{data.AutomatedIluminationByLuminosity.feature.actuator.name}}s(userIlumination.get{{data.AutomatedIluminationByLuminosity.feature.actuator.name}}s());
 			}else if (newFeature instanceof AutomatedIluminationByPresence){
-				((AutomatedIluminationByPresence) newFeature).set{{data.AutomatedIluminationByPresence.feature.actuador.name}}s(userIlumination.get{{data.AutomatedIluminationByPresence.feature.actuador.name}}s());
+				((AutomatedIluminationByPresence) newFeature).set{{data.AutomatedIluminationByPresence.feature.actuator.name}}s(userIlumination.get{{data.AutomatedIluminationByPresence.feature.actuator.name}}s());
 			}
 		}
 
 		if(oldFeature instanceof UserWindowControl){
 			UserWindowControl userWindowControl = (UserWindowControl) oldFeature;
-			((AutomatedWindowControl) newFeature).setAutomaticWindowsToAutomate((userWindowControl.get{{data.UserWindowControl.feature.actuador.name}}s()));
+			((AutomatedWindowControl) newFeature).setAutomaticWindowsToAutomate((userWindowControl.get{{data.UserWindowControl.feature.actuator.name}}s()));
 		}
 
 		if(oldFeature instanceof UserAirConditionerControl){
 			UserAirConditionerControl userAirConditionerControl = (UserAirConditionerControl) oldFeature;
-			((UserAirConditionerControl) newFeature).setAirConditioners((userAirConditionerControl.get{{data.UserAirConditionerControl.feature.actuador.name}}s()));
+			((UserAirConditionerControl) newFeature).setAirConditioners((userAirConditionerControl.get{{data.UserAirConditionerControl.feature.actuator.name}}s()));
 		}
 	}
 

@@ -12,57 +12,57 @@ set LightSensor Sensor as RANGE
 set PresenceSensor Sensor as BOOL
 
 use Optional UserAirConditionerControl 
-actuador: AirConditioner
+actuator: AirConditioner
 serial: "5575292698449566428L"
 
 use Alternative AutomatedAirConditionerControl 
 extends: UserAirConditionerControl
 alternatives: UserAirConditionerControl
-actuador: AirConditioner
+actuator: AirConditioner
 sensor: TemperatureSensor
 serial: "4435596811596503762L"
 
 use Mandatory PresenceIlusion 
-actuador: Led
+actuator: Led
 serial: "4435596811596503762L"
 
 use OR AutomatedIluminationByPresence 
 extends: UserIlumination 
 brother: AutomatedIluminationByLuminosity
-actuador: Led
+actuator: Led
 sensor: PresenceSensor
 serial: "4435596811596503762L"
 
 use Mandatory UserIlumination 
-actuador: Led
+actuator: Led
 serial: "4435596811596503762L"
 
 use OR AutomatedIluminationByLuminosity 
 extends: UserIlumination 
 brother: AutomatedIluminationByPresence
-actuador: Led
+actuator: Led
 sensor: LightSensor
 serial: "4435596811596503762L"
 
 use Optional UserWindowControl 
-actuador: AutomaticWindow
+actuator: AutomaticWindow
 serial: "5575292698449566428L"
 
 use Alternative AutomatedWindowControl 
 extends: UserWindowControl 
 alternatives: UserAirConditionerControl
-actuador: AutomaticWindow
+actuator: AutomaticWindow
 sensor: TemperatureSensor
 serial: "4435596811596503762L"
 
 use Mandatory PanicMode 
-actuador: Led
+actuator: Led
 serial: "4435596811596503762L"
 
 use Optional AlarmAgainstRobbery 
-actuador: Alarm
+actuator: Alarm
 serial: "5575292698449566428L"
 
 use Optional LockDoors 
-actuador: AutomaticDoor
+actuator: AutomaticDoor
 serial: "4435596811596503762L"

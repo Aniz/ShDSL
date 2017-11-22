@@ -81,9 +81,9 @@ public class AutomatedAirConditionerControlUI extends FeatureUIBase {
 		cmbAvaliableAirConditioner.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				AirConditioner actuador = (AirConditioner) cmbAvaliableAirConditioner.getSelectedItem();
-				if(!automatedairconditionercontrol.getAirConditioners().contains(actuador)){
-					automatedairconditionercontrol.getAirConditioners().add(actuador);
+				AirConditioner actuator = (AirConditioner) cmbAvaliableAirConditioner.getSelectedItem();
+				if(!automatedairconditionercontrol.getAirConditioners().contains(actuator)){
+					automatedairconditionercontrol.getAirConditioners().add(actuator);
 					updateAutomatedAirConditionerControlToAutomateCombo();
 				}
 			}
@@ -100,8 +100,8 @@ public class AutomatedAirConditionerControlUI extends FeatureUIBase {
 		cmbCurrentAirConditioners.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				AirConditioner actuador = (AirConditioner) cmbCurrentAirConditioners.getSelectedItem();
-				automatedairconditionercontrol.getAirConditioners().remove(actuador);
+				AirConditioner actuator = (AirConditioner) cmbCurrentAirConditioners.getSelectedItem();
+				automatedairconditionercontrol.getAirConditioners().remove(actuator);
 				updateAutomatedAirConditionerControlToAutomateCombo();
 			}
 		});
@@ -130,14 +130,14 @@ public class AutomatedAirConditionerControlUI extends FeatureUIBase {
 	}
 	
 	private void updateAvaliableCombo() {
-		ArrayList<AirConditioner> actuadors = automatedairconditionercontrol.getAirConditioners();
-		AirConditioner[] actuadorsArray= new AirConditioner[actuadors.size()];
+		ArrayList<AirConditioner> actuators = automatedairconditionercontrol.getAirConditioners();
+		AirConditioner[] actuatorsArray= new AirConditioner[actuators.size()];
 		int i=0;
-		for (AirConditioner actuador : actuadors) {
-			actuadorsArray[i] = (AirConditioner) actuador;
+		for (AirConditioner actuator : actuators) {
+			actuatorsArray[i] = (AirConditioner) actuator;
 			i++;
 		}
-		cmbAvaliableAirConditioner.setModel(new DefaultComboBoxModel<AirConditioner>(actuadorsArray));
+		cmbAvaliableAirConditioner.setModel(new DefaultComboBoxModel<AirConditioner>(actuatorsArray));
 	}
 
 	private void updateTemperatureSensorCombo() {
@@ -152,13 +152,13 @@ public class AutomatedAirConditionerControlUI extends FeatureUIBase {
 	}
 
 	private void updateAutomatedAirConditionerControlToAutomateCombo() {
-		ArrayList<AirConditioner> actuadors = automatedairconditionercontrol.getAirConditioners();
-		AirConditioner[] actuadorsArray= new AirConditioner[actuadors.size()];
+		ArrayList<AirConditioner> actuators = automatedairconditionercontrol.getAirConditioners();
+		AirConditioner[] actuatorsArray= new AirConditioner[actuators.size()];
 		int i=0;
-		for (AirConditioner actuador : actuadors) {
-			actuadorsArray[i] = (AirConditioner) actuador;
+		for (AirConditioner actuator : actuators) {
+			actuatorsArray[i] = (AirConditioner) actuator;
 			i++;
 		}
-		cmbCurrentAirConditioners.setModel(new DefaultComboBoxModel<AirConditioner>(actuadorsArray));
+		cmbCurrentAirConditioners.setModel(new DefaultComboBoxModel<AirConditioner>(actuatorsArray));
 	}
 }

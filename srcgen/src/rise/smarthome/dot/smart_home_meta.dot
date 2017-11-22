@@ -11,51 +11,51 @@
     edge[dir=black,arrowtail=empty]
 
 
-140477798839544 -> 140477798841400[arrowtail=diamond, dir=both, headlabel="components 0..*"]
-140477798839544[ label="{SmartHomeModel|+name:ID\l+pin:STRING\l}"]
+140202980953816 -> 140202980955672[arrowtail=diamond, dir=both, headlabel="components 0..*"]
+140202980953816[ label="{SmartHomeModel|+name:ID\l+pin:STRING\l}"]
 
-140477798841400[ label="{*Component|}"]
-140477798841400 -> 140477798845112 [dir=back]
-140477798841400 -> 140477798846968 [dir=back]
+140202980955672[ label="{*Component|}"]
+140202980955672 -> 140202980959384 [dir=back]
+140202980955672 -> 140202980961240 [dir=back]
 
-140477798843256[ label="{TypeDevice|Sensor\|Actuador\|Hardware}"]
+140202980957528[ label="{TypeDevice|Sensor\|Actuator\|Hardware}"]
 
-140477798660344[ label="{SimpleType|BOOL\|RANGE\|INFO}"]
+140202979715784[ label="{SimpleType|BOOL\|RANGE\|INFO}"]
 
-140477798845112[ label="{Device|+name:ID\l+typeDevice:TypeDevice\l+type:SimpleType\l+alias:ID\l}"]
+140202980959384[ label="{Device|+name:ID\l+typeDevice:TypeDevice\l+type:SimpleType\l+alias:ID\l}"]
 
-140477798846968 -> 140477798846968[headlabel="extend "]
-140477798846968 -> 140477798846968[headlabel="alternatives 0..*"]
-140477798846968 -> 140477798846968[headlabel="brother "]
-140477798846968 -> 140477798845112[headlabel="actuador "]
-140477798846968 -> 140477798845112[headlabel="sensor "]
-140477798846968[ label="{Feature|+type:Type\l+name:Entity\l+serial:STRING\l}"]
+140202980961240 -> 140202980961240[headlabel="extend "]
+140202980961240 -> 140202980961240[headlabel="alternatives 0..*"]
+140202980961240 -> 140202980961240[headlabel="brother "]
+140202980961240 -> 140202980959384[headlabel="actuator "]
+140202980961240 -> 140202980959384[headlabel="sensor "]
+140202980961240[ label="{Feature|+type:Type\l+name:Entity\l+serial:STRING\l}"]
 
-140477798848824[ label="{Type|Mandatory\|Optional\|Alternative\|OR}"]
+140202980963096[ label="{Type|Mandatory\|Optional\|Alternative\|OR}"]
 
-140477798850680[ label="{Entity|AlarmAgainstRobbery\|AutomatedAirConditionerControl\|AutomatedIluminationByLuminosity\|AutomatedIluminationByPresence\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
+140202980964952[ label="{Entity|AlarmAgainstRobbery\|AutomatedAirConditionerControl\|AutomatedIluminationByLuminosity\|AutomatedIluminationByPresence\|AutomatedWindowControl\|LockDoors\|PanicMode\|PresenceIlusion\|UserAirConditionerControl\|UserIlumination\|UserWindowControl}"]
 
-140477798852536[ label="{Comment|\\/\\/.*$}"]
+140202980966808[ label="{Comment|\\/\\/.*$}"]
 
-140477798661272[ label="{ID|}"]
+140202979717976[ label="{ID|}"]
 
-140477799848744[ label="{STRING|}"]
+140202979719832[ label="{STRING|}"]
 
-140477798664280[ label="{BOOL|}"]
+140202979722264[ label="{BOOL|}"]
 
-140477798666712[ label="{INT|}"]
+140202979724696[ label="{INT|}"]
 
-140477798669144[ label="{FLOAT|}"]
+140202979727128[ label="{FLOAT|}"]
 
-140477798671576[ label="{NUMBER|}"]
-140477798671576 -> 140477798669144 [dir=back]
-140477798671576 -> 140477798666712 [dir=back]
+140202979729560[ label="{NUMBER|}"]
+140202979729560 -> 140202979727128 [dir=back]
+140202979729560 -> 140202979724696 [dir=back]
 
-140477798673432[ label="{BASETYPE|}"]
-140477798673432 -> 140477798671576 [dir=back]
-140477798673432 -> 140477798664280 [dir=back]
-140477798673432 -> 140477798661272 [dir=back]
-140477798673432 -> 140477799848744 [dir=back]
+140202979731416[ label="{BASETYPE|}"]
+140202979731416 -> 140202979729560 [dir=back]
+140202979731416 -> 140202979722264 [dir=back]
+140202979731416 -> 140202979717976 [dir=back]
+140202979731416 -> 140202979719832 [dir=back]
 
 
 }

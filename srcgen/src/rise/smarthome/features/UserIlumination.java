@@ -33,14 +33,14 @@ public class UserIlumination  extends FeatureBase {
 		// [0] Led pin
 		// [1] action: 1 on; 0 off; -1 switch state
 		if(leds!=null){
-			for (Led actuador : leds) {
-				if(actuador.getPin()==Integer.parseInt(args[0])){
+			for (Led actuator : leds) {
+				if(actuator.getPin()==Integer.parseInt(args[0])){
 					if(Integer.parseInt(args[1]) == 1){
-						actuador.activate();
+						actuator.activate();
 					}else if (Integer.parseInt(args[1]) == 0 ){
-						actuador.deactivate();
+						actuator.deactivate();
 					}else if (Integer.parseInt(args[1]) == -1 ){
-						if(actuador.getState()==0) actuador.activate(); else actuador.deactivate();
+						if(actuator.getState()==0) actuator.activate(); else actuator.deactivate();
 					}
 				}
 			}

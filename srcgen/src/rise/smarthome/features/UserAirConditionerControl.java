@@ -34,12 +34,12 @@ public class UserAirConditionerControl  extends FeatureBase  {
 	public void proceedActions(String[] args) {
 		// [0] Led pin
 		// [1] action: 1 on; 0 off;
-		for (AirConditioner actuador : airconditioners) {
-			if(actuador.getPin()==Integer.parseInt(args[0])){
+		for (AirConditioner actuator : airconditioners) {
+			if(actuator.getPin()==Integer.parseInt(args[0])){
 				if(Integer.parseInt(args[1]) == 1){
-					actuador.activate();
+					actuator.activate();
 				}else if (Integer.parseInt(args[1]) == 0 ){
-					actuador.deactivate();
+					actuator.deactivate();
 				}
 			}
 		}

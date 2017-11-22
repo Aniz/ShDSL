@@ -81,9 +81,9 @@ public class AutomatedIluminationByLuminosityUI extends FeatureUIBase {
 		cmbAvaliableLed.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				Led actuador = (Led) cmbAvaliableLed.getSelectedItem();
-				if(!automatediluminationbyluminosity.getLeds().contains(actuador)){
-					automatediluminationbyluminosity.getLeds().add(actuador);
+				Led actuator = (Led) cmbAvaliableLed.getSelectedItem();
+				if(!automatediluminationbyluminosity.getLeds().contains(actuator)){
+					automatediluminationbyluminosity.getLeds().add(actuator);
 					updateAutomatedIluminationByLuminosityToAutomateCombo();
 				}
 			}
@@ -100,8 +100,8 @@ public class AutomatedIluminationByLuminosityUI extends FeatureUIBase {
 		cmbCurrentLeds.addActionListener(new ActionListener() {
                     
 			public synchronized void actionPerformed(ActionEvent e) {
-				Led actuador = (Led) cmbCurrentLeds.getSelectedItem();
-				automatediluminationbyluminosity.getLeds().remove(actuador);
+				Led actuator = (Led) cmbCurrentLeds.getSelectedItem();
+				automatediluminationbyluminosity.getLeds().remove(actuator);
 				updateAutomatedIluminationByLuminosityToAutomateCombo();
 			}
 		});
@@ -130,14 +130,14 @@ public class AutomatedIluminationByLuminosityUI extends FeatureUIBase {
 	}
 	
 	private void updateAvaliableCombo() {
-		ArrayList<Led> actuadors = automatediluminationbyluminosity.getLeds();
-		Led[] actuadorsArray= new Led[actuadors.size()];
+		ArrayList<Led> actuators = automatediluminationbyluminosity.getLeds();
+		Led[] actuatorsArray= new Led[actuators.size()];
 		int i=0;
-		for (Led actuador : actuadors) {
-			actuadorsArray[i] = (Led) actuador;
+		for (Led actuator : actuators) {
+			actuatorsArray[i] = (Led) actuator;
 			i++;
 		}
-		cmbAvaliableLed.setModel(new DefaultComboBoxModel<Led>(actuadorsArray));
+		cmbAvaliableLed.setModel(new DefaultComboBoxModel<Led>(actuatorsArray));
 	}
 
 	private void updateLightSensorCombo() {
@@ -152,13 +152,13 @@ public class AutomatedIluminationByLuminosityUI extends FeatureUIBase {
 	}
 
 	private void updateAutomatedIluminationByLuminosityToAutomateCombo() {
-		ArrayList<Led> actuadors = automatediluminationbyluminosity.getLeds();
-		Led[] actuadorsArray= new Led[actuadors.size()];
+		ArrayList<Led> actuators = automatediluminationbyluminosity.getLeds();
+		Led[] actuatorsArray= new Led[actuators.size()];
 		int i=0;
-		for (Led actuador : actuadors) {
-			actuadorsArray[i] = (Led) actuador;
+		for (Led actuator : actuators) {
+			actuatorsArray[i] = (Led) actuator;
 			i++;
 		}
-		cmbCurrentLeds.setModel(new DefaultComboBoxModel<Led>(actuadorsArray));
+		cmbCurrentLeds.setModel(new DefaultComboBoxModel<Led>(actuatorsArray));
 	}
 }

@@ -31,11 +31,11 @@ public class LockDoors  extends FeatureBase  {
 	@Override
 	public void proceedActions(String[] args) {
 		// [0] - 0 Lock all doors; 1 Unlock all doors
-		for (AutomaticDoor actuador : AutomaticDoors) {
+		for (AutomaticDoor actuator : AutomaticDoors) {
 			if(args[0].equals("0"))
-				actuador.deactivate();
+				actuator.deactivate();
 			else if(args[0].equals("1"))
-				actuador.activate();
+				actuator.activate();
 		}
 	}
         public ArrayList<AutomaticDoor> getAutomaticDoors() {

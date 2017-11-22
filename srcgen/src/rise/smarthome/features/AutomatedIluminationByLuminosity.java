@@ -32,8 +32,8 @@ public class AutomatedIluminationByLuminosity extends UserIlumination implements
 	public void proceedActions() {
         if(isActive()){
 			if(automatediluminationbyluminosityToAutomate!= null && lightsensor!=null){
-				for (Led actuador : automatediluminationbyluminosityToAutomate) {
-					lightsensor.act(actuador);
+				for (Led actuator : automatediluminationbyluminosityToAutomate) {
+					lightsensor.act(actuator);
 				}
 			}
 		}

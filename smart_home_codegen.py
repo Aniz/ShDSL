@@ -133,7 +133,7 @@ def main(debug=False):
        
     #validation
     for keyF, feature in componentFeatureDict.items():
-        if not feature["feature"].actuador:
+        if not feature["feature"].actuator:
             print("[error] Feature '%s' missing actuator" % (feature["feature"].name)) 
         if feature["feature"].type == "Alternative" and not feature["feature"].alternatives:
             print("[error] Missing alternatives features of '%s' " % (feature["feature"].name)) 
