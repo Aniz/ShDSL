@@ -14,13 +14,15 @@ import re
 from textx.metamodel import metamodel_from_file
 from textx.export import metamodel_export, model_export
 
-def main(debug=False):
+def main(fileName='smart_home.shome',debug=False):
 
     this_folder = dirname(__file__)
     smart_home_mm = get_smart_home_mm(debug)
 
-    # Build Event model from person.ent file
-    smart_home_model = smart_home_mm.model_from_file(join(this_folder, 'smart_home.shome'))
+    if sys.argv[1:]:
+        fileName = sys.argv[1]
+
+    smart_home_model = smart_home_mm.model_from_file(join(this_folder, fileName))
 
     def javatype(s):
         """
@@ -187,7 +189,6 @@ def append(data):
 
 def remove(data,item):
     return data.remove(item)
-
 
 def upperfirst(x):
     return x[0].upper()+x[1:]

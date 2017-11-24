@@ -28,7 +28,7 @@ serial: "4435596811596503762L"
 
 use OR AutomatedIluminationByPresence 
 extends: UserIlumination 
-brother: AutomatedIluminationByLuminosity
+OR: AutomatedIluminationByLuminosity
 actuator: Led
 sensor: PresenceSensor
 serial: "4435596811596503762L"
@@ -39,7 +39,7 @@ serial: "4435596811596503762L"
 
 use OR AutomatedIluminationByLuminosity 
 extends: UserIlumination 
-brother: AutomatedIluminationByPresence
+OR: AutomatedIluminationByPresence
 actuator: Led
 sensor: LightSensor
 serial: "4435596811596503762L"

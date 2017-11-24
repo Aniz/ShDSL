@@ -29,7 +29,7 @@ Feature:
   'use' type=Type name=Entity 
   ('extends:' extend=[Feature])*
   ('alternatives:' alternatives*=[Feature][','])*
-  ('brother:' brother=[Feature])*
+  ('OR:' brother=[Feature])*
   'actuator:' actuator=[Device]  
   ('sensor:' sensor=[Device])* 
   'serial:' serial=STRING  
