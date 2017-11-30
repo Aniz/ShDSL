@@ -109,11 +109,7 @@ def main(fileName='smart_home.shome',debug=False):
     allDevicesDict = {}
 
     avaliableBaseDevices = ["Actuator","Sensor","Hardware"]
-    avaliableOptions = ["User","Speaker","Organizer","Event","Payment","Reviewer","Activity","Submission","Review","Author","Receipt","CheckingCopy"]
-    avaliableFunctions = ["Insert","Remove","Update","Search","ListAll","Search","Management"]
-    avaliableDependencesArray = ["Review","ActivityUser","ActivitySpeaker","ActivityOrganizer","SubmissionAuthor","SubmissionUser","Registration","Assignment"]
-    chosenFunctions = []
-    
+    avaliableFeatures = ['AlarmAgainstRobbery','AutomatedAirConditionerControl','AutomatedIluminationByLuminosity', 'AutomatedIluminationByPresence' ,'AutomatedWindowControl','LockDoors', 'PanicMode' , 'PresenceIlusion','UserAirConditionerControl','UserIlumination','UserWindowControl'];
     #Get options from model
     for component in smart_home_model.components:
         if component.__class__.__name__ == 'Action':
